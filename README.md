@@ -1,7 +1,7 @@
 # organizacionSemanal
 
-## Descripción general del problema
-Ayuda a un usuario, estudiante, a organizar su agenda semanal. Las actividades consideradas son: asistir a clase en la universidad, ir a ciertas clases del gimnasio (por ejemplo, pilates) y citas periódicas con un médico (por ejemplo, dentista).
+El cliente, un estudiante, necesita una organización de su agenda semanal. Esto es porque tiene muchas actividades que realizar: asistir a clase en la universidad, ir a ciertas clases del gimnasio y citas periódicas con un médico; y no sabe cómo poder asistir a todas, o priorizar las más importantes, en caso de que fuese necesario.
 
-- Software Libre: GNU GPL v3
+
+[Configuración del repositorio](https://github.com/carlotiii30/organizacionSemanal/blob/Objetivo-0/configuracion.png)
 
