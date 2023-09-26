@@ -1,7 +1,9 @@
-# organizacionSemanal
+# Problema de Organización de la Agenda Semanal
 
-El cliente, un estudiante, necesita una organización de su agenda semanal. Esto es porque tiene muchas actividades que realizar: asistir a clase en la universidad, ir a ciertas clases del gimnasio y citas periódicas con un médico; y no sabe cómo poder asistir a todas, o priorizar las más importantes, en caso de que fuese necesario.
-
+Una persona necesita una solución para organizar, de manera eficiente, su semana, ya 
+que tiene múltiples actividades y compromisos. Estos compromisos pueden 
+variar ampliamente según las circunstancias individuales, pero pueden incluir 
+actividades como clases universitarias, reuniones, citas médicas o ejercicio físico.
 
 [Configuración del repositorio](https://github.com/carlotiii30/organizacionSemanal/blob/Objetivo-0/configuracion.png)
 
