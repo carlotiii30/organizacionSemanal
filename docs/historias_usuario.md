@@ -6,4 +6,7 @@ las personas, sobretodo, de mi persona. Quiero una forma de optimizar mi tiempo 
 poder equilibrar mis estudios, el ejercicio físico y las citas médicas sin sentirme 
 abrumada. Además, soy muy olvidadiza, por tanto, me gustaría recibir recordatorios o 
 notificaciones para mis actividades planificadas, para así asegurarme de que no me 
-olvido de ninguna de ellas.
+olvido de ninguna de ellas. Los horarios de mis clases de la universidad 
+coinciden con los subidos en la plataforma, del cuarto curso, mientras que 
+las citas médicas tendría que ir apuntándolas yo conforme vaya 
+cogiendolas.
