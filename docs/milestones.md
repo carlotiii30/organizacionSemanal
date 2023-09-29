@@ -1,8 +1,8 @@
 # Milestones
 
 [M0] Modelo del problema
-- Objetivo: A partir de las Historias de Usuario [HU], se busca crear 
-una estructura organizada del modelo del problema.
+- Objetivo: A partir de las Historias de Usuario [HU], se busca crear una estructura organizada del modelo del problema
+- Código modularizado del problema.
 - Será viable si es aprobado por el product manager.
 
 [M1] Desarrollo de una función de creación de eventos.
