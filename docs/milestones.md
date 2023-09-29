@@ -10,14 +10,14 @@
 - Código fuente de la función. 
 - Será viable si pasa los tests.
 
-[M2] Desarrollo de un sistema de notificaciones.
-- Objetivo: Avisar, mediante notificaciones, al usuario de un evento.
-- Código fuente de la clase.
-- Será viable si pasa los tests.
-
-[M3] Heurística para organización eficiente.
+[M2] Heurística para organización eficiente.
 - Objetivo: Distribuir de forma eficiente el tiempo empleado a cada 
 actividad, de forma que todas puedan ser realizadas o con sistema de 
 prioridades.
 - Código fuente de la heurística.
 - Será viable si pasa los tests
+
+[M3] Desarrollo de un sistema de notificaciones.
+- Objetivo: Avisar, mediante notificaciones, al usuario de un evento.
+- Código fuente de la clase.
+- Será viable si pasa los tests.
