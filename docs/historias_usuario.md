@@ -4,11 +4,11 @@
 y Nutrición Humana y Dietética, estoy muy comprometida con el deporte y el bienestar de 
 las personas, sobre todo, de mi persona. Quiero una forma de optimizar mi 
 tiempo para poder equilibrar mis estudios, el ejercicio físico y las citas 
-qie tenga, tanto médicas como de cualquier otro tipo, sin sentirme 
+que tenga, tanto médicas como de cualquier otro tipo, sin sentirme 
 abrumada. Además, 
 soy muy olvidadiza, por tanto, me gustaría recibir recordatorios o 
 notificaciones para mis actividades planificadas, para así asegurarme de que no me 
 olvido de ninguna de ellas. Los horarios de mis clases de la universidad 
 coinciden con los subidos en la plataforma, del cuarto curso, mientras que 
-las citas médicas tendría que ir apuntándolas yo conforme vaya 
+las citas tendría que ir apuntándolas yo conforme vaya 
 cogiendolas.
