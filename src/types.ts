@@ -6,3 +6,5 @@ export enum TipoTarea{
     REUINION,
     OTRO
 }
+
+export type nombreDia = "lunes" | "martes" | "miercoles" | "jueves" | "viernes" | "sabado" | "domingo";
