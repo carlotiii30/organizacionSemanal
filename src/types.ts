@@ -8,3 +8,8 @@ export enum TipoTarea{
 }
 
 export type nombreDia = "lunes" | "martes" | "miercoles" | "jueves" | "viernes" | "sabado" | "domingo";
+
+export type Notificacion = {
+    titulo : string,
+    cuerpo : string
+}
