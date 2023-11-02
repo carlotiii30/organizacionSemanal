@@ -1,8 +1,4 @@
 {
-  "name": "organizacionsemanal",
-  "version": "1.0.0",
-  "description": "## Descripción del problema",
-  "main": "index.js",
   "directories": {
     "doc": "docs"
   },
