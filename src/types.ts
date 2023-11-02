@@ -1,11 +1,4 @@
-export enum TipoTarea{
-    MEDICA,
-    DEPORTIVA,
-    ACADEMICA,
-    LABORAL,
-    REUINION,
-    OTRO
-}
+export type TipoTarea = "medica" | "deportiva" | "academica" | "laboral" | "reunion" | "otro";
 
 export type Notificacion = {
     titulo : string,
