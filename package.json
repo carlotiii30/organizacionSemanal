@@ -1,0 +1,8 @@
+{
+  "name": "organizacionSemanal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:carlotiii30/organizacionSemanal.git",
+  "author": "Carlota de la Vega <carlotadlavega@correo.ugr.es>",
+  "license": "MIT"
+}
