@@ -5,6 +5,9 @@ forma automatizada. Estas tareas pueden ser, entre otras, compilación de
 código, optimización de recursos, ejecución de pruebas u organización de
 activos.
 
+En este caso, debemos tener en cuenta que el gestor de dependencias elegido
+es Yarn.
+
 Las opciones que vamos a explorar son:
 * [Gulp](#gulp)
 * [Webpack](#webpack)
