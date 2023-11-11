@@ -2,7 +2,9 @@
 La administración de dependencias es el proceso de automatización de la
 instalación, actualización, configuración y eliminación de bibliotecas,
 paquetes y herramientas de las que depende una aplicación. Cada lenguaje
-de programación tiene sus propias herramientas de gestión de dependencias.
+de programación tiene sus propias herramientas de gestión de dependencias,
+por tanto, deberemos tener en cuenta que el lenguaje de programación que
+vamos a utilizar en este proyecto es TypeScript.
 
 Las opciones que vamos a explorar son:
 * [Yarn](#yarn)
