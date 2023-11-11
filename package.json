@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:carlotiii30/organizacionSemanal.git",
   "author": "Carlota de la Vega <carlotadlavega@correo.ugr.es>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
 }
