@@ -6,3 +6,8 @@ export type Actividad = {
     aplazable: boolean;
     completada: boolean;
   };
+
+export type Tarea = {
+  titulo: string;
+  descripcion: string;
+}
