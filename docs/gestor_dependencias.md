@@ -19,8 +19,7 @@ nuestro proyecto.
 no contengan vulnerabilidades conocidas.
 * Estabilidad: Capacidad de garantizar que las versiones de las bibliotecas y
 paquetes utilizados en un proyecto se mantengan constantes.
-* Simpleza: Facilidad de uso y claridad en el proceso de añadir, eliminar y
-actualizar paquetes.
+* Simpleza: Claridad en el proceso de añadir, eliminar y actualizar paquetes.
 
 
 ## Yarn

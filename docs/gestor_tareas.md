@@ -14,6 +14,19 @@ Las opciones que vamos a explorar son:
 * [Grunt](#grunt)
 
 
+## Criterios de elección
+Vamos a establecer unos criterios para poder elegir la mejor opción para
+nuestro proyecto.
+
+* Facilidad de configuración: Claridad en la forma que se pueden configurar las
+tareas: sintaxis clara y declarativa, una documentación detallada...
+* Rendimiento: Velocidad y eficiencia con la que se pueden ejecutar las tareas
+definidas.
+* Comunidad: Respaldo y apoyo que tiene el gestor de tareas por parte de otros
+desarrolladores, que puede proporcionar soluciones rápidas a problemas comunes.
+* Flexibilidad: Capacidad para adaptarse a diferentes necesidades y contextos.
+
+
 ## Gulp
 Gulp es una herramienta de construcción (_build tool_) que permite definir y
 ejecutar tareas automatizadas para diversas acciones, como compilar TypeScript
