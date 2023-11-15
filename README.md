@@ -29,3 +29,11 @@ pero siempre que existan deben realizarse.
 ## Toolchain
 * [Gestor de dependencias](./docs/gestor_dependencias.md)
 * [Gestor de tareas](./docs/gestor_tareas.md)
+* [Runtime](./docs/runtime.md)
+
+## Comprobación de sintaxis
+Para la comprobación de la sintaxis del código de nuestro proyecto, deberemos
+ejecutar el siguiente comando:
+```bash
+yarn run tsc
+```

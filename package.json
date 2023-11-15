@@ -6,6 +6,7 @@
   "author": "Carlota de la Vega <carlotadlavega@correo.ugr.es>",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "typescript": "^5.2.2"
   }
 }
