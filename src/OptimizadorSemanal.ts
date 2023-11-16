@@ -1,4 +1,4 @@
-import { Actividad } from "./actividad";
+import { Actividad } from "./types";
 
 export class OptimizadorSemanal{
     private inicioSemana: Date;
