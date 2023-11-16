@@ -7,8 +7,8 @@ En lenguajes como TypeScript, un entorno de ejecución es esencial para que el
 código pueda ser interpretado y ejecutado.
 
 Las opciones que vamos a explorar son:
-* [Node.js](#nodejs)
-* [Deno](#deno)
+* [Node.js](#nodejs): https://nodejs.org/en
+* [Deno](#deno): https://deno.com
 
 
 ## Node.js

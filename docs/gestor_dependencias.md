@@ -7,8 +7,8 @@ por tanto, deberemos tener en cuenta que el lenguaje de programación que
 vamos a utilizar en este proyecto es TypeScript.
 
 Las opciones que vamos a explorar son:
-* [Yarn](#yarn)
-* [NPM](#npm)
+* [Yarn](#yarn): https://yarnpkg.com
+* [NPM](#npm): https://www.npmjs.com
 
 
 ## Criterios de elección
