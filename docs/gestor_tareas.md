@@ -27,7 +27,7 @@ desarrolladores, que puede proporcionar soluciones rápidas a problemas comunes.
 ## Gulp
 Gulp es una herramienta de construcción (_build tool_) que permite definir y
 ejecutar tareas automatizadas para diversas acciones, como compilar TypeScript
-minificar archivos u optimizar imágenes.
+minificar archivos u optimizar imágenes. Sin embargo, está obsoleto.
 
 ### Características
 **Amplia comunidad:** Tiene una comunidad activa y gran cantidad de plugins
@@ -71,6 +71,4 @@ y generalizada, mientras que [Gulp](#gulp) se encuentra en un punto intermedio
 entre la sencillez y la complejidad, además, ofrece flexibilidad en la
 automatización de tareas.
 
-Como no este no es un proyecto que requiera mucha complejidad, utilizaremos
-el gestor de tareas Gulp, que, aunque sea más complejo, ofrece más
-flexibilidad que Grunt.
+Para este proyecto utilizaremos Grunt, ya que Gulp está obsoleto.

@@ -1,5 +1,5 @@
 lenguaje: TypeScript
 entidad: src/planificador.ts
 automatizar:
-  fichero: gulpfile.js
+  fichero: gruntfile.js
   orden: yarn run
