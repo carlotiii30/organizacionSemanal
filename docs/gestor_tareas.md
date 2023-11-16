@@ -18,8 +18,6 @@ Las opciones que vamos a explorar son:
 Vamos a establecer unos criterios para poder elegir la mejor opción para
 nuestro proyecto.
 
-* Facilidad de configuración: Claridad en la forma que se pueden configurar las
-tareas: sintaxis clara y declarativa, una documentación detallada...
 * Rendimiento: Velocidad y eficiencia con la que se pueden ejecutar las tareas
 definidas.
 * Comunidad: Respaldo y apoyo que tiene el gestor de tareas por parte de otros
