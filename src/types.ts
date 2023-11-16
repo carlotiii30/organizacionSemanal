@@ -6,7 +6,7 @@ export enum TipoActividad {
   REUNION
 }
 
-export type Tarea = {
-  titulo: string;
-  descripcion: string;
+export type Actividad = {
+  TipoActividad: TipoActividad,
+  Tarea: [string, Date],
 }
