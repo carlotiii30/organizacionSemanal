@@ -1,15 +1,16 @@
 {
-  "directories": {
-    "doc": "docs"
+  "name": "organizacionSemanal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:carlotiii30/organizacionSemanal.git",
+  "author": "Carlota de la Vega <carlotadlavega@correo.ugr.es>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "typescript": "^5.2.2"
+    "start": "node index.js",
+    "lint": "eslint src"
   }
 }
