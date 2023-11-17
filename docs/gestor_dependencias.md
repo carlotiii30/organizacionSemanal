@@ -9,6 +9,7 @@ vamos a utilizar en este proyecto es TypeScript.
 Las opciones que vamos a explorar son:
 * [Yarn](#yarn): https://yarnpkg.com
 * [NPM](#npm): https://www.npmjs.com
+* [PNPM](#pnpm): https://pnpm.io/es/
 
 
 ## Criterios de elección
@@ -19,19 +20,11 @@ nuestro proyecto.
 no contengan vulnerabilidades conocidas.
 * Estabilidad: Capacidad de garantizar que las versiones de las bibliotecas y
 paquetes utilizados en un proyecto se mantengan constantes.
-* Simpleza: Claridad en el proceso de añadir, eliminar y actualizar paquetes.
+* Comunidad: Cantidad de recursos y paquetes desarrollados, y ayuda en la
+resolución de problemas comunes.
 
 
 ## Yarn
-### Historia
-Es un gestor de dependencias creado por Facebook en colaboración con Exponent,
-Google y Tilde. Surge en 2016 con un claro enfoque: seguridad y velocidad.
-
-Aparece cuando desarrolladores que utilizan npm solicitan mejoras a la
-comunidad que no llegaban nunca, con la intención de generar una herramienta
-que garantizase la fluidez, la rapidez y la seguridad.
-
-### Características
 **Rápido:** Almacena en caché todos los paquetes que ha descargado, para no
 tener que volver a descargarlos. Además, hace casi todo de forma concurrente,
 maximizando el uso de los recursos.
@@ -59,18 +52,6 @@ dependencias. Es una forma de reducir el tamaño de node_modules.
 
 
 ## NPM
-### Historia
-Node Package Management es uno de los gestores de dependencias más utilizados
-en Javascript. Fue lanzado en 2014, y desde la versión 0.6.3 de NodeJS, se
-instala por defecto.
-
-Existen dos maneras de usar este gestor:
-
-* Global: Es muy usada para instalar aplicaciones a nivel de sistema.
-* Local: Permite asociar qué dependencias y versiones funcionarán en nuestro
-proyecto.
-
-### Características
 **Amplia biblioteca de paquetes:** Al ser el gestor de paquetes original para
 Node.js y JavaScript, cuenta con un amplio repositorio de paquetes que abarca
 una extensa gama de funcionalidades.
@@ -91,11 +72,30 @@ la comunidad.
 **Interfaz de línea de comandos:** Permite interactuar con facilidad con el
 sistema de gestión de paquetes.
 
+
+## PNPM
+**Espacio**: Comparte dependencias entre proyectos, no las duplica, si no que
+las almacena de forma global y las enlaza simbólicamente a cada proyecto que
+las necesita.
+
+**Lockfile**: Admite un archivo de bloqueo, pnpm-lock.yaml, que garantiza que
+las versiones de las dependencias sean coherentes en diferentes entornos.
+
+**Soporte para Workspaces**: Permite gestionar múltiples proyectos dentro de un
+único repositorio.
+
+**Reducción de uso de red**: Al almacenar las dependencias de forma global, se
+reduce el uso de red al descargar y almacenar los paquetes.
+
+**Comandos adicionales**: Ofrece comandos adicionales como pnpm recursive, que
+permite ejecutar comandos en todos los proyectos en un entorno monorepo.
+
 ## Conclusión
-Tanto [Yarn](#yarn) como [npm](#npm) tienen sus puntos fuertes y débiles,
-mientras que npm tiene una comunidad muy grande y activa que proporciona
-soporte y actualizaciones constantes, influyendo en la seguridad; Yarn destaca
-por su velocidad y capacidad de bloquear versiones, lo que contribuye a la
-estabilidad.
+Tanto [Yarn](#yarn) como [npm](#npm) y [pnpm](#pnpm) tienen sus puntos fuertes
+y débiles, mientras que npm tiene una comunidad muy grande y activa que
+proporciona soporte y actualizaciones constantes, influyendo en la seguridad;
+Yarn destaca por su velocidad y capacidad de bloquear versiones, lo que
+contribuye a la estabilidad. Por otro lado, pnpm tiene comandos adicionales que
+pueden ser de gran utilidad y una gran gestión del espacio.
 
 En este proyecto, vamos a utilizar Yarn.
