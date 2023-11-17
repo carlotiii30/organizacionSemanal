@@ -6,11 +6,11 @@
   "author": "Carlota de la Vega <carlotadlavega@correo.ugr.es>",
   "license": "MIT",
   "devDependencies": {
-    "grunt": "^1.6.1",
-    "grunt-exec": "^3.0.0",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-uglify": "~0.5.0",
     "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node index.js",
+    "lint": "eslint src"
   }
 }

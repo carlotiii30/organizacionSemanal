@@ -11,6 +11,7 @@ es Yarn.
 Las opciones que vamos a explorar son:
 * [Gulp](#gulp): https://gulpjs.com
 * [Grunt](#grunt): https://gruntjs.com
+* [Yarn](#yarn): https://yarnpkg.com
 
 
 ## Criterios de elección
@@ -65,10 +66,15 @@ automatización.
 **Familiaridad:** Es una herramienta más antigua y ha sido utilizada en muchos
 proyectos durante años.
 
+
+## Yarn
+Al haber elegido yarn como gestor de dependencias, tenemos la posibilidad de
+utilizarlo también como gestor de tareas, facilitando así la ejecución.
+
 ## Conclusión
 Para proyectos TypeScript como este, [Grunt](#grunt) es una opción más simple
 y generalizada, mientras que [Gulp](#gulp) se encuentra en un punto intermedio
 entre la sencillez y la complejidad, además, ofrece flexibilidad en la
 automatización de tareas.
 
-Para este proyecto utilizaremos Grunt, ya que Gulp está obsoleto.
+Sin embargo, para este proyecto vamos a utilizar [Yarn](#yarn).

@@ -35,5 +35,5 @@ pero siempre que existan deben realizarse.
 Para la comprobación de la sintaxis del código de nuestro proyecto, deberemos
 ejecutar el siguiente comando:
 ```bash
-yarn grunt check
+yarn check
 ```
