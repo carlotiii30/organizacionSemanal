@@ -38,11 +38,11 @@ pero siempre que existan deben realizarse.
 Para la comprobación de la sintaxis del código de nuestro proyecto, deberemos
 ejecutar el siguiente comando:
 ```bash
-yarn check
+yarn run check
 ```
 
 ## Ejecución de test
 Para la ejecución de tests, el comando que utilizaremos será:
 ```bash
-yarn test
+yarn run test
 ```
