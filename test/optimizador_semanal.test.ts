@@ -14,4 +14,4 @@ describe('OptimizadorSemanal', () => {
 
         expect(optimizador.getActividades()).toHaveLength(1);
     });
-}
+});
