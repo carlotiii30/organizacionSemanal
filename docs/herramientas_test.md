@@ -48,5 +48,87 @@ términos y conceptos en contextos específicos, permitiendo mayor modularidad
 y escalabilidad.
 
 ## Decisión final
-Para este proyecto usaremos TDD, ya que nuestro objetivo es buscar el mínimo
-producto viable.
+Para este proyecto usaremos TDD, ya que nuestro objetivo es buscar el productoo
+mínimo viable.
+
+
+# Herramientas para los tests
+Tenemos que elegir un assert, un test runner y un CLI.
+
+## Test runner
+Opciones:
+* Jest: https://jestjs.io
+* Mocha: https://mochajs.org
+
+### Jest
+Jest es un framework de tests para JavaScript y TypeScript desarrollado por
+Facebook. Es especialmente conocido por su simplicidad y configuración "listo
+para usar".
+
+**Características**
+* Soporte para tests de unidades, integración y extremo a extremo.
+* Ejecución paralela de pruebas para mayor velocidad.
+* Integración con TypeScript.
+* API de aserciones incorporada.
+* Generación de informes de cobertura de código.
+* Snapshot testing para detectar cambios no deseados en la salida.
+
+### Mocha
+Mocha es otro popular framework de tests para JavaScript y Node.js. A
+diferencia de Jest, Mocha es más flexible y permite la utilización de
+bibliotecas de aserciones y bibliotecas de manipulación del flujo de control
+de tests.
+
+**Características**
+* Admite pruebas unitarias y de integración.
+* Soporte para aserciones, pero permite la elección de bibliotecas como Chai.
+* Se puede usar con Node.js y en el navegador.
+* Configuración flexible y extensible.
+* Informes detallados y generación de informes de cobertura.
+
+### Decisión final
+Para este proyecto utilizaremos Jest, ya que es especialmente fuerte en
+proyectos basados en TypeScript.
+
+## Assert
+Opciones:
+* Chai: https://www.chaijs.com
+* Assert (módulo de Node.js): https://nodejs.org/en
+* Jest: https://jestjs.io
+
+### Chai
+Chai es una biblioteca de aserciones que se puede utilizar con Mocha y otros
+frameworks de pruebas. Proporciona una sintaxis clara y expresiva para realizar
+afirmaciones sobre el código.
+
+**Características**
+* Ofrece múltiples estilos de aserciones, como should, expect y assert.
+* Soporte para pruebas asíncronas.
+* Integración con varios frameworks de tests.
+* Posibilidad de extender con plugins.
+
+### Assert
+El módulo 'assert' es una biblioteca de aserciones integrada en Node.js.
+
+**Características**
+* Al ser parte del núclero de Node.js, no requiere instalación adicional.
+* Sintaxis simple para realizar aserciones básicas.
+* Adecuado para pruebas unitarias y de integración en entornos de Node.js.
+
+Debemos tener en cuenta que es especialmente útil en entornos como el nuestro,
+[Node.js](runtime.md), pero no ofrece la riqueza de otras bibliotecas externas.
+
+### Decisión final
+Debemos tener en cuenta el test runner elegido. Si la elección hubiese sido
+[Mocha](#mocha), probablemente habríamos optado por Chai. Sin embargo, como la
+decisión final ha sido [Jest](#jest), podemos aprovechar las capacidades de
+aserciones integradas que nos ofrece sin agregar una biblioteca de aserciones
+externa.
+
+## CLI
+[Yarn](gestor_dependencias.md) proporciona una interfaz de línea de comandos
+que permite realizar diversas tareas relacionadas con la gestión de paquetes,
+incluyendo la ejecución de scripts personalizados, como los scripts de prueba.
+
+La CLI de Yarn es bastante flexible y puede adaptarse a las necesidad de este
+proyecto, por tanto, será la que utilizaremos.
