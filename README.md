@@ -31,9 +31,18 @@ pero siempre que existan deben realizarse.
 * [Gestor de tareas](./docs/gestor_tareas.md)
 * [Runtime](./docs/runtime.md)
 
+## Herramientas para tests y metodología
+[Herramientas para tests](./docs/herramientas_test.md)
+
 ## Comprobación de sintaxis
 Para la comprobación de la sintaxis del código de nuestro proyecto, deberemos
 ejecutar el siguiente comando:
 ```bash
 yarn check
+```
+
+## Ejecución de test
+Para la ejecución de tests, el comando que utilizaremos será:
+```bash
+yarn test
 ```
