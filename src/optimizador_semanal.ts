@@ -20,6 +20,9 @@ export class OptimizadorSemanal{
      * @param actividad Actividad a agregar.
      */
     public agregarActividad(actividad: Actividad): void{
+        if (actividad.Tarea[0] === "")
+            throw new Error('La actividad debe tener una tarea');
+
         this.actividades.push(actividad);
     }
 

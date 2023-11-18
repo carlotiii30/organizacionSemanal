@@ -3,4 +3,4 @@ entidad: src/planificador.ts
 automatizar:
   fichero: package.json
   orden: yarn run
-test: test/optimizador_semanal_test.test.ts
+test: test/optimizador_semanal.test.ts
