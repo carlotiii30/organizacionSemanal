@@ -1,107 +1,133 @@
 # Metodología
 Una metodología de desarrollo de software es un enfoque estructurado o conjunto
 de prácticas, procesos, reglas y principios que guían el desarrollo de software
-a lo largo de su ciclo de vida. Estas metodologías proporcionan un marco de
-trabajo para planificar, estructurar y controlar el proceso de desarrollo, con
-el objetivo de mejorar la calidad del software, aumentar la eficiencia y
-gestionar de manera efectiva los recursos y el tiempo.
+a lo largo de su ciclo de vida.
 
-Vamos a explorar dos opciones:
+Vamos a explorar tres opciones:
 * [TDD](#tdd)
-* [DDD](#ddd)
+* [BDD](#bdd)
+* [ATDD](#atdd)
+
+Para poder tomar la mejor decisión para nuestro proyecto, primero
+investigaremos sobre cómo funciona cada una de estas metodologías, y, después,
+compararemos las características que ofrecen con los [criterios](#criterios)
+establecidos.
+
+## Criterios
+- **Enfoque**: Manera específica en que se realiza una actividad.
+- **Propósito**: Objetivo detrás de la actividad.
 
 ## TDD
 TDD - Test Driven Development es una metodología que se centra en escribir
 tests antes del propio código.
 
-Su ciclo es el siguiente:
-1. Red: Se escribe un test que falla porque la funcionalidad aún no está
-implementada.
-2. Green: Se implementa el código mínimo necesario para que pase el test.
-3. Refactor: Se mejora el código sin cambiar el comportamiento.
+### Características
+**Enfoque**:
+- Se centra en escribir pruebas unitarias antes de escribir el código de
+producción.
+- Ciclo red-green-refactor: escribir una prueba que falle, hacer que pase y
+luego refactorizar si es necesario.
 
-### Ventajas
-**Mejora la calidad del código**: Al escribir los tests antes, se asegura de
-que el código funcione según lo esperado.
-
-**Retroalimentación**: Los tests automáticos proporcionan retroalimentación
-inmediaata sobre cualquier cambio en el código.
-
-**Errores en producción**: Se reducen significativamente los errores que llegan
-a producción, ya que se detectan y se corrigen en una etapa temprana.
+**Propósito**:
+- Garantizar que el código sea confiable y cumpla con los requisitos al
+escribir pruebas unitarias antes de implementar el código de producción.
+- Mejorar la calidad del código y facilitar el mantenimiento.
 
 ## BDD
-BDD - Behavior Driven Development es una metodología que se enfoca en la
-colaboración dentre desarrolladores, testers y stakeholders. La principal idea
-es describir el comportamiento del sistema en un lenguaje natural comprensible
+BDD - Behavior Driven Development es una metodología que se enfoca en la idea
+de describir el comportamiento del sistema en un lenguaje natural comprensible
 para todos los involucrados en el proyecto.
 
-### Ventajas
-**Comportamiento**: Se centra en el comportamiento del sistema desde la
-perspectiva del usuario final, ayudando a alinear el desarrollo con las
-necesidades del negocio y del usuario.
+### Características
+**Enfoque**:
+- Se centra en describir el comportamiento del sistema desde la perspectiva del
+usuario final.
+- Uso del lenguaje natural para escribir especificaciones que describan el
+comportamiento esperado.
 
-**Automatización de pruebas**: Las especificaciones escritas en lenguaje
-natural pueden convertise en pruebas automatizadas, lo que garantiza una
-ejecución regular y repetible de los tests.
+**Propósito**:
+-  Mejorar la colaboración entre los miembros del equipo y garantizar que el
+sistema se comporte según las expectativas del usuario final.
+- Facilitar la comprensión compartida del comportamiento del sistema.
 
-**Detección de problemas**: Al escribir las especififcaciones de comportamiento
-antes de implementar el código, los problemas pueden detectarse en una etapa
-temprana del proyecto.
+## ATDD
+ATDD - Acceptance Test-Driven Development es una metodología de desarrollo de
+software que se centra en la colaboración entre los desarrolladores, los
+testers y los stakeholders del proyecto, con el objetivo de garantizar que las
+características desarrolladas satisfagan los requisitos del negocio.
 
-**Reutilización**: Las especificaciones escritas en lenguaje natural pueden
-reutilizarse para diferentes propósitos.
+### Características
+**Enfoque**:
+- Se centra en la colaboración entre equipos y en validar que las
+funcionalidades implementadas cumplan con los requisitos del usuario.
+- Definición de pruebas de aceptación antes de implementar el código.
+
+**Propósito**:
+- Validar que las funcionalidades implementadas cumplan con los requisitos del
+usuario y del negocio.
+- Mejorar la comunicación y la colaboración entre desarrolladores, testers y
+stakeholders.
 
 ## Decisión final
 Para este proyecto usaremos TDD, ya que nuestro objetivo es buscar el producto
-mínimo viable. Sin embargo, estos no son mutuamente excluyentes, por tanto, si,
-en algún momento, necesitamos escribir pruebas a nivel superior que describan
-el comportamiento general del sistema podremos utilizar BDD.
+mínimo viable, y con el ciclo red-green-refactor podemos lograr esto de la
+forma más eficiente.
 
 
 # Herramientas para los tests
 Tenemos que elegir un assert, un test runner y un CLI.
 
+## Criterios
+- **Compatibilidad**: Buscamos herramientas que sean compatibles con nuestro
+lenguaje de programación [TypeScript](../iv.yaml)
+- **Aserciones**: Buscamos un test runner que tenga biblioteca de aserciones
+propia, o que sea compatible con alguna de ellas.
+- **Capacidad de paralelización**: Ejecutar pruebas en paralelo puede acelerar
+significativamente el proceso de prueba.
+
+
 ## Test runner
 Opciones:
 * Jest: https://jestjs.io
 * Mocha: https://mochajs.org
+* Jasmine: https://jasmine.github.io
+* Cypress: https://www.cypress.io
 
 ### Jest
-Jest es un framework de tests para JavaScript y TypeScript desarrollado por
-Facebook. Es especialmente conocido por su simplicidad y configuración "listo
-para usar".
-
 **Características**
-* Soporte para tests de unidades, integración y extremo a extremo.
 * Ejecución paralela de pruebas para mayor velocidad.
 * Integración con TypeScript.
 * API de aserciones incorporada.
-* Generación de informes de cobertura de código.
-* Snapshot testing para detectar cambios no deseados en la salida.
 
 ### Mocha
-Mocha es otro popular framework de tests para JavaScript y Node.js. A
-diferencia de Jest, Mocha es más flexible y permite la utilización de
-bibliotecas de aserciones y bibliotecas de manipulación del flujo de control
-de tests.
-
 **Características**
-* Admite pruebas unitarias y de integración.
-* Soporte para aserciones, pero permite la elección de bibliotecas como Chai.
-* Se puede usar con Node.js y en el navegador.
-* Configuración flexible y extensible.
-* Informes detallados y generación de informes de cobertura.
+* Compatible con TypeScript.
+* No incluye biblioteca de aserciones, pero permite la elección de bibliotecas.
+* No tiene capacidad de paralelización, pero puede aprovechar herramientas
+adicionales.
+
+### Jasmine
+**Características**
+* Tiene soprte para TypeScript.
+* Incluye su propia biblioteca de aserciones.
+* No tiene capacidad de paralelización, pero puede aprovechar herramientas
+adicionales.
+
+### Cypress
+**Características**
+* Tiene soprte para TypeScript.
+* Incluye su propia biblioteca de aserciones.
+* Tiene capacidad de paralelización en su servicio de ejecución en la nube.
 
 ### Decisión final
 Para este proyecto utilizaremos Jest, ya que es especialmente fuerte en
 proyectos basados en TypeScript.
 
+
 ## Assert
 Opciones:
 * Chai: https://www.chaijs.com
-* Assert (módulo de Node.js): https://nodejs.org/en
-* Jest: https://jestjs.io
+* Frameworks integrados.
 
 ### Chai
 Chai es una biblioteca de aserciones que se puede utilizar con Mocha y otros
@@ -114,16 +140,13 @@ afirmaciones sobre el código.
 * Integración con varios frameworks de tests.
 * Posibilidad de extender con plugins.
 
-### Assert
-El módulo 'assert' es una biblioteca de aserciones integrada en Node.js.
-
-**Características**
-* Al ser parte del núclero de Node.js, no requiere instalación adicional.
-* Sintaxis simple para realizar aserciones básicas.
-* Adecuado para pruebas unitarias y de integración en entornos de Node.js.
-
-Debemos tener en cuenta que es especialmente útil en entornos como el nuestro,
-[Node.js](runtime.md), pero no ofrece la riqueza de otras bibliotecas externas.
+### Frameworks integrados
+Algunos test runners llevan integradas bibliotecas de aserciones, nosotros
+podríamos utilizar:
+- Node.js
+- Jest
+- Jasmine
+- Cypress
 
 ### Decisión final
 Debemos tener en cuenta el test runner elegido. Si la elección hubiese sido
