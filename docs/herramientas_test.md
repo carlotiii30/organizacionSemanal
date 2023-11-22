@@ -121,7 +121,8 @@ adicionales.
 
 ### Decisión final
 Para este proyecto utilizaremos Jest, ya que es especialmente fuerte en
-proyectos basados en TypeScript.
+proyectos basados en TypeScript y cumple con todos los
+[criterios](#criterios-1) establecidos.
 
 
 ## Assert
@@ -149,11 +150,9 @@ podríamos utilizar:
 - Cypress
 
 ### Decisión final
-Debemos tener en cuenta el test runner elegido. Si la elección hubiese sido
-[Mocha](#mocha), probablemente habríamos optado por Chai. Sin embargo, como la
-decisión final ha sido [Jest](#jest), podemos aprovechar las capacidades de
-aserciones integradas que nos ofrece sin agregar una biblioteca de aserciones
-externa.
+Debemos tener en cuenta el test runner elegido. Como la decisión final ha sido
+[Jest](#jest), podemos aprovechar las capacidades de aserciones integradas que
+nos ofrece sin agregar una biblioteca de aserciones externa.
 
 ## CLI
 [Yarn](gestor_dependencias.md) proporciona una interfaz de línea de comandos
