@@ -30,26 +30,33 @@ inmediaata sobre cualquier cambio en el código.
 **Errores en producción**: Se reducen significativamente los errores que llegan
 a producción, ya que se detectan y se corrigen en una etapa temprana.
 
-## DDD
-DDD - Domain Driven Design es una metodología que se enfoca en entender y
-resolver complejidades del diseño en el dominio del problema. Pone un énfasis
-particular en la compresión del dominio del problema.
+## BDD
+BDD - Behavior Driven Development es una metodología que se enfoca en la
+colaboración dentre desarrolladores, testers y stakeholders. La principal idea
+es describir el comportamiento del sistema en un lenguaje natural comprensible
+para todos los involucrados en el proyecto.
 
 ### Ventajas
-**Comprensión**: La comprensión del dominio ayuda a reflejar con mayor
-precisión las necesidades y la lógica del negocio.
+**Comportamiento**: Se centra en el comportamiento del sistema desde la
+perspectiva del usuario final, ayudando a alinear el desarrollo con las
+necesidades del negocio y del usuario.
 
-**Modelado**: Propone un modelado centrado en el dominio, que permite crear un
-modelo de dominioque refleje de manera más precisa la realidad del negocio,
-facilitando la comprensión y mantenimiento del código.
+**Automatización de pruebas**: Las especificaciones escritas en lenguaje
+natural pueden convertise en pruebas automatizadas, lo que garantiza una
+ejecución regular y repetible de los tests.
 
-**Bounded Context**: Evita conflictos al definir claramente el significado de
-términos y conceptos en contextos específicos, permitiendo mayor modularidad
-y escalabilidad.
+**Detección de problemas**: Al escribir las especififcaciones de comportamiento
+antes de implementar el código, los problemas pueden detectarse en una etapa
+temprana del proyecto.
+
+**Reutilización**: Las especificaciones escritas en lenguaje natural pueden
+reutilizarse para diferentes propósitos.
 
 ## Decisión final
-Para este proyecto usaremos TDD, ya que nuestro objetivo es buscar el productoo
-mínimo viable.
+Para este proyecto usaremos TDD, ya que nuestro objetivo es buscar el producto
+mínimo viable. Sin embargo, estos no son mutuamente excluyentes, por tanto, si,
+en algún momento, necesitamos escribir pruebas a nivel superior que describan
+el comportamiento general del sistema podremos utilizar BDD.
 
 
 # Herramientas para los tests
