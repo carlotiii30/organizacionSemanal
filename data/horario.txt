@@ -1,0 +1,4 @@
+Lunes: 09:00-11:00 Correr | 13:00-15:00 Cocinar;
+Martes: 10:00-12:00 Estudiar | 14:00-16:00 Ir al cole;
+Miércoles: 08:00-10:00 Gimnasio | 12:00-14:00 IV
+Jueves: 08:00-10:00 Gimnasio | 12:00-14:00 IV

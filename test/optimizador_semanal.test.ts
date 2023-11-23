@@ -32,7 +32,7 @@ describe('OptimizadorSemanal', () => {
 
         optimizador.extraerHorario();
 
-        expect(optimizador.getActividades()).toHaveLength(6);
+        expect(optimizador.getActividades()).toHaveLength(8);
     });
 
 });
