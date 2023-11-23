@@ -73,7 +73,7 @@ proyectos basados en TypeScript y cumple con todos los
 [criterios](#criterios-1) establecidos.
 
 
-## Assert
+## Biblioteca de aserciones
 Opciones:
 * Chai: https://www.chaijs.com
 * Frameworks integrados.
@@ -92,7 +92,6 @@ afirmaciones sobre el código.
 ### Frameworks integrados
 Algunos test runners llevan integradas bibliotecas de aserciones, nosotros
 podríamos utilizar:
-- Node.js
 - Jest
 - Jasmine
 - Cypress
@@ -103,9 +102,13 @@ Debemos tener en cuenta el test runner elegido. Como la decisión final ha sido
 nos ofrece sin agregar una biblioteca de aserciones externa.
 
 ## CLI
-[Yarn](gestor_dependencias.md) proporciona una interfaz de línea de comandos
-que permite realizar diversas tareas relacionadas con la gestión de paquetes,
-incluyendo la ejecución de scripts personalizados, como los scripts de prueba.
+Todas las [test runner](#test-runner) investigados tienen su propia CLI. Sin
+embargo, para esta decisión, deberemos tener en cuenta solo a uno de ellos:
+Jest, que es el vamos a utilizar.
 
-La CLI de Yarn es bastante flexible y puede adaptarse a las necesidad de este
-proyecto, por tanto, será la que utilizaremos.
+Además, Yarn, el gestor de dependencias, también tiene su interfaz de línea de
+comandos integrada. Por tanto, podríamos utilizar cualquiera de las dos para
+este proyecto.
+
+La CLI de [Yarn](gestor_dependencias.md) es bastante flexible y puede adaptarse
+a las necesidad de este proyecto, por tanto, será la que utilizaremos.
