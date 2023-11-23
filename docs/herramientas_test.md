@@ -3,19 +3,7 @@ Una metodología de desarrollo de software es un enfoque estructurado o conjunto
 de prácticas, procesos, reglas y principios que guían el desarrollo de software
 a lo largo de su ciclo de vida.
 
-Vamos a explorar tres opciones:
-* [TDD](#tdd)
-* [BDD](#bdd)
-* [ATDD](#atdd)
-
-Para poder tomar la mejor decisión para nuestro proyecto, primero
-investigaremos sobre cómo funciona cada una de estas metodologías, y, después,
-compararemos las características que ofrecen con los [criterios](#criterios)
-establecidos.
-
-## Criterios
-- **Enfoque**: Manera específica en que se realiza una actividad.
-- **Propósito**: Objetivo detrás de la actividad.
+Para esta proyecto utilizaremos la metodología TDD.
 
 ## TDD
 TDD - Test Driven Development es una metodología que se centra en escribir
@@ -32,46 +20,6 @@ luego refactorizar si es necesario.
 - Garantizar que el código sea confiable y cumpla con los requisitos al
 escribir pruebas unitarias antes de implementar el código de producción.
 - Mejorar la calidad del código y facilitar el mantenimiento.
-
-## BDD
-BDD - Behavior Driven Development es una metodología que se enfoca en la idea
-de describir el comportamiento del sistema en un lenguaje natural comprensible
-para todos los involucrados en el proyecto.
-
-### Características
-**Enfoque**:
-- Se centra en describir el comportamiento del sistema desde la perspectiva del
-usuario final.
-- Uso del lenguaje natural para escribir especificaciones que describan el
-comportamiento esperado.
-
-**Propósito**:
--  Mejorar la colaboración entre los miembros del equipo y garantizar que el
-sistema se comporte según las expectativas del usuario final.
-- Facilitar la comprensión compartida del comportamiento del sistema.
-
-## ATDD
-ATDD - Acceptance Test-Driven Development es una metodología de desarrollo de
-software que se centra en la colaboración entre los desarrolladores, los
-testers y los stakeholders del proyecto, con el objetivo de garantizar que las
-características desarrolladas satisfagan los requisitos del negocio.
-
-### Características
-**Enfoque**:
-- Se centra en la colaboración entre equipos y en validar que las
-funcionalidades implementadas cumplan con los requisitos del usuario.
-- Definición de pruebas de aceptación antes de implementar el código.
-
-**Propósito**:
-- Validar que las funcionalidades implementadas cumplan con los requisitos del
-usuario y del negocio.
-- Mejorar la comunicación y la colaboración entre desarrolladores, testers y
-stakeholders.
-
-## Decisión final
-Para este proyecto usaremos TDD, ya que nuestro objetivo es buscar el producto
-mínimo viable, y con el ciclo red-green-refactor podemos lograr esto de la
-forma más eficiente.
 
 
 # Herramientas para los tests
