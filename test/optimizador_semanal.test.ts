@@ -28,11 +28,9 @@ describe('OptimizadorSemanal', () => {
 
     it ('debería extraer el horario de la semana', () => {
         const optimizador = new OptimizadorSemanal();
-        const horario = new Horario("/data/horario.txt");
 
         optimizador.extraerHorario();
 
-        expect(optimizador.getActividades()).toHaveLength(8);
+        expect(optimizador.getActividades()).toHaveLength(6);
     });
-
 });

@@ -2,6 +2,7 @@ import { Actividad, TipoActividad } from "./types";
 import { Horario } from "./horario";
 
 export class OptimizadorSemanal {
+
     private actividades: Actividad[];
 
     /**
@@ -28,6 +29,7 @@ export class OptimizadorSemanal {
         return this.actividades;
     }
 
+
     /**
      * Extrae la información de un día.
      * @param info Contenido del horario a extraer la información.
@@ -39,25 +41,17 @@ export class OptimizadorSemanal {
             return null;
         }
 
-        const regex = new RegExp(`${dia}:[^|]*\\|([^;]*)`, 'g');
+        const regex = new RegExp(`${dia}[^;]*?(\\d{2}:\\d{2}-\\d{2}:\\d{2}[^\n|]*)`, 'g');
+
         const coincidencias = info.match(regex);
 
         if (coincidencias) {
-            const informacion: { hora: string, actividad: string }[] = [];
+            const informacion = coincidencias.map((coincidencia) => {
+                const partes = coincidencia.split(/\s+/);
+                const hora = partes[1];
+                const actividad = partes.slice(2).join(' ');
 
-            coincidencias.forEach((coincidencia) => {
-                const partes = coincidencia.split('|');
-                partes.forEach((parte) => {
-                    const horaMatch = /\d{2}:\d{2}-\d{2}:\d{2}/.exec(parte);
-                    const actividadMatch = /[^\d:]+/.exec(parte);
-
-                    if (horaMatch && actividadMatch) {
-                        const hora = horaMatch[0];
-                        const actividad = actividadMatch[0].trim();
-
-                        informacion.push({ hora, actividad });
-                    }
-                });
+                return { hora, actividad };
             });
 
             return informacion;
@@ -65,8 +59,6 @@ export class OptimizadorSemanal {
 
         return null;
     }
-
-
 
 
     /**
@@ -77,18 +69,17 @@ export class OptimizadorSemanal {
         const horario = new Horario("./data/horario.txt");
         const contenido = horario.getInfo();
 
-        const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-
-        // Limpiamos las actividades existentes antes de extraer el nuevo horario
-        this.actividades = [];
+        const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
         dias.forEach((dia) => {
             const informacion = this.extraerInformacion(contenido, dia);
 
             if (informacion) {
+                let actividad: Actividad | null = null;
+
                 informacion.forEach((info) => {
                     if (info.actividad) {
-                        const actividad: Actividad = {
+                        actividad = {
                             TipoActividad: TipoActividad.ESTUDIO,
                             Tarea: {
                                 Descripcion: info.actividad,
@@ -97,11 +88,11 @@ export class OptimizadorSemanal {
                             },
                         };
 
-                        // Agregar cada actividad directamente a la lista general
-                        this.actividades.push(actividad);
+                        this.agregarActividad(actividad);
                     }
                 });
             }
         });
     }
 }
+
