@@ -63,7 +63,6 @@ export class OptimizadorSemanal {
 
     /**
      * Extrae el horario de la semana.
-     * @param contenido Contenido del horario.
      */
     public extraerHorario(): void {
         const horario = new Horario("./data/horario.txt");
