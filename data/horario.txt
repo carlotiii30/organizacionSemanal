@@ -1,9 +1,5 @@
-Lunes: 09:00-11:00 Correr
-Lunes: 13:00-15:00 Cocinar
-
-Martes: 10:00-12:00 Estudiar
-Martes: 14:00-16:00 Ir al cole
-
-Miércoles: 08:00-10:00 Gimnasio
-
-Jueves: 08:00-10:00 Dormir
+Lunes 17:30-19:00 Academia de inglés
+Miércoles 17:30-19:00 Academia
+Jueves 8:30-14:30 Facultad
+Jueves 15:30-17:30 Facultad
+Viernes 8:30-14:30 Facultad

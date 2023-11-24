@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
 
-export class Horario {
+export class Archivo {
     private path: string;
     private info: string | null = null;
 

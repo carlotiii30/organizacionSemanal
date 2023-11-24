@@ -1,5 +1,6 @@
-import { Actividad, TipoActividad } from "./types";
-import { Horario } from "./horario";
+import { TipoActividad } from "./tipos";
+import { Archivo } from "./archivo";
+import { Actividad } from "./actividad";
 
 export class OptimizadorSemanal {
 
@@ -17,7 +18,7 @@ export class OptimizadorSemanal {
      * @param actividad Actividad a agregar.
      */
     public agregarActividad(actividad: Actividad): void {
-        if (actividad.Tarea.Descripcion != null)
+        if (actividad.getDescripcion() != null)
             this.actividades.push(actividad);
     }
 
@@ -34,64 +35,71 @@ export class OptimizadorSemanal {
      * Extrae la información de un día.
      * @param info Contenido del horario a extraer la información.
      * @param dia Día de la semana a extraer la información.
-     * @returns Lista de objetos con 'hora' y 'actividad'.
+     * @returns Lista de objetos con 'hora' y 'descripcion'.
      */
-    public extraerInformacion(info: string, dia: string): { hora: string, actividad: string }[] | null {
+    public extraerInformacionHorario(info: string): { dia: string; hora: string; descripcion: string }[] | null {
         if (info == null) {
             return null;
         }
 
-        const regex = new RegExp(`${dia}[^;]*?(\\d{2}:\\d{2}-\\d{2}:\\d{2}[^\n|]*)`, 'g');
+        const partes = info.split(/ /);
+        const dia = partes[0];
+        const hora = partes[1];
+        const descripcion = partes.slice(2).join(" ");
 
-        const coincidencias = info.match(regex);
-
-        if (coincidencias) {
-            const informacion = coincidencias.map((coincidencia) => {
-                const partes = coincidencia.split(/\s+/);
-                const hora = partes[1];
-                const actividad = partes.slice(2).join(' ');
-
-                return { hora, actividad };
-            });
-
-            return informacion;
-        }
-
-        return null;
+        return [{ dia: dia, hora: hora, descripcion: descripcion }];
     }
-
 
     /**
      * Extrae el horario de la semana.
+     * @param horario Horario a extraer.
      */
-    public extraerHorario(): void {
-        const horario = new Horario("./data/horario.txt");
+    public extraerHorario(horario: Archivo): void {
         const contenido = horario.getInfo();
+        const lineas = contenido.split(/\n/);
 
-        const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-
-        dias.forEach((dia) => {
-            const informacion = this.extraerInformacion(contenido, dia);
+        lineas.forEach(linea => {
+            const informacion = this.extraerInformacionHorario(linea);
 
             if (informacion) {
-                let actividad: Actividad | null = null;
-
                 informacion.forEach((info) => {
-                    if (info.actividad) {
-                        actividad = {
-                            TipoActividad: TipoActividad.ESTUDIO,
-                            Tarea: {
-                                Descripcion: info.actividad,
-                                Dia: dia,
-                                Hora: info.hora,
-                            },
-                        };
+                    const actividad = new Actividad(TipoActividad.FIJA, info.descripcion, info.dia, info.hora);
+                    this.agregarActividad(actividad);
+                });
+            }
+        });
+    }
 
-                        this.agregarActividad(actividad);
-                    }
+    public extraerInformacionLista(info: string): { descripcion: string, duracion: number }[] | null {
+        if (info == null) {
+            return null;
+        }
+
+        const partes = info.split(/-/);
+        const duracion = parseInt(partes[1].slice(0, -1));
+        const descripcion = partes[0].slice(0, -1);
+
+        return [{ descripcion: descripcion, duracion: duracion }];
+    }
+
+    /**
+     * Extrae las actividades de la lista de actividades.
+     * @param lista Lista de actividades a extraer.
+     */
+    public extraerActividades(lista: Archivo): void {
+        const contenido = lista.getInfo();
+        const lineas = contenido.split(/\n/);
+
+        lineas.forEach(linea => {
+            const informacion = this.extraerInformacionLista(linea);
+
+            if (informacion) {
+                informacion.forEach((info) => {
+                    const actividad = new Actividad(TipoActividad.VARIABLE, info.descripcion, "", "");
+                    actividad.setDuracion(info.duracion);
+                    this.agregarActividad(actividad);
                 });
             }
         });
     }
 }
-
