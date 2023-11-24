@@ -70,6 +70,11 @@ export class OptimizadorSemanal {
         });
     }
 
+    /**
+     * Extrae la información de una lista de actividades.
+     * @param info Contenido de la lista.
+     * @returns Descripcion y duración de las actividades.
+     */
     public extraerInformacionLista(info: string): { descripcion: string, duracion: number }[] | null {
         if (info == null) {
             return null;
