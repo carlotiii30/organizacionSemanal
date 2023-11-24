@@ -52,4 +52,15 @@ describe('OptimizadorSemanal', () => {
         expect(optimizador.getActividades()[0].getDia()).toEqual("");
         expect(optimizador.getActividades()[0].getHora()).toEqual("");
     });
+
+    it('debería crear un horario', () => {
+        const optimizador = new OptimizadorSemanal();
+        const horario = optimizador.organizarHorario();
+
+        expect(horario[0][1]).toBe("LUNES");
+        expect(horario[0][5]).toBe("VIERNES");
+        expect(horario[1][0]).toBe("7:00");
+        expect(horario[29][0]).toBe("21:00");
+    });
+
 });
