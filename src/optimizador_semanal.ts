@@ -107,4 +107,41 @@ export class OptimizadorSemanal {
             }
         });
     }
+
+    /**
+     * Crear una matriz horario.
+     */
+    public crearHorario(): string[][] {
+        const horario: string[][] = [];
+
+        // Primera fila: días de la semana
+        horario.push(["", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"]);
+
+        // Primera columna: horas del día
+        Array.from({ length: 29 }).forEach((_, index) => {
+            const hour = Math.floor(index / 2) + 7;
+            const minute = index % 2 === 0 ? "00" : "30";
+            horario.push([`${hour}:${minute}`, "", "", "", "", ""]);
+        });
+
+        // Visualizar matriz
+        horario.forEach((row) => {
+            console.log(row.join("\t"));
+        });
+
+        return horario;
+    }
+
+
+    /**
+     * Asignación de horas.
+     */
+    public organizarHorario(): string[][] {
+        let horario: string[][] = this.crearHorario();
+
+        const fijas = this.actividades.filter(actividad => actividad.getTipo() == TipoActividad.FIJA);
+        const variables = this.actividades.filter(actividad => actividad.getTipo() == TipoActividad.VARIABLE);
+
+        return horario;
+    }
 }
