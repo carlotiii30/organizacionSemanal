@@ -13,7 +13,7 @@ export class Actividad {
      * Constructor de la clase Actividad.
      */
     constructor(tipo: TipoActividad, descripcion: string, dia: string, hora: string) {
-        this.Tipo = TipoActividad.FIJA;
+        this.Tipo = tipo;
         this.Tarea = {
             Descripcion: descripcion,
             Dia: dia,
@@ -75,7 +75,7 @@ export class Actividad {
      * Calcula la duración de la actividad.
      * @returns Duración de la actividad.
      */
-    public calcularDuracion(): number {
+    public calcularDuracion(): number | undefined{
         const horaInicio = this.Tarea.Hora.split(/-/)[0];
         const horaFin = this.Tarea.Hora.split(/-/)[1];
 

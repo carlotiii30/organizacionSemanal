@@ -75,4 +75,15 @@ describe('OptimizadorSemanal', () => {
         expect(optimizador.getHorario()[9][1]).toBe("Estudiar para el examen");
         expect(optimizador.getHorario()[10][1]).toBe("Estudiar para el examen");
     });
+
+    it ('debería agregar una actividad variable al horario', () => {
+        const optimizador = new OptimizadorSemanal();
+        const actividad = new Actividad(TipoActividad.VARIABLE, "Gimnasio", "", "");
+
+        actividad.setDuracion(2);
+        optimizador.agregarActividad(actividad);
+        optimizador.organizarHorario();
+
+        expect(optimizador.getHorario()[1][1]).toBe("Gimnasio");
+    });
 });

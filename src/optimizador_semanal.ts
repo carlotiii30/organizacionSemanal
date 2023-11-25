@@ -154,14 +154,47 @@ export class OptimizadorSemanal {
             const horaInicioActividad = hora.split("-")[0];
             const horaIndex = this.horario.findIndex((row) => row[0] === horaInicioActividad);
 
-            const duracion = actividad.calcularDuracion();
+            let duracion = undefined;
 
-            if (diaIndex !== -1 && horaIndex !== -1) {
-                for (let i = horaIndex; i < horaIndex + (duracion * 2); i++) {
-                    this.horario[i][diaIndex] = descripcion || "";
+            if (actividad.getDuracion() === undefined)
+                duracion = actividad.calcularDuracion();
+            else
+                duracion = actividad.getDuracion();
+
+            if (diaIndex !== -1 && horaIndex !== -1 && duracion) {
+                this.horario
+                    .slice(horaIndex, horaIndex + (duracion * 2))
+                    .forEach((row) => row[diaIndex] = descripcion || "");
+            }
+        });
+
+        // Asignación de actividades variables
+        variables.forEach(actividad => {
+            const descripcion = actividad.getDescripcion();
+            let duracion = actividad.getDuracion();
+
+            console.log("Duracion: " + duracion);
+            if (duracion) {
+                const celdasDisponibles: any[] = [];
+                this.horario.forEach((row, rowIndex) => {
+                    if (rowIndex > 0) {
+                        row.forEach((cell, cellIndex) => {
+                            if (cell === "" && cellIndex > 0) {
+                                celdasDisponibles.push({ rowIndex, cellIndex });
+                            }
+                        });
+                    }
+                });
+
+                while (duracion > 0 && celdasDisponibles.length > 0) {
+                    const celda = celdasDisponibles.shift();
+                    this.horario[celda.rowIndex][celda.cellIndex] = descripcion || "";
+                    duracion-= 0;
                 }
             }
-
         });
+
+        console.log(this.horario);
     }
+
 }
