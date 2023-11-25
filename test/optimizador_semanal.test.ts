@@ -86,4 +86,40 @@ describe('OptimizadorSemanal', () => {
 
         expect(optimizador.getHorario()[1][1]).toBe("Gimnasio");
     });
+
+    it ('debería crear un horario funcional con actividades fijas y variables', () => {
+        const optimizador = new OptimizadorSemanal();
+        const horario = new Archivo("./data/horario.txt");
+        const listaActividades = new Archivo("./data/actividades.txt");
+
+        optimizador.extraerHorario(horario);
+        optimizador.extraerActividades(listaActividades);
+
+        optimizador.organizarHorario();
+
+        expect(optimizador.getHorario()[22][1]).toBe("Academia de inglés");
+        expect(optimizador.getHorario()[23][1]).toBe("Academia de inglés");
+        expect(optimizador.getHorario()[24][1]).toBe("Academia de inglés");
+
+        expect(optimizador.getHorario()[22][3]).toBe("Academia");
+        expect(optimizador.getHorario()[23][3]).toBe("Academia");
+        expect(optimizador.getHorario()[24][3]).toBe("Academia");
+
+        expect(optimizador.getHorario()[4][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[5][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[6][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[7][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[8][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[9][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[10][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[11][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[12][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[13][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[14][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[15][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[18][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[19][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[20][4]).toBe("Facultad");
+        expect(optimizador.getHorario()[21][4]).toBe("Facultad");
+    });
 });

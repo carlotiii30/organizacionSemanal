@@ -169,11 +169,10 @@ export class OptimizadorSemanal {
         });
 
         // Asignación de actividades variables
-        variables.forEach(actividad => {
+        /*variables.forEach(actividad => {
             const descripcion = actividad.getDescripcion();
             let duracion = actividad.getDuracion();
 
-            console.log("Duracion: " + duracion);
             if (duracion) {
                 const celdasDisponibles: any[] = [];
                 this.horario.forEach((row, rowIndex) => {
@@ -192,7 +191,7 @@ export class OptimizadorSemanal {
                     duracion-= 0.5;
                 }
             }
-        });
+        });*/
 
         console.log(this.horario);
     }
