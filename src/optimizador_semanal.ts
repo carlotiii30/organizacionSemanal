@@ -5,12 +5,14 @@ import { Actividad } from "./actividad";
 export class OptimizadorSemanal {
 
     private actividades: Actividad[];
+    private horario: string[][];
 
     /**
      * Constructor por defecto de la clase OptimizadorSemanal
      */
     constructor() {
         this.actividades = [];
+        this.horario = [];
     }
 
     /**
@@ -28,6 +30,14 @@ export class OptimizadorSemanal {
      */
     public getActividades(): Actividad[] {
         return this.actividades;
+    }
+
+    /**
+     * Getter del horario.
+     * @returns Horario.
+     */
+    public getHorario(): string[][] {
+        return this.horario;
     }
 
 
@@ -111,37 +121,15 @@ export class OptimizadorSemanal {
     /**
      * Crear una matriz horario.
      */
-    public crearHorario(): string[][] {
-        const horario: string[][] = [];
-
+    public crearHorario(): void {
         // Primera fila: días de la semana
-        horario.push(["", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"]);
+        this.horario.push(["", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"]);
 
         // Primera columna: horas del día
         Array.from({ length: 29 }).forEach((_, index) => {
             const hour = Math.floor(index / 2) + 7;
             const minute = index % 2 === 0 ? "00" : "30";
-            horario.push([`${hour}:${minute}`, "", "", "", "", ""]);
+            this.horario.push([`${hour}:${minute}`, "", "", "", "", ""]);
         });
-
-        // Visualizar matriz
-        horario.forEach((row) => {
-            console.log(row.join("\t"));
-        });
-
-        return horario;
-    }
-
-
-    /**
-     * Asignación de horas.
-     */
-    public organizarHorario(): string[][] {
-        let horario: string[][] = this.crearHorario();
-
-        const fijas = this.actividades.filter(actividad => actividad.getTipo() == TipoActividad.FIJA);
-        const variables = this.actividades.filter(actividad => actividad.getTipo() == TipoActividad.VARIABLE);
-
-        return horario;
     }
 }

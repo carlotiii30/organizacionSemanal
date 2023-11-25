@@ -55,12 +55,24 @@ describe('OptimizadorSemanal', () => {
 
     it('debería crear un horario', () => {
         const optimizador = new OptimizadorSemanal();
-        const horario = optimizador.organizarHorario();
+        optimizador.crearHorario();
 
-        expect(horario[0][1]).toBe("LUNES");
-        expect(horario[0][5]).toBe("VIERNES");
-        expect(horario[1][0]).toBe("7:00");
-        expect(horario[29][0]).toBe("21:00");
+        expect(optimizador.getHorario()[0][1]).toBe("LUNES");
+        expect(optimizador.getHorario()[0][5]).toBe("VIERNES");
+        expect(optimizador.getHorario()[1][0]).toBe("7:00");
+        expect(optimizador.getHorario()[29][0]).toBe("21:00");
     });
 
+    it ('debería agregar una actividad fija al horario', () => {
+        const optimizador = new OptimizadorSemanal();
+        const actividad = new Actividad(TipoActividad.FIJA, "Estudiar para el examen", "Lunes", "10:00-12:00");
+
+        optimizador.agregarActividad(actividad);
+        optimizador.organizarHorario();
+
+        expect(optimizador.getHorario()[7][1]).toBe("Estudiar para el examen");
+        expect(optimizador.getHorario()[8][1]).toBe("Estudiar para el examen");
+        expect(optimizador.getHorario()[9][1]).toBe("Estudiar para el examen");
+        expect(optimizador.getHorario()[10][1]).toBe("Estudiar para el examen");
+    });
 });
