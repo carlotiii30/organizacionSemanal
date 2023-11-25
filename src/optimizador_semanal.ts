@@ -189,7 +189,7 @@ export class OptimizadorSemanal {
                 while (duracion > 0 && celdasDisponibles.length > 0) {
                     const celda = celdasDisponibles.shift();
                     this.horario[celda.rowIndex][celda.cellIndex] = descripcion || "";
-                    duracion-= 0;
+                    duracion-= 0.5;
                 }
             }
         });
