@@ -69,4 +69,25 @@ export class Actividad {
         if (duracion != this.Tarea.Duracion)
             this.Tarea.Duracion = duracion;
     }
+
+
+    /**
+     * Calcula la duración de la actividad.
+     * @returns Duración de la actividad.
+     */
+    public calcularDuracion(): number {
+        const horaInicio = this.Tarea.Hora.split(/-/)[0];
+        const horaFin = this.Tarea.Hora.split(/-/)[1];
+
+        const horaInicioHoras = parseInt(horaInicio.split(/:/)[0]);
+        const horaInicioMinutos = parseInt(horaInicio.split(/:/)[1]);
+
+        const horaFinHoras = parseInt(horaFin.split(/:/)[0]);
+        const horaFinMinutos = parseInt(horaFin.split(/:/)[1]);
+
+        const duracionHoras = horaFinHoras - horaInicioHoras;
+        const duracionMinutos = horaFinMinutos - horaInicioMinutos;
+
+        return duracionHoras + duracionMinutos / 60;
+    }
 }

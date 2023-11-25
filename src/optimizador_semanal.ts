@@ -132,4 +132,36 @@ export class OptimizadorSemanal {
             this.horario.push([`${hour}:${minute}`, "", "", "", "", ""]);
         });
     }
+
+
+    /**
+     * Asignación de horas.
+     */
+    public organizarHorario(): void {
+        this.crearHorario();
+
+        const fijas = this.actividades.filter(actividad => actividad.getTipo() == TipoActividad.FIJA);
+        const variables = this.actividades.filter(actividad => actividad.getTipo() == TipoActividad.VARIABLE);
+
+        // Asignación de actividades fijas
+        fijas.forEach(actividad => {
+            const dia = actividad.getDia();
+            const hora = actividad.getHora();
+            const descripcion = actividad.getDescripcion();
+
+            const diaIndex = this.horario[0].findIndex(d => d.toUpperCase() === dia.toUpperCase());
+
+            const horaInicioActividad = hora.split("-")[0];
+            const horaIndex = this.horario.findIndex((row) => row[0] === horaInicioActividad);
+
+            const duracion = actividad.calcularDuracion();
+
+            if (diaIndex !== -1 && horaIndex !== -1) {
+                for (let i = horaIndex; i < horaIndex + (duracion * 2); i++) {
+                    this.horario[i][diaIndex] = descripcion || "";
+                }
+            }
+
+        });
+    }
 }
