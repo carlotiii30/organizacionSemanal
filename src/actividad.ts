@@ -25,7 +25,7 @@ export class Actividad {
      * Getter de la descripción de la actividad.
      * @returns Descripción de la actividad.
      */
-    public getDescripcion(): string | null {
+    get descripcion(): string | null {
         return this.Tarea.Descripcion;
     }
 
@@ -33,7 +33,7 @@ export class Actividad {
      * Getter del día de la actividad.
      * @returns Día de la actividad.
      */
-    public getDia(): string {
+    get dia(): string {
         return this.Tarea.Dia;
     }
 
@@ -41,7 +41,7 @@ export class Actividad {
      * Getter de la hora de la actividad.
      * @returns Hora de la actividad.
      */
-    public getHora(): string {
+    get hora(): string {
         return this.Tarea.Hora;
     }
 
@@ -49,7 +49,7 @@ export class Actividad {
      * Getter del tipo de la actividad.
      * @returns Tipo de la actividad.
      */
-    public getTipo(): TipoActividad {
+    get tipo(): TipoActividad {
         return this.Tipo;
     }
 
@@ -57,7 +57,7 @@ export class Actividad {
      * Getter de la duración de la actividad.
      * @returns Duración de la actividad.
      */
-    public getDuracion(): number | undefined {
+    get duracion(): number | undefined {
         return this.Tarea.Duracion;
     }
 
@@ -65,17 +65,17 @@ export class Actividad {
      * Setter de la duración de la actividad.
      * @param duracion Duración de la actividad.
      */
-    public setDuracion(duracion: number): void {
-        if (duracion != this.Tarea.Duracion)
+    set duracion(duracion: number | undefined) {
+        if (duracion !== this.Tarea.Duracion) {
             this.Tarea.Duracion = duracion;
+        }
     }
-
 
     /**
      * Calcula la duración de la actividad.
      * @returns Duración de la actividad.
      */
-    public calcularDuracion(): number | undefined{
+    calcularDuracion(): number | undefined {
         const horaInicio = this.Tarea.Hora.split(/-/)[0];
         const horaFin = this.Tarea.Hora.split(/-/)[1];
 

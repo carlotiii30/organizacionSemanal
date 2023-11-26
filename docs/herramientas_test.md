@@ -39,7 +39,6 @@ Opciones:
 * Jest: https://jestjs.io
 * Mocha: https://mochajs.org
 * Jasmine: https://jasmine.github.io
-* Cypress: https://www.cypress.io
 
 ### Jest
 **Características**
@@ -61,11 +60,6 @@ adicionales.
 * No tiene capacidad de paralelización, pero puede aprovechar herramientas
 adicionales.
 
-### Cypress
-**Características**
-* Tiene soprte para TypeScript.
-* Incluye su propia biblioteca de aserciones.
-* Tiene capacidad de paralelización en su servicio de ejecución en la nube.
 
 ### Decisión final
 Para este proyecto utilizaremos Jest, ya que es especialmente fuerte en
@@ -94,7 +88,6 @@ Algunos test runners llevan integradas bibliotecas de aserciones, nosotros
 podríamos utilizar:
 - Jest
 - Jasmine
-- Cypress
 
 ### Decisión final
 Debemos tener en cuenta el test runner elegido. Como la decisión final ha sido
