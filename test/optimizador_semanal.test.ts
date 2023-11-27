@@ -1,9 +1,7 @@
 // Tests
 
 import { OptimizadorSemanal } from '../src/optimizador_semanal';
-import { TipoActividad } from '../src/tipos';
 import { Archivo } from '../src/archivo';
-import { Actividad } from '../src/actividad';
 
 describe('OptimizadorSemanal', () => {
     it('debería crear un horario con actividades fijas', () => {
@@ -61,22 +59,15 @@ describe('OptimizadorSemanal', () => {
         optimizador.organizarHorario();
 
         // Comprobar que todas las actividades están en el horario.
-        const actividades = optimizador.actividades;
-        const horarioActividades = optimizador.horario;
-
-        actividades.forEach(actividad => {
-            const dia = actividad.dia;
-            const hora = actividad.hora;
-            const duracion = actividad.duracion;
-
-            const diaIndex = horarioActividades[0].indexOf(dia);
-            const horaIndex = horarioActividades.findIndex(hora => hora[0] === actividad.hora);
+        (optimizador.actividades).forEach(actividad => {
+            const diaIndex = ((optimizador.horario)[0]).indexOf(actividad.dia);
+            const horaIndex = (optimizador.horario).findIndex(hora => actividad.hora[0] === actividad.hora);
 
             const finalDiaIndex = diaIndex !== -1 ? diaIndex : null;
             const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
 
             if (finalDiaIndex != null && finalHoraIndex != null) {
-                const actividadEnHorario = horarioActividades[finalDiaIndex][finalHoraIndex];
+                const actividadEnHorario = (optimizador.horario)[finalDiaIndex][finalHoraIndex];
 
                 expect(actividadEnHorario).toEqual(actividad.descripcion);
             }
