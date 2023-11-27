@@ -70,7 +70,7 @@ proyectos basados en TypeScript y cumple con todos los
 ## Biblioteca de aserciones
 Opciones:
 * Chai: https://www.chaijs.com
-* Frameworks integrados.
+* Biblioteca de aserciones del test runner elegido.
 
 ### Chai
 Chai es una biblioteca de aserciones que se puede utilizar con Mocha y otros
@@ -82,12 +82,6 @@ afirmaciones sobre el código.
 * Soporte para pruebas asíncronas.
 * Integración con varios frameworks de tests.
 * Posibilidad de extender con plugins.
-
-### Frameworks integrados
-Algunos test runners llevan integradas bibliotecas de aserciones, nosotros
-podríamos utilizar:
-- Jest
-- Jasmine
 
 ### Decisión final
 Debemos tener en cuenta el test runner elegido. Como la decisión final ha sido

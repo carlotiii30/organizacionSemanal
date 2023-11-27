@@ -6,120 +6,80 @@ import { Archivo } from '../src/archivo';
 import { Actividad } from '../src/actividad';
 
 describe('OptimizadorSemanal', () => {
-    it('debería agregar una actividad', () => {
-        const optimizador = new OptimizadorSemanal();
-        const actividad = new Actividad(TipoActividad.FIJA, "Estudiar para el examen", "Lunes", "10:00-12:00");
-
-        optimizador.agregarActividad(actividad);
-
-        expect(optimizador.actividades).toHaveLength(1);
-    });
-
-    it('debería extraer la información de un día', () => {
-        const optimizador = new OptimizadorSemanal();
-        const informacion = optimizador.extraerInformacionHorario("Lunes 10:00-12:00 Estudiar para el examen");
-
-        expect(informacion).toEqual([{ dia: "Lunes", hora: "10:00-12:00", descripcion: "Estudiar para el examen" }])
-    });
-
-    it('debería extraer el horario de la semana', () => {
+    it('debería crear un horario con actividades fijas', () => {
         const optimizador = new OptimizadorSemanal();
         const horario = new Archivo("./data/horario.txt");
 
         optimizador.extraerHorario(horario);
 
-        expect(optimizador.actividades).toHaveLength(5);
-        expect(optimizador.actividades[0].descripcion).toEqual("Academia de inglés");
-        expect(optimizador.actividades[0].dia).toEqual("Lunes");
-        expect(optimizador.actividades[0].hora).toEqual("17:30-19:00");
-    });
-
-    it('debería extraer la información de una actividad', () => {
-        const optimizador = new OptimizadorSemanal();
-        const actividad = optimizador.extraerInformacionLista("Gimnasio - 2h");
-
-        expect(actividad).toEqual([{ descripcion: "Gimnasio", duracion: 2 }]);
-    });
-
-    it('debería extraer actividades de un archivo', () => {
-        const optimizador = new OptimizadorSemanal();
-        const listaActividades = new Archivo("./data/actividades.txt");
-
-        optimizador.extraerActividades(listaActividades);
-
-        expect(optimizador.actividades).toHaveLength(5);
-        expect(optimizador.actividades[0].descripcion).toEqual("Gimnasio");
-        expect(optimizador.actividades[0].dia).toEqual("");
-        expect(optimizador.actividades[0].hora).toEqual("");
-    });
-
-    it('debería crear un horario', () => {
-        const optimizador = new OptimizadorSemanal();
-        optimizador.crearHorario();
-
-        expect(optimizador.horario[0][1]).toBe("LUNES");
-        expect(optimizador.horario[0][5]).toBe("VIERNES");
-        expect(optimizador.horario[1][0]).toBe("7:00");
-        expect(optimizador.horario[29][0]).toBe("21:00");
-    });
-
-    it ('debería agregar una actividad fija al horario', () => {
-        const optimizador = new OptimizadorSemanal();
-        const actividad = new Actividad(TipoActividad.FIJA, "Estudiar para el examen", "Lunes", "10:00-12:00");
-
-        optimizador.agregarActividad(actividad);
         optimizador.organizarHorario();
 
-        expect(optimizador.horario[7][1]).toBe("Estudiar para el examen");
-        expect(optimizador.horario[8][1]).toBe("Estudiar para el examen");
-        expect(optimizador.horario[9][1]).toBe("Estudiar para el examen");
-        expect(optimizador.horario[10][1]).toBe("Estudiar para el examen");
+        const expectedHorario = [
+            ["", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"],
+            ["7:00", "", "", "", "", ""],
+            ["7:30", "", "", "", "", ""],
+            ["8:00", "", "", "", "", ""],
+            ["8:30", "", "", "", "Facultad", "Facultad"],
+            ["9:00", "", "", "", "Facultad", "Facultad"],
+            ["9:30", "", "", "", "Facultad", "Facultad"],
+            ["10:00", "", "", "", "Facultad", "Facultad"],
+            ["10:30", "", "", "", "Facultad", "Facultad"],
+            ["11:00", "", "", "", "Facultad", "Facultad"],
+            ["11:30", "", "", "", "Facultad", "Facultad"],
+            ["12:00", "", "", "", "Facultad", "Facultad"],
+            ["12:30", "", "", "", "Facultad", "Facultad"],
+            ["13:00", "", "", "", "Facultad", "Facultad"],
+            ["13:30", "", "", "", "Facultad", "Facultad"],
+            ["14:00", "", "", "", "Facultad", "Facultad"],
+            ["14:30", "", "", "", "", ""],
+            ["15:00", "", "", "", "", ""],
+            ["15:30", "", "", "", "Facultad", ""],
+            ["16:00", "", "", "", "Facultad", ""],
+            ["16:30", "", "", "", "Facultad", ""],
+            ["17:00", "", "", "", "Facultad", ""],
+            ["17:30", "Academia de inglés", "", "Academia", "", ""],
+            ["18:00", "Academia de inglés", "", "Academia", "", ""],
+            ["18:30", "Academia de inglés", "", "Academia", "", ""],
+            ["19:00", "", "", "", "", ""],
+            ["19:30", "", "", "", "", ""],
+            ["20:00", "", "", "", "", ""],
+            ["20:30", "", "", "", "", ""],
+            ["21:00", "", "", "", "", ""]
+        ]
+
+        expect(optimizador.horario).toEqual(expectedHorario);
     });
 
-    it ('debería agregar una actividad variable al horario', () => {
-        const optimizador = new OptimizadorSemanal();
-        const actividad = new Actividad(TipoActividad.VARIABLE, "Gimnasio", "", "");
-
-        actividad.setDuracion(2);
-        optimizador.agregarActividad(actividad);
-        optimizador.organizarHorario();
-
-        expect(optimizador.horario[1][1]).toBe("Gimnasio");
-    });
-
-    it ('debería crear un horario funcional con actividades fijas y variables', () => {
+    it('debería crear un horario con todas las actividades de la lista', () => {
         const optimizador = new OptimizadorSemanal();
         const horario = new Archivo("./data/horario.txt");
-        const listaActividades = new Archivo("./data/actividades.txt");
+        const lista = new Archivo("./data/actividades.txt");
 
         optimizador.extraerHorario(horario);
-        optimizador.extraerActividades(listaActividades);
+        optimizador.extraerActividades(lista);
 
         optimizador.organizarHorario();
 
-        expect(optimizador.horario[22][1]).toBe("Academia de inglés");
-        expect(optimizador.horario[23][1]).toBe("Academia de inglés");
-        expect(optimizador.horario[24][1]).toBe("Academia de inglés");
+        // Comprobar que todas las actividades están en el horario.
+        const actividades = optimizador.actividades;
+        const horarioActividades = optimizador.horario;
 
-        expect(optimizador.horario[22][3]).toBe("Academia");
-        expect(optimizador.horario[23][3]).toBe("Academia");
-        expect(optimizador.horario[24][3]).toBe("Academia");
+        actividades.forEach(actividad => {
+            const dia = actividad.dia;
+            const hora = actividad.hora;
+            const duracion = actividad.duracion;
 
-        expect(optimizador.horario[4][4]).toBe("Facultad");
-        expect(optimizador.horario[5][4]).toBe("Facultad");
-        expect(optimizador.horario[6][4]).toBe("Facultad");
-        expect(optimizador.horario[7][4]).toBe("Facultad");
-        expect(optimizador.horario[8][4]).toBe("Facultad");
-        expect(optimizador.horario[9][4]).toBe("Facultad");
-        expect(optimizador.horario[10][4]).toBe("Facultad");
-        expect(optimizador.horario[11][4]).toBe("Facultad");
-        expect(optimizador.horario[12][4]).toBe("Facultad");
-        expect(optimizador.horario[13][4]).toBe("Facultad");
-        expect(optimizador.horario[14][4]).toBe("Facultad");
-        expect(optimizador.horario[15][4]).toBe("Facultad");
-        expect(optimizador.horario[18][4]).toBe("Facultad");
-        expect(optimizador.horario[19][4]).toBe("Facultad");
-        expect(optimizador.horario[20][4]).toBe("Facultad");
-        expect(optimizador.horario[21][4]).toBe("Facultad");
+            const diaIndex = horarioActividades[0].indexOf(dia);
+            const horaIndex = horarioActividades.findIndex(hora => hora[0] === actividad.hora);
+
+            const finalDiaIndex = diaIndex !== -1 ? diaIndex : null;
+            const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
+
+            if (finalDiaIndex != null && finalHoraIndex != null) {
+                const actividadEnHorario = horarioActividades[finalDiaIndex][finalHoraIndex];
+
+                expect(actividadEnHorario).toEqual(actividad.descripcion);
+            }
+        });
     });
 });

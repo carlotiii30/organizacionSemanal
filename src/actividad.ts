@@ -11,14 +11,24 @@ export class Actividad {
 
     /**
      * Constructor de la clase Actividad.
+     * @param tipo Tipo de la actividad.
+     * @param descripcion Descripción de la actividad.
+     * @param dia Día de la actividad.
+     * @param hora Hora de la actividad.
+     * @param duracion Duración de la actividad.
      */
-    constructor(tipo: TipoActividad, descripcion: string, dia: string, hora: string) {
+    constructor(tipo: TipoActividad, descripcion: string, dia: string, hora: string, duracion?: number) {
         this.Tipo = tipo;
         this.Tarea = {
             Descripcion: descripcion,
             Dia: dia,
-            Hora: hora
+            Hora: hora,
+            Duracion: duracion,
         };
+
+        if (duracion === undefined) {
+            this.calcularDuracion();
+        }
     }
 
     /**
@@ -59,16 +69,6 @@ export class Actividad {
      */
     get duracion(): number | undefined {
         return this.Tarea.Duracion;
-    }
-
-    /**
-     * Setter de la duración de la actividad.
-     * @param duracion Duración de la actividad.
-     */
-    set duracion(duracion: number | undefined) {
-        if (duracion !== this.Tarea.Duracion) {
-            this.Tarea.Duracion = duracion;
-        }
     }
 
     /**

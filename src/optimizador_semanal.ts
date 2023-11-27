@@ -66,18 +66,21 @@ export class OptimizadorSemanal {
      */
     public extraerHorario(horario: Archivo): void {
         const contenido = horario.getInfo();
-        const lineas = contenido.split(/\n/);
 
-        lineas.forEach(linea => {
-            const informacion = this.extraerInformacionHorario(linea);
+        if (contenido != null) {
+            const lineas = contenido.split(/\n/);
 
-            if (informacion) {
-                informacion.forEach((info) => {
-                    const actividad = new Actividad(TipoActividad.FIJA, info.descripcion, info.dia, info.hora);
-                    this.agregarActividad(actividad);
-                });
-            }
-        });
+            lineas.forEach(linea => {
+                const informacion = this.extraerInformacionHorario(linea);
+
+                if (informacion) {
+                    informacion.forEach((info) => {
+                        const actividad = new Actividad(TipoActividad.FIJA, info.descripcion, info.dia, info.hora);
+                        this.agregarActividad(actividad);
+                    });
+                }
+            });
+        }
     }
 
     /**
@@ -103,19 +106,21 @@ export class OptimizadorSemanal {
      */
     public extraerActividades(lista: Archivo): void {
         const contenido = lista.getInfo();
-        const lineas = contenido.split(/\n/);
 
-        lineas.forEach(linea => {
-            const informacion = this.extraerInformacionLista(linea);
+        if (contenido != null) {
+            const lineas = contenido.split(/\n/);
 
-            if (informacion) {
-                informacion.forEach((info) => {
-                    const actividad = new Actividad(TipoActividad.VARIABLE, info.descripcion, "", "");
-                    actividad.setDuracion(info.duracion);
-                    this.agregarActividad(actividad);
-                });
-            }
-        });
+            lineas.forEach(linea => {
+                const informacion = this.extraerInformacionLista(linea);
+
+                if (informacion) {
+                    informacion.forEach((info) => {
+                        const actividad = new Actividad(TipoActividad.VARIABLE, info.descripcion, "", "", info.duracion);
+                        this.agregarActividad(actividad);
+                    });
+                }
+            });
+        }
     }
 
     /**
@@ -142,8 +147,8 @@ export class OptimizadorSemanal {
      * @param duracion Duración de la actividad.
      * @param descripcion Descripción de la actividad.
      */
-    private asignarActividadFija(horario: string[][], diaIndex: number, horaIndex: number, duracion: number, descripcion: string): void {
-        if (diaIndex !== -1 && horaIndex !== -1 && duracion) {
+    private asignarActividadFija(horario: string[][], diaIndex: number | null, horaIndex: number | null, duracion: number, descripcion: string): void {
+        if (diaIndex != null && horaIndex != null && duracion) {
             horario
                 .slice(horaIndex, horaIndex + (duracion * 2))
                 .forEach((row) => row[diaIndex] = descripcion || "");
@@ -206,13 +211,16 @@ export class OptimizadorSemanal {
             const horaInicioActividad = hora.split("-")[0];
             const horaIndex = this.horario.findIndex((row) => row[0] === horaInicioActividad);
 
+            const finalDiaIndex = diaIndex !== -1 ? diaIndex : null;
+            const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
+
             let duracion = actividad.duracion;
 
             if (actividad.duracion === undefined)
                 duracion = actividad.calcularDuracion();
 
             if (duracion != undefined)
-                this.asignarActividadFija(this.horario, diaIndex, horaIndex, duracion, descripcion);
+                this.asignarActividadFija(this.horario, finalDiaIndex, finalHoraIndex, duracion, descripcion);
         });
 
         // Asignación de actividades variables
