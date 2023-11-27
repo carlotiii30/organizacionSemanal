@@ -24,6 +24,10 @@ export class Archivo {
         }
     }
 
+    /**
+     * Extrae la información de un archivo.
+     * @returns Contenido del archivo.
+     */
     public getInfo(): string {
         if (!this.info) {
             this.leerArchivo();

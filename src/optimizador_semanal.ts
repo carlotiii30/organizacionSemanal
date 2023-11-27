@@ -4,15 +4,15 @@ import { Actividad } from "./actividad";
 
 export class OptimizadorSemanal {
 
-    private actividades: Actividad[];
-    private horario: string[][];
+    private Actividades: Actividad[];
+    private Horario: string[][];
 
     /**
      * Constructor por defecto de la clase OptimizadorSemanal
      */
     constructor() {
-        this.actividades = [];
-        this.horario = [];
+        this.Actividades = [];
+        this.Horario = [];
     }
 
     /**
@@ -20,24 +20,24 @@ export class OptimizadorSemanal {
      * @param actividad Actividad a agregar.
      */
     public agregarActividad(actividad: Actividad): void {
-        if (actividad.getDescripcion() != null)
-            this.actividades.push(actividad);
+        if (actividad.descripcion != null)
+            this.Actividades.push(actividad);
     }
 
     /**
      * Getter de las actividades semanales.
      * @returns Lista de actividades de la semana.
      */
-    public getActividades(): Actividad[] {
-        return this.actividades;
+    get actividades(): Actividad[] {
+        return this.Actividades;
     }
 
     /**
      * Getter del horario.
      * @returns Horario.
      */
-    public getHorario(): string[][] {
-        return this.horario;
+    get horario(): string[][] {
+        return this.Horario;
     }
 
 
@@ -135,62 +135,97 @@ export class OptimizadorSemanal {
 
 
     /**
+     * Asigna una actividad fija al horario.
+     * @param horario Horario a asignar la actividad.
+     * @param diaIndex Indice del día en el horario.
+     * @param horaIndex Indice de la hora en el horario.
+     * @param duracion Duración de la actividad.
+     * @param descripcion Descripción de la actividad.
+     */
+    private asignarActividadFija(horario: string[][], diaIndex: number, horaIndex: number, duracion: number, descripcion: string): void {
+        if (diaIndex !== -1 && horaIndex !== -1 && duracion) {
+            horario
+                .slice(horaIndex, horaIndex + (duracion * 2))
+                .forEach((row) => row[diaIndex] = descripcion || "");
+        }
+    }
+
+    /**
+     * Obtiene las celdas disponibles del horario.
+     * @param horario Horario a obtener las celdas disponibles.
+     * @returns Lista de celdas disponibles.
+     */
+    private obtenerCeldasDisponibles(horario: string[][]): { rowIndex: number, cellIndex: number }[] {
+        const celdasDisponibles: { rowIndex: number, cellIndex: number }[] = [];
+        horario.forEach((row, rowIndex) => {
+            if (rowIndex > 0) {
+                row.forEach((cell, cellIndex) => {
+                    if (cell === "" && cellIndex > 0) {
+                        celdasDisponibles.push({ rowIndex, cellIndex });
+                    }
+                });
+            }
+        });
+        return celdasDisponibles;
+    }
+
+    /**
+     * Asigna una actividad variable al horario.
+     * @param horario Horario a asignar la actividad.
+     * @param descripcion Descripción de la actividad.
+     * @param duracion Duración de la actividad.
+     */
+    private asignarActividadVariable(horario: string[][], descripcion: string, duracion: number): void {
+        const celdasDisponibles = this.obtenerCeldasDisponibles(horario);
+
+        while (duracion > 0 && celdasDisponibles.length > 0) {
+            const celda = celdasDisponibles.shift();
+            if (celda != undefined) {
+                horario[celda.rowIndex][celda.cellIndex] = descripcion || "";
+                duracion -= 0.5;
+            }
+        }
+    }
+
+    /**
      * Asignación de horas.
      */
     public organizarHorario(): void {
         this.crearHorario();
 
-        const fijas = this.actividades.filter(actividad => actividad.getTipo() == TipoActividad.FIJA);
-        const variables = this.actividades.filter(actividad => actividad.getTipo() == TipoActividad.VARIABLE);
+        const fijas = this.actividades.filter(actividad => actividad.tipo == TipoActividad.FIJA);
+        const variables = this.actividades.filter(actividad => actividad.tipo == TipoActividad.VARIABLE);
 
         // Asignación de actividades fijas
         fijas.forEach(actividad => {
-            const dia = actividad.getDia();
-            const hora = actividad.getHora();
-            const descripcion = actividad.getDescripcion();
+            const dia = actividad.dia;
+            const hora = actividad.hora;
+            const descripcion = actividad.descripcion;
 
             const diaIndex = this.horario[0].findIndex(d => d.toUpperCase() === dia.toUpperCase());
-
             const horaInicioActividad = hora.split("-")[0];
             const horaIndex = this.horario.findIndex((row) => row[0] === horaInicioActividad);
 
-            let duracion = undefined;
+            let duracion = actividad.duracion;
 
-            if (actividad.getDuracion() === undefined)
+            if (actividad.duracion === undefined)
                 duracion = actividad.calcularDuracion();
-            else
-                duracion = actividad.getDuracion();
 
-            if (diaIndex !== -1 && horaIndex !== -1 && duracion) {
-                this.horario
-                    .slice(horaIndex, horaIndex + (duracion * 2))
-                    .forEach((row) => row[diaIndex] = descripcion || "");
-            }
+            if (duracion != undefined)
+                this.asignarActividadFija(this.horario, diaIndex, horaIndex, duracion, descripcion);
         });
 
         // Asignación de actividades variables
         variables.forEach(actividad => {
-            const descripcion = actividad.getDescripcion();
-            let duracion = actividad.getDuracion();
+            const descripcion = actividad.descripcion;
+            let duracion = actividad.duracion;
 
-            if (duracion) {
-                const celdasDisponibles: any[] = [];
-                this.horario.forEach((row, rowIndex) => {
-                    if (rowIndex > 0) {
-                        row.forEach((cell, cellIndex) => {
-                            if (cell === "" && cellIndex > 0) {
-                                celdasDisponibles.push({ rowIndex, cellIndex });
-                            }
-                        });
-                    }
-                });
-
-                while (duracion > 0 && celdasDisponibles.length > 0) {
-                    const celda = celdasDisponibles.shift();
-                    this.horario[celda.rowIndex][celda.cellIndex] = descripcion || "";
-                    duracion-= 0.5;
-                }
+            if (!duracion) {
+                duracion = actividad.calcularDuracion();
             }
+
+            if (duracion != undefined)
+                this.asignarActividadVariable(this.horario, descripcion, duracion);
         });
     }
 

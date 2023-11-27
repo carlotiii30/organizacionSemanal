@@ -12,7 +12,7 @@ describe('OptimizadorSemanal', () => {
 
         optimizador.agregarActividad(actividad);
 
-        expect(optimizador.getActividades()).toHaveLength(1);
+        expect(optimizador.actividades).toHaveLength(1);
     });
 
     it('debería extraer la información de un día', () => {
@@ -28,10 +28,10 @@ describe('OptimizadorSemanal', () => {
 
         optimizador.extraerHorario(horario);
 
-        expect(optimizador.getActividades()).toHaveLength(5);
-        expect(optimizador.getActividades()[0].getDescripcion()).toEqual("Academia de inglés");
-        expect(optimizador.getActividades()[0].getDia()).toEqual("Lunes");
-        expect(optimizador.getActividades()[0].getHora()).toEqual("17:30-19:00");
+        expect(optimizador.actividades).toHaveLength(5);
+        expect(optimizador.actividades[0].descripcion).toEqual("Academia de inglés");
+        expect(optimizador.actividades[0].dia).toEqual("Lunes");
+        expect(optimizador.actividades[0].hora).toEqual("17:30-19:00");
     });
 
     it('debería extraer la información de una actividad', () => {
@@ -47,20 +47,20 @@ describe('OptimizadorSemanal', () => {
 
         optimizador.extraerActividades(listaActividades);
 
-        expect(optimizador.getActividades()).toHaveLength(5);
-        expect(optimizador.getActividades()[0].getDescripcion()).toEqual("Gimnasio");
-        expect(optimizador.getActividades()[0].getDia()).toEqual("");
-        expect(optimizador.getActividades()[0].getHora()).toEqual("");
+        expect(optimizador.actividades).toHaveLength(5);
+        expect(optimizador.actividades[0].descripcion).toEqual("Gimnasio");
+        expect(optimizador.actividades[0].dia).toEqual("");
+        expect(optimizador.actividades[0].hora).toEqual("");
     });
 
     it('debería crear un horario', () => {
         const optimizador = new OptimizadorSemanal();
         optimizador.crearHorario();
 
-        expect(optimizador.getHorario()[0][1]).toBe("LUNES");
-        expect(optimizador.getHorario()[0][5]).toBe("VIERNES");
-        expect(optimizador.getHorario()[1][0]).toBe("7:00");
-        expect(optimizador.getHorario()[29][0]).toBe("21:00");
+        expect(optimizador.horario[0][1]).toBe("LUNES");
+        expect(optimizador.horario[0][5]).toBe("VIERNES");
+        expect(optimizador.horario[1][0]).toBe("7:00");
+        expect(optimizador.horario[29][0]).toBe("21:00");
     });
 
     it ('debería agregar una actividad fija al horario', () => {
@@ -70,10 +70,10 @@ describe('OptimizadorSemanal', () => {
         optimizador.agregarActividad(actividad);
         optimizador.organizarHorario();
 
-        expect(optimizador.getHorario()[7][1]).toBe("Estudiar para el examen");
-        expect(optimizador.getHorario()[8][1]).toBe("Estudiar para el examen");
-        expect(optimizador.getHorario()[9][1]).toBe("Estudiar para el examen");
-        expect(optimizador.getHorario()[10][1]).toBe("Estudiar para el examen");
+        expect(optimizador.horario[7][1]).toBe("Estudiar para el examen");
+        expect(optimizador.horario[8][1]).toBe("Estudiar para el examen");
+        expect(optimizador.horario[9][1]).toBe("Estudiar para el examen");
+        expect(optimizador.horario[10][1]).toBe("Estudiar para el examen");
     });
 
     it ('debería agregar una actividad variable al horario', () => {
@@ -84,7 +84,7 @@ describe('OptimizadorSemanal', () => {
         optimizador.agregarActividad(actividad);
         optimizador.organizarHorario();
 
-        expect(optimizador.getHorario()[1][1]).toBe("Gimnasio");
+        expect(optimizador.horario[1][1]).toBe("Gimnasio");
     });
 
     it ('debería crear un horario funcional con actividades fijas y variables', () => {
@@ -97,29 +97,29 @@ describe('OptimizadorSemanal', () => {
 
         optimizador.organizarHorario();
 
-        expect(optimizador.getHorario()[22][1]).toBe("Academia de inglés");
-        expect(optimizador.getHorario()[23][1]).toBe("Academia de inglés");
-        expect(optimizador.getHorario()[24][1]).toBe("Academia de inglés");
+        expect(optimizador.horario[22][1]).toBe("Academia de inglés");
+        expect(optimizador.horario[23][1]).toBe("Academia de inglés");
+        expect(optimizador.horario[24][1]).toBe("Academia de inglés");
 
-        expect(optimizador.getHorario()[22][3]).toBe("Academia");
-        expect(optimizador.getHorario()[23][3]).toBe("Academia");
-        expect(optimizador.getHorario()[24][3]).toBe("Academia");
+        expect(optimizador.horario[22][3]).toBe("Academia");
+        expect(optimizador.horario[23][3]).toBe("Academia");
+        expect(optimizador.horario[24][3]).toBe("Academia");
 
-        expect(optimizador.getHorario()[4][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[5][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[6][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[7][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[8][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[9][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[10][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[11][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[12][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[13][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[14][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[15][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[18][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[19][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[20][4]).toBe("Facultad");
-        expect(optimizador.getHorario()[21][4]).toBe("Facultad");
+        expect(optimizador.horario[4][4]).toBe("Facultad");
+        expect(optimizador.horario[5][4]).toBe("Facultad");
+        expect(optimizador.horario[6][4]).toBe("Facultad");
+        expect(optimizador.horario[7][4]).toBe("Facultad");
+        expect(optimizador.horario[8][4]).toBe("Facultad");
+        expect(optimizador.horario[9][4]).toBe("Facultad");
+        expect(optimizador.horario[10][4]).toBe("Facultad");
+        expect(optimizador.horario[11][4]).toBe("Facultad");
+        expect(optimizador.horario[12][4]).toBe("Facultad");
+        expect(optimizador.horario[13][4]).toBe("Facultad");
+        expect(optimizador.horario[14][4]).toBe("Facultad");
+        expect(optimizador.horario[15][4]).toBe("Facultad");
+        expect(optimizador.horario[18][4]).toBe("Facultad");
+        expect(optimizador.horario[19][4]).toBe("Facultad");
+        expect(optimizador.horario[20][4]).toBe("Facultad");
+        expect(optimizador.horario[21][4]).toBe("Facultad");
     });
 });

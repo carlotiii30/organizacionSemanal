@@ -3,10 +3,10 @@ import { TipoActividad } from "./tipos";
 export class Actividad {
     private Tipo: TipoActividad;
     private Tarea: {
-        Descripcion: string | null,
+        Descripcion: string,
         Dia: string,
         Hora: string,
-        Duracion?: number
+        Duracion?: number | undefined
     };
 
     /**
@@ -25,7 +25,7 @@ export class Actividad {
      * Getter de la descripción de la actividad.
      * @returns Descripción de la actividad.
      */
-    get descripcion(): string | null {
+    get descripcion(): string {
         return this.Tarea.Descripcion;
     }
 
