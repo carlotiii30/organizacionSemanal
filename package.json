@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node index.js",
-    "lint": "eslint src",
+    "check": "tsc --noEmit src/*.ts",
     "test": "jest"
   },
   "dependencies": {
