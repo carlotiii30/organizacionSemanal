@@ -53,7 +53,7 @@ export class Actividad {
 
     /**
      * Calcula la duración de la actividad.
-     * @returns Duración de la actividad.
+     * @returns Duración calculada de la actividad.
      */
     calcularduracion(): number | undefined {
         const horaInicio = this.hora.split(/-/)[0];

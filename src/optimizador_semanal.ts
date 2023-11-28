@@ -140,7 +140,6 @@ export class OptimizadorSemanal {
         });
     }
 
-
     /**
      * Asigna una actividad fija al horario.
      * @param horario Horario a asignar la actividad.
