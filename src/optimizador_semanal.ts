@@ -20,8 +20,10 @@ export class OptimizadorSemanal {
      * @param actividad Actividad a agregar.
      */
     public agregarActividad(actividad: Actividad): void {
-        if (actividad.descripcion != null)
-            this.Actividades.push(actividad);
+        if (actividad.descripcion == null)
+            throw new Error("La actividad debe tener una descripción.");
+
+        this.Actividades.push(actividad);
     }
 
     /**
@@ -48,9 +50,8 @@ export class OptimizadorSemanal {
      * @returns Lista de objetos con 'hora' y 'descripcion'.
      */
     public extraerInformacionHorario(info: string): { dia: string; hora: string; descripcion: string }[] | null {
-        if (info == null) {
-            return null;
-        }
+        if (info == null)
+            throw new Error("El horario debe tener información.");
 
         const partes = info.split(/ /);
         const dia = partes[0];
@@ -67,20 +68,21 @@ export class OptimizadorSemanal {
     public extraerHorario(horario: Archivo): void {
         const contenido = horario.getInfo();
 
-        if (contenido != null) {
-            const lineas = contenido.split(/\n/);
+        if (contenido == null)
+            throw new Error("El horario debe tener información.");
 
-            lineas.forEach(linea => {
-                const informacion = this.extraerInformacionHorario(linea);
+        const lineas = contenido.split(/\n/);
 
-                if (informacion) {
-                    informacion.forEach((info) => {
-                        const actividad = new Actividad(TipoActividad.FIJA, info.descripcion, info.dia, info.hora);
-                        this.agregarActividad(actividad);
-                    });
-                }
-            });
-        }
+        lineas.forEach(linea => {
+            const informacion = this.extraerInformacionHorario(linea);
+
+            if (informacion) {
+                informacion.forEach((info) => {
+                    const actividad = new Actividad(TipoActividad.FIJA, { info.descripcion, info.dia, info.hora });
+                    this.agregarActividad(actividad);
+                });
+            }
+        });
     }
 
     /**
@@ -89,9 +91,8 @@ export class OptimizadorSemanal {
      * @returns Descripcion y duración de las actividades.
      */
     public extraerInformacionLista(info: string): { descripcion: string, duracion: number }[] | null {
-        if (info == null) {
-            return null;
-        }
+        if (info == null)
+            throw new Error("La lista debe tener información.");
 
         const partes = info.split(/-/);
         const duracion = parseInt(partes[1].slice(0, -1));
@@ -107,20 +108,21 @@ export class OptimizadorSemanal {
     public extraerActividades(lista: Archivo): void {
         const contenido = lista.getInfo();
 
-        if (contenido != null) {
-            const lineas = contenido.split(/\n/);
+        if (contenido == null)
+            throw new Error("La lista debe tener información.");
 
-            lineas.forEach(linea => {
-                const informacion = this.extraerInformacionLista(linea);
+        const lineas = contenido.split(/\n/);
 
-                if (informacion) {
-                    informacion.forEach((info) => {
-                        const actividad = new Actividad(TipoActividad.VARIABLE, info.descripcion, "", "", info.duracion);
-                        this.agregarActividad(actividad);
-                    });
-                }
-            });
-        }
+        lineas.forEach(linea => {
+            const informacion = this.extraerInformacionLista(linea);
+
+            if (informacion) {
+                informacion.forEach((info) => {
+                    const actividad = new Actividad(TipoActividad.VARIABLE, info.descripcion, "", "", info.duracion);
+                    this.agregarActividad(actividad);
+                });
+            }
+        });
     }
 
     /**

@@ -1,42 +1,22 @@
 import { TipoActividad } from "./tipos";
 
 export class Actividad {
-    private Tipo: TipoActividad;
-    private Tarea: {
-        Descripcion: string,
-        Dia: string,
-        Hora: string,
-        Duracion?: number | undefined
-    };
 
-    /**
-     * Constructor de la clase Actividad.
-     * @param tipo Tipo de la actividad.
-     * @param descripcion Descripción de la actividad.
-     * @param dia Día de la actividad.
-     * @param hora Hora de la actividad.
-     * @param duracion Duración de la actividad.
-     */
-    constructor(tipo: TipoActividad, descripcion: string, dia: string, hora: string, duracion?: number) {
-        this.Tipo = tipo;
-        this.Tarea = {
-            Descripcion: descripcion,
-            Dia: dia,
-            Hora: hora,
-            Duracion: duracion,
-        };
-
-        if (duracion === undefined) {
-            this.calcularDuracion();
-        }
-    }
+    constructor(
+        tipo: TipoActividad,
+        tarea: {
+            descripcion: string,
+            dia: string,
+            hora: string,
+            duracion?: number | undefined
+        }) { }
 
     /**
      * Getter de la descripción de la actividad.
      * @returns Descripción de la actividad.
      */
     get descripcion(): string {
-        return this.Tarea.Descripcion;
+        return this.descripcion;
     }
 
     /**
@@ -44,23 +24,23 @@ export class Actividad {
      * @returns Día de la actividad.
      */
     get dia(): string {
-        return this.Tarea.Dia;
+        return this.dia;
     }
 
     /**
      * Getter de la hora de la actividad.
-     * @returns Hora de la actividad.
+     * @returns hora de la actividad.
      */
     get hora(): string {
-        return this.Tarea.Hora;
+        return this.hora;
     }
 
     /**
      * Getter del tipo de la actividad.
-     * @returns Tipo de la actividad.
+     * @returns tipo de la actividad.
      */
     get tipo(): TipoActividad {
-        return this.Tipo;
+        return this.tipo;
     }
 
     /**
@@ -68,26 +48,26 @@ export class Actividad {
      * @returns Duración de la actividad.
      */
     get duracion(): number | undefined {
-        return this.Tarea.Duracion;
+        return this.duracion;
     }
 
     /**
      * Calcula la duración de la actividad.
      * @returns Duración de la actividad.
      */
-    calcularDuracion(): number | undefined {
-        const horaInicio = this.Tarea.Hora.split(/-/)[0];
-        const horaFin = this.Tarea.Hora.split(/-/)[1];
+    calcularduracion(): number | undefined {
+        const horaInicio = this.hora.split(/-/)[0];
+        const horaFin = this.hora.split(/-/)[1];
 
-        const horaInicioHoras = parseInt(horaInicio.split(/:/)[0]);
+        const horaIniciohoras = parseInt(horaInicio.split(/:/)[0]);
         const horaInicioMinutos = parseInt(horaInicio.split(/:/)[1]);
 
-        const horaFinHoras = parseInt(horaFin.split(/:/)[0]);
+        const horaFinhoras = parseInt(horaFin.split(/:/)[0]);
         const horaFinMinutos = parseInt(horaFin.split(/:/)[1]);
 
-        const duracionHoras = horaFinHoras - horaInicioHoras;
+        const duracionhoras = horaFinhoras - horaIniciohoras;
         const duracionMinutos = horaFinMinutos - horaInicioMinutos;
 
-        return duracionHoras + duracionMinutos / 60;
+        return duracionhoras + duracionMinutos / 60;
     }
 }
