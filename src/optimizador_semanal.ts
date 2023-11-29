@@ -4,15 +4,15 @@ import { Actividad } from "./actividad";
 
 export class OptimizadorSemanal {
 
-    private Actividades: Actividad[];
-    private Horario: string[][];
+    private actividades: Actividad[];
+    private horario: string[][];
 
     /**
      * Constructor por defecto de la clase OptimizadorSemanal
      */
     constructor() {
-        this.Actividades = [];
-        this.Horario = [];
+        this.actividades = [];
+        this.horario = [];
     }
 
     /**
@@ -23,23 +23,23 @@ export class OptimizadorSemanal {
         if (actividad.descripcion == null)
             throw new Error("La actividad debe tener una descripción.");
 
-        this.Actividades.push(actividad);
+        this.actividades.push(actividad);
     }
 
     /**
      * Getter de las actividades semanales.
      * @returns Lista de actividades de la semana.
      */
-    get actividades(): Actividad[] {
-        return this.Actividades;
+    get Actividades(): Actividad[] {
+        return this.actividades;
     }
 
     /**
      * Getter del horario.
-     * @returns Horario.
+     * @returns horario.
      */
-    get horario(): string[][] {
-        return this.Horario;
+    get Horario(): string[][] {
+        return this.horario;
     }
 
 
@@ -63,7 +63,7 @@ export class OptimizadorSemanal {
 
     /**
      * Extrae el horario de la semana.
-     * @param horario Horario a extraer.
+     * @param horario horario a extraer.
      */
     public extraerHorario(horario: Archivo): void {
         const contenido = horario.getInfo();
@@ -78,7 +78,7 @@ export class OptimizadorSemanal {
 
             if (informacion) {
                 informacion.forEach((info) => {
-                    const actividad = new Actividad(TipoActividad.FIJA, { info.descripcion, info.dia, info.hora });
+                    const actividad = new Actividad(TipoActividad.FIJA, { descripcion: info.descripcion, dia: info.dia, hora: info.hora });
                     this.agregarActividad(actividad);
                 });
             }
@@ -118,7 +118,7 @@ export class OptimizadorSemanal {
 
             if (informacion) {
                 informacion.forEach((info) => {
-                    const actividad = new Actividad(TipoActividad.VARIABLE, info.descripcion, "", "", info.duracion);
+                    const actividad = new Actividad(TipoActividad.VARIABLE, { descripcion: info.descripcion, dia: "", hora: "", duracion: info.duracion });
                     this.agregarActividad(actividad);
                 });
             }
@@ -142,7 +142,7 @@ export class OptimizadorSemanal {
 
     /**
      * Asigna una actividad fija al horario.
-     * @param horario Horario a asignar la actividad.
+     * @param horario horario a asignar la actividad.
      * @param diaIndex Indice del día en el horario.
      * @param horaIndex Indice de la hora en el horario.
      * @param duracion Duración de la actividad.
@@ -158,7 +158,7 @@ export class OptimizadorSemanal {
 
     /**
      * Obtiene las celdas disponibles del horario.
-     * @param horario Horario a obtener las celdas disponibles.
+     * @param horario horario a obtener las celdas disponibles.
      * @returns Lista de celdas disponibles.
      */
     private obtenerCeldasDisponibles(horario: string[][]): { rowIndex: number, cellIndex: number }[] {
@@ -177,7 +177,7 @@ export class OptimizadorSemanal {
 
     /**
      * Asigna una actividad variable al horario.
-     * @param horario Horario a asignar la actividad.
+     * @param horario horario a asignar la actividad.
      * @param descripcion Descripción de la actividad.
      * @param duracion Duración de la actividad.
      */

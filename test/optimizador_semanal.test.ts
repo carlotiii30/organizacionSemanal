@@ -45,7 +45,7 @@ describe('OptimizadorSemanal', () => {
             ["21:00", "", "", "", "", ""]
         ]
 
-        expect(optimizador.horario).toEqual(expectedHorario);
+        expect(optimizador.Horario).toEqual(expectedHorario);
     });
 
     it('debería crear un horario con todas las actividades de la lista', () => {
@@ -59,15 +59,15 @@ describe('OptimizadorSemanal', () => {
         optimizador.organizarHorario();
 
         // Comprobar que todas las actividades están en el horario.
-        (optimizador.actividades).forEach(actividad => {
-            const diaIndex = ((optimizador.horario)[0]).indexOf(actividad.dia);
-            const horaIndex = (optimizador.horario).findIndex(hora => actividad.hora[0] === actividad.hora);
+        (optimizador.Actividades).forEach(actividad => {
+            const diaIndex = ((optimizador.Horario)[0]).indexOf(actividad.dia);
+            const horaIndex = (optimizador.Horario).findIndex(hora => actividad.hora[0] === actividad.hora);
 
             const finalDiaIndex = diaIndex !== -1 ? diaIndex : null;
             const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
 
             if (finalDiaIndex != null && finalHoraIndex != null) {
-                const actividadEnHorario = (optimizador.horario)[finalDiaIndex][finalHoraIndex];
+                const actividadEnHorario = (optimizador.Horario)[finalDiaIndex][finalHoraIndex];
 
                 expect(actividadEnHorario).toEqual(actividad.descripcion);
             }

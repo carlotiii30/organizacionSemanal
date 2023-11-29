@@ -3,23 +3,9 @@ Una metodología de desarrollo de software es un enfoque estructurado o conjunto
 de prácticas, procesos, reglas y principios que guían el desarrollo de software
 a lo largo de su ciclo de vida.
 
-Para esta proyecto utilizaremos la metodología TDD.
-
-## TDD
-TDD - Test Driven Development es una metodología que se centra en escribir
-tests antes del propio código.
-
-### Características
-**Enfoque**:
-- Se centra en escribir pruebas unitarias antes de escribir el código de
-producción.
-- Ciclo red-green-refactor: escribir una prueba que falle, hacer que pase y
-luego refactorizar si es necesario.
-
-**Propósito**:
-- Garantizar que el código sea confiable y cumpla con los requisitos al
-escribir pruebas unitarias antes de implementar el código de producción.
-- Mejorar la calidad del código y facilitar el mantenimiento.
+Para esta proyecto utilizaremos la metodología TDD, que se centra en escribir
+tests antes del propio código; y BDD, que describe las pruebas en un lenguaje
+natural que entienden todos los equipos de un proyecto.
 
 
 # Herramientas para los tests
