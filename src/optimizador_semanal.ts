@@ -1,6 +1,6 @@
 import { Archivo } from "./archivo";
 import { Actividad } from "./actividad";
-import { ActividadFija } from "./actividad_fija";
+import { ActividadFija, DiaSemana } from "./actividad_fija";
 import { ActividadVariable } from "./actividad_variable";
 
 export class OptimizadorSemanal {

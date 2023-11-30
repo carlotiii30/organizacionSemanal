@@ -7,6 +7,10 @@ export class ActividadVariable extends Actividad {
         private duracion: number,
     ) {
         super(descripcion);
+
+        if (duracion <= 0) {
+            throw new Error("La duración debe ser mayor que 0.");
+        }
     }
 
     /**

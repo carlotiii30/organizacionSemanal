@@ -2,8 +2,6 @@
 
 import { OptimizadorSemanal } from '../src/optimizador_semanal';
 import { Archivo } from '../src/archivo';
-import { ActividadFija } from '../src/actividad_fija';
-import { ActividadVariable } from '../src/actividad_variable';
 
 describe('OptimizadorSemanal', () => {
     it('debería crear un horario con todas las actividades de la lista', () => {
