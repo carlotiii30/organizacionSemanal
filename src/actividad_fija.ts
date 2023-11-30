@@ -21,7 +21,7 @@ export class ActividadFija extends Actividad {
         super(descripcion);
 
         if (!this.validarFormatoHora(horaInicio) || !this.validarFormatoHora(horaFin)) {
-            throw new Error("El formato de la hora no es válido. Debe ser HH:MM-HH:MM");
+            throw new Error("El formato de la hora no es válido. Debe ser HH:MM");
         }
     }
 
@@ -55,7 +55,7 @@ export class ActividadFija extends Actividad {
     * @returns true si el formato es válido, false de lo contrario.
     */
     private validarFormatoHora(hora: string): boolean {
-        const formatoHoraRegex = /^\d{2}:\d{2}$/;
+        const formatoHoraRegex = /^\d{1,2}:\d{2}$/;
         return formatoHoraRegex.test(hora);
     }
 }
