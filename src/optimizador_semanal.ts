@@ -174,15 +174,16 @@ export class OptimizadorSemanal {
      * @param descripcion Descripción de la actividad.
      */
     private asignarActividadFija(horario: string[][], hora: string, diaIndex: number | null, horaIndex: number | null, descripcion: string): void {
-        if (diaIndex != null && horaIndex != null) {
-            console.log(diaIndex, horaIndex);
-            const duracion = this.calcularDuracion(hora);
+        if (diaIndex == null || horaIndex == null)
+            throw new Error("El día o la hora no existen.");
 
-            if (duracion != null) {
-                horario
-                    .slice(horaIndex, horaIndex + (duracion * 2))
-                    .forEach((row) => row[diaIndex] = descripcion || "");
-            }
+        console.log(diaIndex, horaIndex);
+        const duracion = this.calcularDuracion(hora);
+
+        if (duracion != null) {
+            horario
+                .slice(horaIndex, horaIndex + (duracion * 2))
+                .forEach((row) => row[diaIndex] = descripcion || "");
         }
     }
 
@@ -191,7 +192,7 @@ export class OptimizadorSemanal {
      * @param horario horario a obtener las celdas disponibles.
      * @returns Lista de celdas disponibles.
      */
-    private obtenerCeldasDisponibles(horario: string[][]): { rowIndex: number, cellIndex: number }[] {
+    public obtenerCeldasDisponibles(horario: string[][]): { rowIndex: number, cellIndex: number }[] {
         const celdasDisponibles: { rowIndex: number, cellIndex: number }[] = [];
         horario.forEach((row, rowIndex) => {
             if (rowIndex > 0) {
