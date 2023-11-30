@@ -1,13 +1,11 @@
 import { Actividad } from './actividad';
 
 export enum DiaSemana {
-    Lunes,
-    Martes,
-    Miercoles,
-    Jueves,
-    Viernes,
-    Sabado,
-    Domingo,
+    LUNES,
+    MARTES,
+    MIERCOLES,
+    JUEVES,
+    VIERNES
 }
 
 export class ActividadFija extends Actividad {

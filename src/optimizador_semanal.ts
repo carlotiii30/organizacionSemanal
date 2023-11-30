@@ -11,9 +11,28 @@ export class OptimizadorSemanal {
     /**
      * Constructor por defecto de la clase OptimizadorSemanal
      */
-    constructor() {
+    constructor(readonly archivo: Archivo) {
         this.actividades = [];
         this.horario = [];
+
+        this.crearHorario();
+
+        const contenido = archivo.getInfo();
+
+        if (contenido == null)
+            throw new Error("El horario debe tener información.");
+
+        const lineas = contenido.split(/\n/);
+
+        lineas.forEach(linea => {
+            const info = this.extraerInformacionHorario(linea);
+
+            if (info) {
+                const dia = this.convertirDiaSemana(info.dia);
+                const actividad = new ActividadFija(info.descripcion, dia, info.horaInicio, info.horaFin);
+                this.actividades.push(actividad);
+            }
+        });
     }
 
     /**
@@ -52,30 +71,6 @@ export class OptimizadorSemanal {
         return { dia: dia, horaInicio: horaInicio, horaFin: horaFin, descripcion: descripcion };
     }
 
-
-    /**
-     * Extrae el horario de la semana.
-     * @param horario horario a extraer.
-     */
-    public extraerHorario(horario: Archivo): void {
-        const contenido = horario.getInfo();
-
-        if (contenido == null)
-            throw new Error("El horario debe tener información.");
-
-        const lineas = contenido.split(/\n/);
-
-        lineas.forEach(linea => {
-            const info = this.extraerInformacionHorario(linea);
-
-            if (info) {
-                const dia = this.convertirDiaSemana(info.dia);
-                const actividad = new ActividadFija(info.descripcion, dia, info.horaInicio, info.horaFin);
-                this.actividades.push(actividad);
-            }
-        });
-    }
-
     /**
      * Convierte un día de la semana a su enumeración.
      * @param dia Día de la semana a convertir.
@@ -84,15 +79,15 @@ export class OptimizadorSemanal {
     private convertirDiaSemana(dia: string): DiaSemana {
         switch (dia) {
             case "Lunes":
-                return DiaSemana.Lunes;
+                return DiaSemana.LUNES;
             case "Martes":
-                return DiaSemana.Martes;
+                return DiaSemana.MARTES;
             case "Miercoles":
-                return DiaSemana.Miercoles;
+                return DiaSemana.MIERCOLES;
             case "Jueves":
-                return DiaSemana.Jueves;
+                return DiaSemana.JUEVES;
             case "Viernes":
-                return DiaSemana.Viernes;
+                return DiaSemana.VIERNES;
             default:
                 throw new Error("El día no existe.");
         }
@@ -184,6 +179,8 @@ export class OptimizadorSemanal {
     private asignarActividadFija(horario: string[][], dia: DiaSemana, horaInicio: string, horaFin: string, descripcion: string): void {
         const diaIndex = this.horario[0].findIndex(d => d === DiaSemana[dia]);
         const horaIndex = this.horario.findIndex((row) => row[0] === horaInicio);
+
+        console.log(diaIndex, horaIndex);
 
         const finalDiaIndex = diaIndex !== -1 ? diaIndex : null;
         const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;

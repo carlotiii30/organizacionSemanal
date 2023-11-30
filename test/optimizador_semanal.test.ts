@@ -7,11 +7,10 @@ import { ActividadFija, DiaSemana } from '../src/actividad_fija';
 
 describe('OptimizadorSemanal', () => {
     it('debería crear un horario con todas las actividades de la lista', () => {
-        const optimizador = new OptimizadorSemanal();
         const horario = new Archivo("./data/horario.txt");
+        const optimizador = new OptimizadorSemanal(horario);
         const lista = new Archivo("./data/actividades.txt");
 
-        optimizador.extraerHorario(horario);
         optimizador.extraerActividades(lista);
 
         optimizador.organizarHorario();
