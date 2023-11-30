@@ -15,11 +15,12 @@ export class ActividadFija extends Actividad {
     constructor(
         descripcion: string,
         private dia: DiaSemana,
-        private hora: string,
+        private horaInicio: string,
+        private horaFin: string
     ) {
         super(descripcion);
 
-        if (!this.validarFormatoHora(hora)) {
+        if (!this.validarFormatoHora(horaInicio) || !this.validarFormatoHora(horaFin)) {
             throw new Error("El formato de la hora no es válido. Debe ser HH:MM-HH:MM");
         }
     }
@@ -33,11 +34,19 @@ export class ActividadFija extends Actividad {
     }
 
     /**
-     * Getter de la hora de la actividad.
-     * @returns Hora de la actividad.
+     * Getter de la hora de inicio de la actividad.
+     * @returns Hora de inicio de la actividad.
      */
-    get Hora(): string {
-        return this.hora;
+    get HoraInicio(): string {
+        return this.horaInicio;
+    }
+
+    /**
+     * Getter de la hora de fin de la actividad.
+     * @returns Hora de fin de la actividad.
+     */
+    get HoraFin(): string {
+        return this.horaFin;
     }
 
     /**
@@ -46,7 +55,7 @@ export class ActividadFija extends Actividad {
     * @returns true si el formato es válido, false de lo contrario.
     */
     private validarFormatoHora(hora: string): boolean {
-        const formatoHoraRegex = /^\d{2}:\d{2}-\d{2}:\d{2}$/;
+        const formatoHoraRegex = /^\d{2}:\d{2}$/;
         return formatoHoraRegex.test(hora);
     }
 }

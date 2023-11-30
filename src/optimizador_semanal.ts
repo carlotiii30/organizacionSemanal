@@ -17,17 +17,6 @@ export class OptimizadorSemanal {
     }
 
     /**
-     * Agrega una actividad a la lista de actividades.
-     * @param actividad Actividad a agregar.
-     */
-    public agregarActividad(actividad: Actividad): void {
-        if (actividad.Descripcion == null)
-            throw new Error("La actividad debe tener una descripción.");
-
-        this.actividades.push(actividad);
-    }
-
-    /**
      * Getter de las actividades semanales.
      * @returns Lista de actividades de la semana.
      */
@@ -50,17 +39,19 @@ export class OptimizadorSemanal {
      * @param dia Día de la semana a extraer la información.
      * @returns Lista de objetos con 'día', 'hora' y 'descripcion'.
      */
-    public extraerInformacionHorario(info: string): { dia: string; hora: string; descripcion: string }[] | null {
+    public extraerInformacionHorario(info: string): { dia: string; horaInicio: string; horaFin: string; descripcion: string } {
         if (info == null)
             throw new Error("El horario debe tener información.");
 
         const partes = info.split(/ /);
         const dia = partes[0];
-        const hora = partes[1];
+        const horaInicio = partes[1].split("-")[0];
+        const horaFin = partes[1].split("-")[1];
         const descripcion = partes.slice(2).join(" ");
 
-        return [{ dia: dia, hora: hora, descripcion: descripcion }];
+        return { dia: dia, horaInicio: horaInicio, horaFin: horaFin, descripcion: descripcion };
     }
+
 
     /**
      * Extrae el horario de la semana.
@@ -75,15 +66,36 @@ export class OptimizadorSemanal {
         const lineas = contenido.split(/\n/);
 
         lineas.forEach(linea => {
-            const informacion = this.extraerInformacionHorario(linea);
+            const info = this.extraerInformacionHorario(linea);
 
-            if (informacion) {
-                informacion.forEach((info) => {
-                    const actividad = new ActividadFija(info.descripcion, info.dia, info.hora);
-                    this.agregarActividad(actividad);
-                });
+            if (info) {
+                const dia = this.convertirDiaSemana(info.dia);
+                const actividad = new ActividadFija(info.descripcion, dia, info.horaInicio, info.horaFin);
+                this.actividades.push(actividad);
             }
         });
+    }
+
+    /**
+     * Convierte un día de la semana a su enumeración.
+     * @param dia Día de la semana a convertir.
+     * @returns Día de la semana convertido.
+     */
+    private convertirDiaSemana(dia: string): DiaSemana {
+        switch (dia) {
+            case "Lunes":
+                return DiaSemana.Lunes;
+            case "Martes":
+                return DiaSemana.Martes;
+            case "Miercoles":
+                return DiaSemana.Miercoles;
+            case "Jueves":
+                return DiaSemana.Jueves;
+            case "Viernes":
+                return DiaSemana.Viernes;
+            default:
+                throw new Error("El día no existe.");
+        }
     }
 
     /**
@@ -91,7 +103,7 @@ export class OptimizadorSemanal {
      * @param info Contenido de la lista.
      * @returns Descripcion y duración de las actividades.
      */
-    public extraerInformacionLista(info: string): { descripcion: string, duracion: number }[] | null {
+    public extraerInformacionLista(info: string): { descripcion: string, duracion: number } {
         if (info == null)
             throw new Error("La lista debe tener información.");
 
@@ -99,8 +111,9 @@ export class OptimizadorSemanal {
         const duracion = parseInt(partes[1].slice(0, -1));
         const descripcion = partes[0].slice(0, -1);
 
-        return [{ descripcion: descripcion, duracion: duracion }];
+        return { descripcion: descripcion, duracion: duracion };
     }
+
 
     /**
      * Extrae las actividades de la lista de actividades.
@@ -118,13 +131,11 @@ export class OptimizadorSemanal {
             const informacion = this.extraerInformacionLista(linea);
 
             if (informacion) {
-                informacion.forEach((info) => {
-                    const actividad = new ActividadVariable(info.descripcion, info.duracion);
-                    this.agregarActividad(actividad);
-                });
+                this.actividades.push(new ActividadVariable(informacion.descripcion, informacion.duracion));
             }
         });
     }
+
 
     /**
      * Crear una matriz horario.
@@ -149,10 +160,7 @@ export class OptimizadorSemanal {
      * Calcula la duración de la actividad.
      * @returns Duración calculada de la actividad.
      */
-    calcularDuracion(hora: string): number | undefined {
-        const horaInicio = hora.split(/-/)[0];
-        const horaFin = hora.split(/-/)[1];
-
+    calcularDuracion(horaInicio: string, horaFin: string): number | undefined {
         const horaIniciohoras = parseInt(horaInicio.split(/:/)[0]);
         const horaInicioMinutos = parseInt(horaInicio.split(/:/)[1]);
 
@@ -173,12 +181,17 @@ export class OptimizadorSemanal {
      * @param duracion Duración de la actividad.
      * @param descripcion Descripción de la actividad.
      */
-    private asignarActividadFija(horario: string[][], hora: string, diaIndex: number | null, horaIndex: number | null, descripcion: string): void {
-        if (diaIndex == null || horaIndex == null)
+    private asignarActividadFija(horario: string[][], dia: DiaSemana, horaInicio: string, horaFin: string, descripcion: string): void {
+        const diaIndex = this.horario[0].findIndex(d => d === DiaSemana[dia]);
+        const horaIndex = this.horario.findIndex((row) => row[0] === horaInicio);
+
+        const finalDiaIndex = diaIndex !== -1 ? diaIndex : null;
+        const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
+
+        if (finalDiaIndex == null || finalHoraIndex == null)
             throw new Error("El día o la hora no existen.");
 
-        console.log(diaIndex, horaIndex);
-        const duracion = this.calcularDuracion(hora);
+        const duracion = this.calcularDuracion(horaInicio, horaFin);
 
         if (duracion != null) {
             horario
@@ -236,17 +249,11 @@ export class OptimizadorSemanal {
         // Asignación de actividades fijas
         fijas.forEach(actividad => {
             const dia = actividad.Dia;
-            const hora = actividad.Hora;
             const descripcion = actividad.Descripcion;
+            const horaInicio = actividad.HoraInicio;
+            const horaFin = actividad.HoraFin;
 
-            const diaIndex = this.horario[0].findIndex(d => d.toUpperCase() === dia.toUpperCase());
-            const horaInicioActividad = hora.split("-")[0];
-            const horaIndex = this.horario.findIndex((row) => row[0] === horaInicioActividad);
-
-            const finalDiaIndex = diaIndex !== -1 ? diaIndex : null;
-            const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
-
-            this.asignarActividadFija(this.horario, hora, finalDiaIndex, finalHoraIndex, descripcion);
+            this.asignarActividadFija(this.horario, dia, horaInicio, horaFin, descripcion);
         });
 
         // Asignación de actividades variables
