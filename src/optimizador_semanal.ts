@@ -1,6 +1,7 @@
-import { TipoActividad } from "./tipos";
 import { Archivo } from "./archivo";
 import { Actividad } from "./actividad";
+import { ActividadFija } from "./actividad_fija";
+import { ActividadVariable } from "./actividad_variable";
 
 export class OptimizadorSemanal {
 
@@ -20,7 +21,7 @@ export class OptimizadorSemanal {
      * @param actividad Actividad a agregar.
      */
     public agregarActividad(actividad: Actividad): void {
-        if (actividad.descripcion == null)
+        if (actividad.Descripcion == null)
             throw new Error("La actividad debe tener una descripción.");
 
         this.actividades.push(actividad);
@@ -47,7 +48,7 @@ export class OptimizadorSemanal {
      * Extrae la información de un día.
      * @param info Contenido del horario a extraer la información.
      * @param dia Día de la semana a extraer la información.
-     * @returns Lista de objetos con 'hora' y 'descripcion'.
+     * @returns Lista de objetos con 'día', 'hora' y 'descripcion'.
      */
     public extraerInformacionHorario(info: string): { dia: string; hora: string; descripcion: string }[] | null {
         if (info == null)
@@ -78,7 +79,7 @@ export class OptimizadorSemanal {
 
             if (informacion) {
                 informacion.forEach((info) => {
-                    const actividad = new Actividad(TipoActividad.FIJA, { descripcion: info.descripcion, dia: info.dia, hora: info.hora });
+                    const actividad = new ActividadFija(info.descripcion, info.dia, info.hora);
                     this.agregarActividad(actividad);
                 });
             }
@@ -118,7 +119,7 @@ export class OptimizadorSemanal {
 
             if (informacion) {
                 informacion.forEach((info) => {
-                    const actividad = new Actividad(TipoActividad.VARIABLE, { descripcion: info.descripcion, dia: "", hora: "", duracion: info.duracion });
+                    const actividad = new ActividadVariable(info.descripcion, info.duracion);
                     this.agregarActividad(actividad);
                 });
             }
@@ -132,12 +133,36 @@ export class OptimizadorSemanal {
         // Primera fila: días de la semana
         this.horario.push(["", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"]);
 
+        const horaFin = 21;
+        const horaInicio = 7;
+        const intervalo = horaFin - horaInicio;
+
         // Primera columna: horas del día
-        Array.from({ length: 29 }).forEach((_, index) => {
+        Array.from({ length: intervalo * 2 + 1 }).forEach((_, index) => {
             const hour = Math.floor(index / 2) + 7;
             const minute = index % 2 === 0 ? "00" : "30";
             this.horario.push([`${hour}:${minute}`, "", "", "", "", ""]);
         });
+    }
+
+    /**
+     * Calcula la duración de la actividad.
+     * @returns Duración calculada de la actividad.
+     */
+    calcularDuracion(hora: string): number | undefined {
+        const horaInicio = hora.split(/-/)[0];
+        const horaFin = hora.split(/-/)[1];
+
+        const horaIniciohoras = parseInt(horaInicio.split(/:/)[0]);
+        const horaInicioMinutos = parseInt(horaInicio.split(/:/)[1]);
+
+        const horaFinhoras = parseInt(horaFin.split(/:/)[0]);
+        const horaFinMinutos = parseInt(horaFin.split(/:/)[1]);
+
+        const duracionhoras = horaFinhoras - horaIniciohoras;
+        const duracionMinutos = horaFinMinutos - horaInicioMinutos;
+
+        return duracionhoras + duracionMinutos / 60;
     }
 
     /**
@@ -148,11 +173,16 @@ export class OptimizadorSemanal {
      * @param duracion Duración de la actividad.
      * @param descripcion Descripción de la actividad.
      */
-    private asignarActividadFija(horario: string[][], diaIndex: number | null, horaIndex: number | null, duracion: number, descripcion: string): void {
-        if (diaIndex != null && horaIndex != null && duracion) {
-            horario
-                .slice(horaIndex, horaIndex + (duracion * 2))
-                .forEach((row) => row[diaIndex] = descripcion || "");
+    private asignarActividadFija(horario: string[][], hora: string, diaIndex: number | null, horaIndex: number | null, descripcion: string): void {
+        if (diaIndex != null && horaIndex != null) {
+            console.log(diaIndex, horaIndex);
+            const duracion = this.calcularDuracion(hora);
+
+            if (duracion != null) {
+                horario
+                    .slice(horaIndex, horaIndex + (duracion * 2))
+                    .forEach((row) => row[diaIndex] = descripcion || "");
+            }
         }
     }
 
@@ -199,14 +229,14 @@ export class OptimizadorSemanal {
     public organizarHorario(): void {
         this.crearHorario();
 
-        const fijas = this.actividades.filter(actividad => actividad.tipo == TipoActividad.FIJA);
-        const variables = this.actividades.filter(actividad => actividad.tipo == TipoActividad.VARIABLE);
+        const fijas = this.actividades.filter(actividad => actividad instanceof ActividadFija) as ActividadFija[];
+        const variables = this.actividades.filter(actividad => actividad instanceof ActividadVariable) as ActividadVariable[];
 
         // Asignación de actividades fijas
         fijas.forEach(actividad => {
-            const dia = actividad.dia;
-            const hora = actividad.hora;
-            const descripcion = actividad.descripcion;
+            const dia = actividad.Dia;
+            const hora = actividad.Hora;
+            const descripcion = actividad.Descripcion;
 
             const diaIndex = this.horario[0].findIndex(d => d.toUpperCase() === dia.toUpperCase());
             const horaInicioActividad = hora.split("-")[0];
@@ -215,23 +245,13 @@ export class OptimizadorSemanal {
             const finalDiaIndex = diaIndex !== -1 ? diaIndex : null;
             const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
 
-            let duracion = actividad.duracion;
-
-            if (actividad.duracion === undefined)
-                duracion = actividad.calcularDuracion();
-
-            if (duracion != undefined)
-                this.asignarActividadFija(this.horario, finalDiaIndex, finalHoraIndex, duracion, descripcion);
+            this.asignarActividadFija(this.horario, hora, finalDiaIndex, finalHoraIndex, descripcion);
         });
 
         // Asignación de actividades variables
         variables.forEach(actividad => {
-            const descripcion = actividad.descripcion;
-            let duracion = actividad.duracion;
-
-            if (!duracion) {
-                duracion = actividad.calcularDuracion();
-            }
+            const descripcion = actividad.Descripcion;
+            const duracion = actividad.Duracion;
 
             if (duracion != undefined)
                 this.asignarActividadVariable(this.horario, descripcion, duracion);
