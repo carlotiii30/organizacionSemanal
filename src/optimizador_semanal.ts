@@ -1,4 +1,3 @@
-import { Archivo } from "./archivo";
 import { Actividad } from "./actividad";
 import { ActividadFija, DiaSemana } from "./actividad_fija";
 import { ActividadVariable } from "./actividad_variable";
@@ -11,28 +10,11 @@ export class OptimizadorSemanal {
     /**
      * Constructor por defecto de la clase OptimizadorSemanal
      */
-    constructor(readonly archivo: Archivo) {
-        this.actividades = [];
+    constructor(actividades: Actividad[]) {
+        this.actividades = actividades;
         this.horario = [];
 
         this.crearHorario();
-
-        const contenido = archivo.getInfo();
-
-        if (contenido == null)
-            throw new Error("El horario debe tener información.");
-
-        const lineas = contenido.split(/\n/);
-
-        lineas.forEach(linea => {
-            const info = this.extraerInformacionHorario(linea);
-
-            if (info) {
-                const dia = this.convertirDiaSemana(info.dia);
-                const actividad = new ActividadFija(info.descripcion, dia, info.horaInicio, info.horaFin);
-                this.actividades.push(actividad);
-            }
-        });
     }
 
     /**
@@ -50,87 +32,6 @@ export class OptimizadorSemanal {
     get Horario(): string[][] {
         return this.horario;
     }
-
-
-    /**
-     * Extrae la información de un día.
-     * @param info Contenido del horario a extraer la información.
-     * @param dia Día de la semana a extraer la información.
-     * @returns Lista de objetos con 'día', 'hora' y 'descripcion'.
-     */
-    public extraerInformacionHorario(info: string): { dia: string; horaInicio: string; horaFin: string; descripcion: string } {
-        if (info == null)
-            throw new Error("El horario debe tener información.");
-
-        const partes = info.split(/ /);
-        const dia = partes[0];
-        const horaInicio = partes[1].split("-")[0];
-        const horaFin = partes[1].split("-")[1];
-        const descripcion = partes.slice(2).join(" ");
-
-        return { dia: dia, horaInicio: horaInicio, horaFin: horaFin, descripcion: descripcion };
-    }
-
-    /**
-     * Convierte un día de la semana a su enumeración.
-     * @param dia Día de la semana a convertir.
-     * @returns Día de la semana convertido.
-     */
-    private convertirDiaSemana(dia: string): DiaSemana {
-        switch (dia) {
-            case "Lunes":
-                return DiaSemana.LUNES;
-            case "Martes":
-                return DiaSemana.MARTES;
-            case "Miercoles":
-                return DiaSemana.MIERCOLES;
-            case "Jueves":
-                return DiaSemana.JUEVES;
-            case "Viernes":
-                return DiaSemana.VIERNES;
-            default:
-                throw new Error("El día no existe.");
-        }
-    }
-
-    /**
-     * Extrae la información de una lista de actividades.
-     * @param info Contenido de la lista.
-     * @returns Descripcion y duración de las actividades.
-     */
-    public extraerInformacionLista(info: string): { descripcion: string, duracion: number } {
-        if (info == null)
-            throw new Error("La lista debe tener información.");
-
-        const partes = info.split(/-/);
-        const duracion = parseInt(partes[1].slice(0, -1));
-        const descripcion = partes[0].slice(0, -1);
-
-        return { descripcion: descripcion, duracion: duracion };
-    }
-
-
-    /**
-     * Extrae las actividades de la lista de actividades.
-     * @param lista Lista de actividades a extraer.
-     */
-    public extraerActividades(lista: Archivo): void {
-        const contenido = lista.getInfo();
-
-        if (contenido == null)
-            throw new Error("La lista debe tener información.");
-
-        const lineas = contenido.split(/\n/);
-
-        lineas.forEach(linea => {
-            const informacion = this.extraerInformacionLista(linea);
-
-            if (informacion) {
-                this.actividades.push(new ActividadVariable(informacion.descripcion, informacion.duracion));
-            }
-        });
-    }
-
 
     /**
      * Crear una matriz horario.
@@ -179,8 +80,6 @@ export class OptimizadorSemanal {
     private asignarActividadFija(horario: string[][], dia: DiaSemana, horaInicio: string, horaFin: string, descripcion: string): void {
         const diaIndex = this.horario[0].findIndex(d => d === DiaSemana[dia]);
         const horaIndex = this.horario.findIndex((row) => row[0] === horaInicio);
-
-        console.log(diaIndex, horaIndex);
 
         const finalDiaIndex = diaIndex !== -1 ? diaIndex : null;
         const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
@@ -238,8 +137,6 @@ export class OptimizadorSemanal {
      * Asignación de horas.
      */
     public organizarHorario(): void {
-        this.crearHorario();
-
         const fijas = this.actividades.filter(actividad => actividad instanceof ActividadFija) as ActividadFija[];
         const variables = this.actividades.filter(actividad => actividad instanceof ActividadVariable) as ActividadVariable[];
 
