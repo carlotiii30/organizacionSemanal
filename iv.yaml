@@ -2,4 +2,5 @@ lenguaje: TypeScript
 entidad: src/planificador.ts
 automatizar:
   fichero: package.json
-  orden: yarn run
+  orden: yarn
+test: test/optimizador_semanal.test.ts
