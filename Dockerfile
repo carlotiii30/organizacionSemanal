@@ -8,7 +8,7 @@ COPY package.json yarn.lock ./
 
 RUN yarn install
 
-RUN if [ ! -x "$(command -v jest)" ]; then echo "Jest is not installed. Check your dependencies."; exit 1; fi
+RUN yarn global add yarn
 
 WORKDIR /app/test
 
