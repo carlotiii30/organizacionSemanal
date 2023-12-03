@@ -46,3 +46,17 @@ Para la ejecución de tests, el comando que utilizaremos será:
 ```bash
 yarn test
 ```
+
+## Contenedor de test
+Para construir la imagen del contenedor usaremos el comando:
+```bash
+docker build -t carlotiii30/organizacionsemanal .
+```
+
+Y para ejecutarla:
+```bash
+docker run  -tv `pwd`:/app/test carlotiii30/organizacionsemanal
+```
+
+La imagen se encuentra en [Docker Hub](https://hub.docker.com/r/carlotiii30/organizacionsemanal)
+
