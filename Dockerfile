@@ -10,7 +10,7 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN yarn cache clean && yarn install --frozen-lockfile
+RUN yarn install
 
 WORKDIR /app/test
 
