@@ -5,7 +5,7 @@ on:
     paths:
       - 'Dockerfile'
       - 'package.json'
-      - 'yarn.lock'
+      - 'package-lock.json'
 
 jobs:
   build:

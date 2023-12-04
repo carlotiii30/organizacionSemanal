@@ -8,13 +8,9 @@ USER node
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
-RUN mkdir -p /app/.yarn_cache
-
-RUN yarn config set cache-folder /app/.yarn_cache && yarn install
-
-RUN chown -R node:node /app/node_modules
+RUN yarn install
 
 WORKDIR /app/test
 
