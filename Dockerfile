@@ -10,7 +10,9 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN yarn install
+RUN mkdir -p /app/.yarn_cache
+
+RUN yarn config set cache-folder /app/.yarn_cache && yarn install
 
 RUN chown -R node:node /app/node_modules
 
