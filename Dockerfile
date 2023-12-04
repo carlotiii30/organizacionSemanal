@@ -12,6 +12,8 @@ COPY package.json ./
 
 RUN yarn install
 
+ENV PATH $PATH:/app/node_modules/.bin
+
 WORKDIR /app/test
 
 ENTRYPOINT ["yarn", "test"]
