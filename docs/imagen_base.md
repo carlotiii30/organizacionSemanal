@@ -23,8 +23,8 @@ reciben actualizaciones y correcciones de manera regular.
 La velocidad de las imágenes de Docker se pueden medir en términos de: tiempo
 de construcción y tamaño de la imagen resultante.
 
-- [Tiempo de construcción]
-- [Tamaño]
+- [Tiempo de construcción](../images/build/)
+- [Tamaño](../images/tam/)
 
 ## Opciones
 - Alpine Linux.
