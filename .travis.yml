@@ -1,0 +1,10 @@
+language:
+  - generic
+
+services:
+  - docker
+
+script:
+  - docker pull carlotiii30/organizacionsemanal
+  - docker run -v $(pwd):/app carlotiii30/organizacionsemanal yarn install
+  - docker run -v $(pwd):/app carlotiii30/organizacionsemanal yarn build
