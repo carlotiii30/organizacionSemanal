@@ -1,7 +1,6 @@
 {
   "name": "organizacionSemanal",
   "version": "1.0.0",
-  "main": "src/optimizador_semanal.js",
   "repository": "git@github.com:carlotiii30/organizacionSemanal.git",
   "author": "Carlota de la Vega <carlotadlavega@correo.ugr.es>",
   "license": "MIT",
@@ -13,7 +12,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "node src/optimizador_semanal.js",
     "check": "tsc --noEmit src/*.ts",
     "test": "jest"
   }
