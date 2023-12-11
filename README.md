@@ -17,32 +17,54 @@ semanales.
 pero siempre que existan deben realizarse.
 
 
-## Configuración
+## Documentos
+
+### Configuración
 [Configuración del repositorio](https://github.com/carlotiii30/organizacionSemanal/blob/Objetivo-0/configuracion.png)
 
-## Historias de usuario
+### Historias de usuario
 [Historias de usuario](./docs/historias_usuario.md)
 
-## Milestones
+### Milestones
 [Milestones](./docs/milestones.md)
 
-## Toolchain
+### Toolchain
 * [Gestor de dependencias](./docs/gestor_dependencias.md)
 * [Gestor de tareas](./docs/gestor_tareas.md)
 * [Runtime](./docs/runtime.md)
 
-## Herramientas para tests y metodología
+### Herramientas para tests y metodología
 [Herramientas para tests](./docs/herramientas_test.md)
 
-## Comprobación de sintaxis
+### Imagen base para contenedor de pruebas
+[Imagen base](./docs/imagen_base.md)
+
+
+## Órdenes
+
+### Comprobación de sintaxis
 Para la comprobación de la sintaxis del código de nuestro proyecto, deberemos
 ejecutar el siguiente comando:
 ```bash
 yarn check
 ```
 
-## Ejecución de test
+### Ejecución de test
 Para la ejecución de tests, el comando que utilizaremos será:
 ```bash
 yarn test
 ```
+
+### Contenedor de test
+Para construir la imagen del contenedor usaremos el comando:
+```bash
+docker build -t carlotiii30/organizacionsemanal .
+```
+
+Y para ejecutarla:
+```bash
+docker run  -tv `pwd`:/app/test carlotiii30/organizacionsemanal
+```
+
+La imagen se encuentra en [Docker Hub](https://hub.docker.com/r/carlotiii30/organizacionsemanal)
+

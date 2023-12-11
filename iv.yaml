@@ -1,5 +1,5 @@
 lenguaje: TypeScript
-entidad: src/planificador.ts
+entidad: src/optimizador_semanal.ts
 automatizar:
   fichero: package.json
   orden: yarn
