@@ -7,16 +7,12 @@ Utilizaremos [Docker Hub](https://hub.docker.com).
 - **Ligereza**: Una imagen más ligera tiene un tamaño más pequqeño en
 comparación con otras. Es beneficioso en términos de eficiencia de
 almacenamiento y velocidad de descarga.
-
 - **Rapidez**: Una imagen rápida debería iniciar y ejecutar la aplicación de
 manera eficiente.
-
 - **Compatibilidad**: La imagen debe ser compatible con las herramientas que
 estamos utilizando: [herramientas](./herramientas_test.md).
-
 - **Mantenimiento y comunidad**: Las imágenes populares y bien mantenidas
 reciben actualizaciones y correcciones de manera regular.
-
 - **Yarn pre-instalado**: La imagen debe tener yarn preinstalado.
 
 ## Velocidad y tamaño
