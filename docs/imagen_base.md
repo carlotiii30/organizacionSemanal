@@ -19,14 +19,18 @@ reciben actualizaciones y correcciones de manera regular.
 
 - **Yarn pre-instalado**: La imagen debe tener yarn preinstalado.
 
+## Velocidad y tamaño
+La velocidad de las imágenes de Docker se pueden medir en términos de: tiempo
+de construcción y tamaño de la imagen resultante.
+
+- [Tiempo de construcción]
+- [Tamaño]
+
 ## Opciones
 - Alpine Linux.
-- Debian Slim.
 - CentOS. -> Deprecated.
-- Fedora.
 - Ubuntu.
 - Arch Linux.
-- Rocky Linux.
 - Node.
 
 ### Alpine Linux
@@ -34,21 +38,6 @@ reciben actualizaciones y correcciones de manera regular.
 - Rapidez: Rápida.
 - Compatibilidad: Compatible.
 - Mantenimiento y comunidad: Comunidad activa y mantenida.
-- Yarn preinstalado: No.
-
-### Debian Slim
-- Ligereza: Ligera.
-- Rapidez: Buena.
-- Compatibilidad: Compatible.
-- Mantenimiento y comunidad: Gran comunidad y sólido mantenimiento.
-- Yarn preinstalado: No.
-
-### Fedora
-- Ligereza: Moderada.
-- Rapidez: Buena.
-- Compatibilidad: Compatible.
-- Mantenimiento y comunidad: Comunidad activa y ciclo de vida de soporte
-establecido.
 - Yarn preinstalado: No.
 
 ### Ubuntu
@@ -66,14 +55,6 @@ mantenida y regularmente actualizada.
 - Mantenimiento y comunidad: Comunidad activa.
 - Yarn preinstalado: No.
 
-### Rocky Linux
-- Ligereza: Moderada.
-- Rapidez: Buena.
-- Compatibilidad: Compatible.
-- Mantenimiento y comunidad: Respaldada por Rocky Enterprise Software
-Foundation.
-- Yarn preinstalado: No.
-
 ### Node
 - Ligereza: Ligera.
 - Rapidez: Rápida.
@@ -84,4 +65,6 @@ Foundation.
 
 ## Decisión final
 La opción que satisface todos nuestros criterios es Node. En particular,
-vamos a utilizar node:20-buster-slim.
+vamos a utilizar node:20-buster-slim, que es la última versión de node basada
+en Debian 10 (Buster) y que utiliza una versión más liviana y optimizada de los
+componentes necesarios para ejecutar Node.js.
