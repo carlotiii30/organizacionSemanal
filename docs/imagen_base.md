@@ -30,7 +30,6 @@ de construcción y tamaño de la imagen resultante.
 - Alpine Linux.
 - CentOS. -> Deprecated.
 - Ubuntu.
-- Arch Linux.
 - Node.
 
 ### Alpine Linux
@@ -46,13 +45,6 @@ de construcción y tamaño de la imagen resultante.
 - Compatibilidad: Compatible.
 - Mantenimiento y comunidad: Comunidad más grande y activa. Ampliamente
 mantenida y regularmente actualizada.
-- Yarn preinstalado: No.
-
-### Arch Linux
-- Ligereza: Variable, depende de la configuración.
-- Rapidez: Buena.
-- Compatibilidad: Compatible.
-- Mantenimiento y comunidad: Comunidad activa.
 - Yarn preinstalado: No.
 
 ### Node
