@@ -51,3 +51,9 @@ planes gratuitos y, además, tiene una integración estrecha con GitHub.
 
 Por otro lado, tenemos GitLab CI/CD, que ofrece la ventaja de tener una
 integración nativa con Docker.
+
+## Versiones
+Como podemos ver en la [página oficial de Node.js](https://nodejs.org/en), la
+versión recomendada para la mayoría de usuarios es la 20, que tiene soporte a
+largo plazo, mientras que la actual es la 21, que incluye las últimas
+características. Por tanto, vamos a testear estas dos versiones.
