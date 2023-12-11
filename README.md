@@ -39,6 +39,8 @@ pero siempre que existan deben realizarse.
 ### Imagen base para contenedor de pruebas
 [Imagen base](./docs/imagen_base.md)
 
+### Sistemas de itegración continua
+[Sistemas CI](./docs/ci.md)
 
 ## Órdenes
 
