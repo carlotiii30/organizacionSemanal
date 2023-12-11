@@ -33,7 +33,7 @@ de construcción y tamaño de la imagen resultante.
 - Node.
 
 ### Alpine Linux
-- Ligereza: Muy ligera.
+- Ligereza: Ligera.
 - Rapidez: Rápida.
 - Compatibilidad: Compatible.
 - Mantenimiento y comunidad: Comunidad activa y mantenida.
