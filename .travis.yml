@@ -1,5 +1,5 @@
 language:
-  - generic
+  - minimal
 
 services:
   - docker
@@ -8,4 +8,4 @@ install:
   - docker pull carlotiii30/organizacionsemanal
 
 script:
-  - docker run -v $(pwd):/app carlotiii30/organizacionsemanal
+  - docker run -v $(pwd):/app/test carlotiii30/organizacionsemanal

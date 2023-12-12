@@ -4,11 +4,11 @@ LABEL maintainer="carlotadlavega@correo.ugr.es"
 
 RUN mkdir -p /app/test && chown -R node:node /app
 
-USER node:node
+USER node
 
 WORKDIR /app
 
-COPY --chown=node:node package.json ./
+COPY package.json ./
 
 RUN yarn config set cache-folder /app/.yarn_cache && \
     yarn install
