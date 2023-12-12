@@ -8,4 +8,5 @@ install:
   - docker pull carlotiii30/organizacionsemanal
 
 script:
-  - docker run -u node -v $(pwd):/app carlotiii30/organizacionsemanal
+  - docker run -u node -v $(pwd):/app carlotiii30/organizacionsemanal && chmod -R 777 $(pwd)
+
