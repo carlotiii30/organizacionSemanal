@@ -4,7 +4,8 @@ language:
 services:
   - docker
 
-script:
+install:
   - docker pull carlotiii30/organizacionsemanal
-  - docker run -v $(pwd):/app carlotiii30/organizacionsemanal yarn install
-  - docker run -v $(pwd):/app carlotiii30/organizacionsemanal yarn build
+
+script:
+  - docker run -v $(pwd):/app carlotiii30/organizacionsemanal
