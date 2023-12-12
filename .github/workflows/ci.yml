@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ['20', '21']
+        node-version: ['lts/*', 'current']
 
     steps:
     - name: Checkout Repository
