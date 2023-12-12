@@ -8,10 +8,14 @@ USER node
 
 WORKDIR /app
 
-COPY package.json ./
+COPY --chown=node:node package.json ./
 
 RUN yarn config set cache-folder /app/.yarn_cache && \
     yarn install
+
+USER root
+RUN chmod -R 777 /app/.yarn_cache
+USER node
 
 ENV PATH $PATH:/app/node_modules/.bin
 
