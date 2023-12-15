@@ -4,3 +4,7 @@ automatizar:
   fichero: package.json
   orden: yarn
 test: test/optimizador_semanal.test.ts
+CI:
+  - .gitlab-ci.yml
+  - .github/workflows/ci.yml
+  - .travis.yml

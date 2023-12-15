@@ -39,6 +39,8 @@ pero siempre que existan deben realizarse.
 ### Imagen base para contenedor de pruebas
 [Imagen base](./docs/imagen_base.md)
 
+### Sistemas de itegración continua
+[Sistemas CI](./docs/ci.md)
 
 ## Órdenes
 
@@ -67,4 +69,3 @@ docker run  -tv `pwd`:/app/test carlotiii30/organizacionsemanal
 ```
 
 La imagen se encuentra en [Docker Hub](https://hub.docker.com/r/carlotiii30/organizacionsemanal)
-

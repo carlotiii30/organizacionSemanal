@@ -1,0 +1,8 @@
+stages:
+  - build
+
+build:
+  image: carlotiii30/organizacionsemanal
+  script:
+    - yarn install
+    - yarn build
