@@ -58,4 +58,4 @@ versión recomendada para la mayoría de usuarios es la 20, que tiene soporte a
 largo plazo, mientras que la actual es la 21, que incluye las últimas
 características. Por tanto, vamos a testear estas dos versiones.
 
-Adicionalmente, vamos a probar la versión en desarrollo.
+Adicionalmente, vamos a testear la versión anterior a la actual LTS.
