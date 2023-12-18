@@ -1,16 +1,17 @@
-import logger from './logger';
+import { LoggerConfig } from './logger';
 
 export abstract class Actividad {
 
     constructor(
         private descripcion: string,
-    ){
+        private logger = LoggerConfig.logger,
+    ) {
         if (descripcion == null) {
-            logger.error("Intento de crear una instancia de Actividad sin descripción.");
+            this.logger.error("Intento de crear una instancia de Actividad sin descripción.");
             throw new Error("La actividad debe tener una descripción.");
         }
 
-        logger.info(`Se creó una nueva instancia de Actividad con descripción: ${descripcion}`);
+        this.logger.info(`Se creó una nueva instancia de Actividad con descripción: ${descripcion}`);
     }
 
     /**

@@ -3,8 +3,11 @@ import { ActividadFija, DiaSemana } from '../src/actividad_fija';
 import { ActividadVariable } from '../src/actividad_variable';
 import { Actividad } from '../src/actividad';
 import * as fs from 'fs';
+import { LoggerConfig } from '../src/logger';
 
 describe('Verificar Horario', () => {
+
+    const logger = LoggerConfig.logger;
 
     const convertirDiaSemana = (dia: string): DiaSemana => {
         switch (dia) {
@@ -61,7 +64,7 @@ describe('Verificar Horario', () => {
                 const informacion = extraerInformacionLista(linea);
 
                 if (informacion) {
-                    actividades.push(new ActividadVariable(informacion.descripcion, informacion.duracion));
+                    actividades.push(new ActividadVariable(informacion.descripcion, logger, informacion.duracion));
                 }
             });
 
@@ -87,7 +90,7 @@ describe('Verificar Horario', () => {
 
                 if (info) {
                     const dia = convertirDiaSemana(info.dia);
-                    actividades.push(new ActividadFija(info.descripcion, dia, info.horaInicio, info.horaFin));
+                    actividades.push(new ActividadFija(info.descripcion, logger, dia, info.horaInicio, info.horaFin));
                 }
             });
 

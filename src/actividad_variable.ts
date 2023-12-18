@@ -1,13 +1,14 @@
 import { Actividad } from './actividad';
-import logger from './logger';
+import { LoggerConfig } from './logger';
 
 export class ActividadVariable extends Actividad {
 
     constructor(
         descripcion: string,
+        logger = LoggerConfig.logger,
         private duracion: number,
     ) {
-        super(descripcion);
+        super(descripcion, logger);
 
         if (duracion <= 0) {
             logger.error(`Intento de crear una instancia de ActividadVariable con duración no válida: ${duracion}`);

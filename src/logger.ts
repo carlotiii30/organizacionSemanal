@@ -1,15 +1,33 @@
 import pino from 'pino';
+import { Configuracion } from './configuracion';
 
-// Cargar variables de entorno desde el archivo .env
-require('dotenv').config();
+export class Logger {
+    private logger: pino.Logger;
 
-// Obtener configuraciones de Pino desde variables de entorno
-const logLevel = process.env.LOG_LEVEL || 'info';
-const logFilePath = process.env.LOG_FILE_PATH || 'logs.log';
+    constructor(configuracion: Configuracion) {
+        this.logger = pino({
+            level: configuracion.LogLevel,
+        }, pino.destination(configuracion.LogFilePath));
+    }
 
-// Configurar Pino con las opciones obtenidas
-const logger = pino({
-  level: logLevel,
-}, pino.destination(logFilePath));
+    public debug(message: string): void {
+        this.logger.debug(message);
+    }
 
-export default logger;
+    public info(message: string): void {
+        this.logger.info(message);
+    }
+
+    public warn(message: string): void {
+        this.logger.warn(message);
+    }
+
+    public error(message: string): void {
+        this.logger.error(message);
+    }
+}
+
+export const LoggerConfig = {
+  logger: new Logger(new Configuracion()),
+  config: new Configuracion(),
+};

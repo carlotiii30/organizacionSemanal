@@ -1,12 +1,15 @@
 import { Actividad } from "./actividad";
 import { ActividadFija, DiaSemana } from "./actividad_fija";
 import { ActividadVariable } from "./actividad_variable";
-import logger from "./logger";
+import { Configuracion } from "./configuracion";
+import { Logger } from "./logger";
 
 export class OptimizadorSemanal {
 
     private actividades: Actividad[];
     private horario: string[][];
+    private config: Configuracion = new Configuracion();
+    private logger: Logger = new Logger(this.config);
 
     /**
      * Constructor por defecto de la clase OptimizadorSemanal
@@ -17,7 +20,7 @@ export class OptimizadorSemanal {
 
         this.crearHorario();
 
-        logger.info('Instancia del OptimizadorSemanal creada con éxito.');
+        this.logger.info('Instancia del OptimizadorSemanal creada con éxito.');
     }
 
     /**
@@ -54,7 +57,7 @@ export class OptimizadorSemanal {
             this.horario.push([`${hour}:${minute}`, "", "", "", "", ""]);
         });
 
-        logger.debug('Horario creado con éxito.');
+        this.logger.debug('Horario creado con éxito.');
     }
 
     /**
@@ -90,7 +93,7 @@ export class OptimizadorSemanal {
         const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
 
         if (finalDiaIndex == null || finalHoraIndex == null) {
-            logger.error(`Intento de asignar una actividad fija con día o hora no válidos. Día: ${DiaSemana[dia]}, horaInicio: ${horaInicio}, horaFin: ${horaFin}`);
+            this.logger.error(`Intento de asignar una actividad fija con día o hora no válidos. Día: ${DiaSemana[dia]}, horaInicio: ${horaInicio}, horaFin: ${horaFin}`);
             throw new Error("El día o la hora no existen.");
         }
 
@@ -156,7 +159,7 @@ export class OptimizadorSemanal {
 
             this.asignarActividadFija(this.horario, dia, horaInicio, horaFin, descripcion);
 
-            logger.debug(`Actividad fija ${descripcion} asignada con éxito.`);
+            this.logger.debug(`Actividad fija ${descripcion} asignada con éxito.`);
         });
 
         // Asignación de actividades variables
@@ -167,9 +170,9 @@ export class OptimizadorSemanal {
             if (duracion != undefined)
                 this.asignarActividadVariable(this.horario, descripcion, duracion);
 
-            logger.debug(`Actividad variable ${descripcion} asignada con éxito.`);
+            this.logger.debug(`Actividad variable ${descripcion} asignada con éxito.`);
         });
 
-        logger.info('Horario organizado con éxito.');
+        this.logger.info('Horario organizado con éxito.');
     }
 }
