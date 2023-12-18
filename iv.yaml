@@ -8,3 +8,4 @@ CI:
   - .gitlab-ci.yml
   - .github/workflows/ci.yml
   - .travis.yml
+configuracion: src/configuracion.ts
