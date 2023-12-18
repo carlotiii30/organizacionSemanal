@@ -89,8 +89,10 @@ export class OptimizadorSemanal {
         const finalDiaIndex = diaIndex !== -1 ? diaIndex : null;
         const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
 
-        if (finalDiaIndex == null || finalHoraIndex == null)
+        if (finalDiaIndex == null || finalHoraIndex == null) {
+            logger.error(`Intento de asignar una actividad fija con día o hora no válidos. Día: ${DiaSemana[dia]}, horaInicio: ${horaInicio}, horaFin: ${horaFin}`);
             throw new Error("El día o la hora no existen.");
+        }
 
         const duracion = this.calcularDuracion(horaInicio, horaFin);
 

@@ -1,4 +1,5 @@
 import { Actividad } from './actividad';
+import logger from './logger';
 
 export class ActividadVariable extends Actividad {
 
@@ -9,8 +10,11 @@ export class ActividadVariable extends Actividad {
         super(descripcion);
 
         if (duracion <= 0) {
+            logger.error(`Intento de crear una instancia de ActividadVariable con duración no válida: ${duracion}`);
             throw new Error("La duración debe ser mayor que 0.");
         }
+
+        logger.info(`Se creó una nueva instancia de ActividadVariable con descripción: ${descripcion} y duración: ${duracion}`);
     }
 
     /**
