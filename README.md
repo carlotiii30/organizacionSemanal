@@ -42,6 +42,9 @@ pero siempre que existan deben realizarse.
 ### Sistemas de itegración continua
 [Sistemas CI](./docs/ci.md)
 
+### Sistemas de Logs
+[Logs](./docs/logs.md)
+
 ## Órdenes
 
 ### Comprobación de sintaxis

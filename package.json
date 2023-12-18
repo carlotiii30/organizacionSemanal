@@ -14,5 +14,9 @@
     "build": "tsc",
     "check": "tsc --noEmit src/*.ts",
     "test": "jest"
+  },
+  "dependencies": {
+    "@types/pino": "^7.0.5",
+    "pino": "^8.17.1"
   }
 }

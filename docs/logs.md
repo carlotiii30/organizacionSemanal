@@ -64,3 +64,6 @@ mantenimiento y formato JSON, se decide optar por Pino como sistema de logs.
 Pino es conocido por su rendimiento, bajo consumo de recursos y su capacidad
 para trabajar eficientemente en entornos de contenedores, cumpliendo así con los
 criterios específicos establecidos para este proyecto.
+
+Para más información sobre las configuraciones posibles de Pino, podemos
+consultar https://getpino.io/#/docs/api?id=logger
