@@ -4,7 +4,7 @@ export class Configuracion {
 
     constructor() {
         this.logLevel = process.env.LOG_LEVEL || 'info';
-        this.logFilePath = process.env.LOG_FILE_PATH || '../logs.log';
+        this.logFilePath = process.env.LOG_FILE_PATH || './logs.log';
     }
 
     get LogLevel(): string {
