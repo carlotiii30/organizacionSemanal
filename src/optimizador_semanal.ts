@@ -1,6 +1,7 @@
 import { Actividad } from "./actividad";
 import { ActividadFija, DiaSemana } from "./actividad_fija";
 import { ActividadVariable } from "./actividad_variable";
+import logger from "./logger";
 
 export class OptimizadorSemanal {
 
@@ -15,6 +16,8 @@ export class OptimizadorSemanal {
         this.horario = [];
 
         this.crearHorario();
+
+        logger.info('Instancia del OptimizadorSemanal creada con éxito.');
     }
 
     /**
@@ -50,6 +53,8 @@ export class OptimizadorSemanal {
             const minute = index % 2 === 0 ? "00" : "30";
             this.horario.push([`${hour}:${minute}`, "", "", "", "", ""]);
         });
+
+        logger.debug('Horario creado con éxito.');
     }
 
     /**
@@ -148,6 +153,8 @@ export class OptimizadorSemanal {
             const horaFin = actividad.HoraFin;
 
             this.asignarActividadFija(this.horario, dia, horaInicio, horaFin, descripcion);
+
+            logger.debug(`Actividad fija ${descripcion} asignada con éxito.`);
         });
 
         // Asignación de actividades variables
@@ -157,7 +164,10 @@ export class OptimizadorSemanal {
 
             if (duracion != undefined)
                 this.asignarActividadVariable(this.horario, descripcion, duracion);
-        });
-    }
 
+            logger.debug(`Actividad variable ${descripcion} asignada con éxito.`);
+        });
+
+        logger.info('Horario organizado con éxito.');
+    }
 }
