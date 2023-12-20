@@ -16,7 +16,7 @@ contenedores Docker.
 
 ## Opciones
 - Dotenv: https://github.com/motdotla/dotenv
-- Koanf: https://github.com/knadh/koanf
+- Config: https://github.com/lorenwest/node-config
 
 
 ### Dotenv
@@ -29,16 +29,15 @@ archivos.
 - Gestión de Entorno de Docker: Es compatible con Docker y puede integrarse
 eficientemente.
 
-### Koanf
-- Seguridad: Permite cargar configuraciones desde múltiples fuentes, incluidas
-variables de entorno.
-- Flexibilidad: Es conocido por su flexibilidad al cargar configuraciones desde
-diversas fuentes.
-- Centralización: Ofrece la posibilidad de centralizar configuraciones desde
-diferentes fuentes.
-- Gestión de Entorno de Docker: es compatible con entornos de contenedores, y
-su flexibilidad lo hace adecuado para la gestión de configuraciones en
-contenedores Docker.
+### Config
+- Seguridad: Permite definir archivos de configuración con estructuras
+específicas y no maneja directamente información sensible.
+- Flexibilidad: Soporta diferentes formatos de archivos de configuración (JSON,
+YAML, JavaScript).
+- Centralización: Ofrece la posibilidad de centralizar configuraciones en
+archivos específicos y estructurados.
+- Gestión de Entorno de Docker: Es compatible y puede ser configurado para
+manejar variables de entorno.
 
 ## Decisión final
 Teniendo en cuenta que estamos trabajando en un proyecto pequeño, la solución
