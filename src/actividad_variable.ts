@@ -10,12 +10,15 @@ export class ActividadVariable extends Actividad {
     ) {
         super(descripcion, logger);
 
-        if (duracion <= 0) {
-            logger.error(`Intento de crear una instancia de ActividadVariable con duración no válida: ${duracion}`);
-            throw new Error("La duración debe ser mayor que 0.");
-        }
+        try {
+            this.validarDuracion(duracion);
 
-        logger.info(`Se creó una nueva instancia de ActividadVariable con descripción: ${descripcion} y duración: ${duracion}`);
+            logger.info(`Se creó una nueva instancia de ActividadVariable con descripción: ${descripcion} y duración: ${duracion}`);
+        }
+        catch (error: any) {
+            logger.error(error.message);
+            throw error;
+        }
     }
 
     /**
@@ -24,5 +27,15 @@ export class ActividadVariable extends Actividad {
      */
     get Duracion(): number {
         return this.duracion;
+    }
+
+    /**
+     * Validar la duración de la actividad.
+     * @param duracion Duración de la actividad.
+     */
+    private validarDuracion(duracion: number) {
+        if (duracion == null || duracion <= 0) {
+            throw new Error("La duración de la actividad no puede ser null ni menor que 0.");
+        }
     }
 }

@@ -93,8 +93,8 @@ export class OptimizadorSemanal {
         const finalHoraIndex = horaIndex !== -1 ? horaIndex : null;
 
         if (finalDiaIndex == null || finalHoraIndex == null) {
-            this.logger.error(`Intento de asignar una actividad fija con día o hora no válidos. Día: ${DiaSemana[dia]}, horaInicio: ${horaInicio}, horaFin: ${horaFin}`);
-            throw new Error("El día o la hora no existen.");
+            const error = "No se pudo asignar la actividad fija.";
+            throw new Error(error);
         }
 
         const duracion = this.calcularDuracion(horaInicio, horaFin);
@@ -105,6 +105,8 @@ export class OptimizadorSemanal {
                 .forEach((row) => row[diaIndex] = descripcion || "");
         }
     }
+
+
 
     /**
      * Obtiene las celdas disponibles del horario.
@@ -157,9 +159,14 @@ export class OptimizadorSemanal {
             const horaInicio = actividad.HoraInicio;
             const horaFin = actividad.HoraFin;
 
-            this.asignarActividadFija(this.horario, dia, horaInicio, horaFin, descripcion);
-
-            this.logger.debug(`Actividad fija ${descripcion} asignada con éxito.`);
+            try {
+                this.asignarActividadFija(this.horario, dia, horaInicio, horaFin, descripcion);
+                this.logger.debug(`Actividad fija ${descripcion} asignada con éxito.`);
+            }
+            catch (error: any) {
+                this.logger.error(error.message);
+                throw error;
+            }
         });
 
         // Asignación de actividades variables

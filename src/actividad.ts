@@ -6,12 +6,14 @@ export abstract class Actividad {
         private descripcion: string,
         private logger = LoggerConfig.logger,
     ) {
-        if (descripcion == null) {
-            this.logger.error("Intento de crear una instancia de Actividad sin descripción.");
-            throw new Error("La actividad debe tener una descripción.");
-        }
+        try {
+            this.validarDescripcion();
 
-        this.logger.info(`Se creó una nueva instancia de Actividad con descripción: ${descripcion}`);
+            logger.info(`Se creó una nueva instancia de Actividad con descripción: ${this.descripcion}`);
+        } catch (error: any) {
+            this.logger.error(error.message);
+            throw error;
+        }
     }
 
     /**
@@ -20,5 +22,11 @@ export abstract class Actividad {
      */
     get Descripcion(): string {
         return this.descripcion;
+    }
+
+    private validarDescripcion() {
+        if (this.descripcion == null) {
+            throw new Error("La descripción de la actividad no puede ser null");
+        }
     }
 }
