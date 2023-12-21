@@ -1,32 +1,36 @@
 import pino from 'pino';
 import { Configuracion } from './configuracion';
-import * as dotenv from 'dotenv';
-
-dotenv.config(); // Cargar variables de entorno desde el archivo .env
 
 export class Logger {
     private logger: pino.Logger;
 
     constructor(configuracion: Configuracion) {
+        const logLevel = configuracion.get('LOG_LEVEL');
+        const logFilePath = configuracion.get('LOG_FILE_PATH');
+
+        if (!logLevel || !logFilePath) {
+            throw new Error('Nivel de registro o ruta del archivo de registro no configurados correctamente.');
+        }
+
         this.logger = pino({
-            level: configuracion.get('LOG_LEVEL'),
-        }, pino.destination(configuracion.get('LOG_FILE_PATH')));
+            level: logLevel,
+        }, pino.destination(logFilePath));
     }
 
-    public debug(message: string): void {
-        this.logger.debug(message);
+    public debug(message: string, data?: Record<string, any>): void {
+        this.logger.debug({ message, ...data });
     }
 
-    public info(message: string): void {
-        this.logger.info(message);
+    public info(message: string, data?: Record<string, any>): void {
+        this.logger.info({ message, ...data });
     }
 
-    public warn(message: string): void {
-        this.logger.warn(message);
+    public warn(message: string, data?: Record<string, any>): void {
+        this.logger.warn({ message, ...data });
     }
 
-    public error(message: string): void {
-        this.logger.error(message);
+    public error(message: string, data?: Record<string, any>): void {
+        this.logger.error({ message, ...data });
     }
 }
 

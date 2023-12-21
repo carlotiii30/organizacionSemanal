@@ -1,12 +1,13 @@
 import * as dotenv from 'dotenv';
 
-dotenv.config(); // Cargar variables de entorno desde el archivo .env
+dotenv.config();
 
 export class Configuracion {
-
-    // Get genérico
     get(key: string): string {
-        return process.env[key] || '';
+        const value = process.env[key];
+        if (!value) {
+            throw new Error(`La variable de entorno ${key} no está configurada.`);
+        }
+        return value;
     }
-
 }
