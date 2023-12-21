@@ -9,10 +9,8 @@ críticos.
 ## Criterios
 - **Compatibilidad**: Buscamos un sistema de logs que sea compatible con el
 entorno de ejecución en el que trabajamos.
-- **Niveles de logs**: Debemos verificar si la biblioteca admite varios niveles
-de logs.
 - **Soporte de contenedores**: Debe estar optimizada para su uso en Docker.
-- **Mantenimiento**: Buscamos una biblioteca con una comunidad activida y con
+- **Mantenimiento**: Buscamos una biblioteca con una comunidad activa y con
 actualizaciones frecuentes.
 - **Formato**: Debemos tener en cuenta el formato de registro que nos ofrece
 la biblioteca.
@@ -27,8 +25,6 @@ la biblioteca.
 ### Pino
 - Compatibilidad: Diseñado para ser rápido y eficiente en entornos Node.js,
 compatible con TypeScript.
-- Niveles de Logs: Admite múltiples niveles de logs, desde información hasta
-emergencia.
 - Soporte de Contenedores: Ligero y optimizado para entornos de contenedores.
 - Mantenimiento: Activa comunidad de desarrollo y actualizaciones frecuentes.
 - Formato: Puede producir logs en formato JSON o formato plano.
@@ -36,7 +32,6 @@ emergencia.
 ### Winston
 - Compatibilidad: Ampliamente utilizado en el ecosistema Node.js, compatible
 con TypeScript.
-- Niveles de Logs: Admite varios niveles de logs, personalizables.
 - Soporte de Contenedores: Se puede utilizar en entornos de contenedores,
 aunque puede ser más pesado en comparación con Pino.
 - Mantenimiento: Comunidad activa y mantenimiento regular.
@@ -44,7 +39,6 @@ aunque puede ser más pesado en comparación con Pino.
 
 ### Log4js
 - Compatibilidad: Compatible con Node.js y TypeScript.
-- Niveles de Logs: Soporta varios niveles de logs, con configuración flexible.
 - Soporte de Contenedores: Puede ser utilizado en entornos de contenedores.
 - Mantenimiento: Comunidad activa, con actualizaciones periódicas.
 - Formato: Configurable, permite diferentes formatos de logs.
@@ -52,7 +46,6 @@ aunque puede ser más pesado en comparación con Pino.
 ### Bunyan
 - Compatibilidad: Diseñado para ser rápido en entornos Node.js, compatible con
 TypeScript.
-- Niveles de Logs: Admite varios niveles de logs, estructurados en formato JSON.
 - Soporte de Contenedores: Ligero y adecuado para entornos de contenedores.
 - Mantenimiento: Mantenimiento regular, aunque su última actualización en GiHub
 fue hace un año.
