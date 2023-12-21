@@ -5,9 +5,6 @@ import { Actividad } from '../src/actividad';
 import * as fs from 'fs';
 import { LoggerConfig } from '../src/logger';
 
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 describe('Verificar Horario', () => {
 
     const logger = LoggerConfig.logger;
