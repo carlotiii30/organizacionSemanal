@@ -1,3 +1,7 @@
+import * as dotenv from 'dotenv';
+
+dotenv.config(); // Cargar variables de entorno desde el archivo .env
+
 export class Configuracion {
     private logLevel: string;
     private logFilePath: string;
