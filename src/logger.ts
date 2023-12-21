@@ -1,5 +1,8 @@
 import pino from 'pino';
 import { Configuracion } from './configuracion';
+import * as dotenv from 'dotenv';
+
+dotenv.config(); // Cargar variables de entorno desde el archivo .env
 
 export class Logger {
     private logger: pino.Logger;
