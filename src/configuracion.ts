@@ -3,19 +3,10 @@ import * as dotenv from 'dotenv';
 dotenv.config(); // Cargar variables de entorno desde el archivo .env
 
 export class Configuracion {
-    private logLevel: string;
-    private logFilePath: string;
 
-    constructor() {
-        this.logLevel = process.env.LOG_LEVEL || 'info';
-        this.logFilePath = process.env.LOG_FILE_PATH || './logs.log';
+    // Get genérico
+    get(key: string): string {
+        return process.env[key] || '';
     }
 
-    get LogLevel(): string {
-        return this.logLevel;
-    }
-
-    get LogFilePath(): string {
-        return this.logFilePath;
-    }
 }

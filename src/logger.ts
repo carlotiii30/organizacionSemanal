@@ -6,8 +6,8 @@ export class Logger {
 
     constructor(configuracion: Configuracion) {
         this.logger = pino({
-            level: configuracion.LogLevel,
-        }, pino.destination(configuracion.LogFilePath));
+            level: configuracion.get('LOG_LEVEL'),
+        }, pino.destination(configuracion.get('LOG_FILE_PATH')));
     }
 
     public debug(message: string): void {
