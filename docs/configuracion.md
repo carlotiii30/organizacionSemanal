@@ -6,7 +6,6 @@ características y el funcionamiento de la aplicación según las necesidades de
 usuario o del entorno en el que se ejecuta.
 
 ## Criterios
-- **Seguridad**: Debe manejar información sensible de manera segura.
 - **Flexibilidad**: Debe poder adaptarse a cambios en la infraestructura o
 entorno de ejecución.
 - **Centralización**: Debe permitir la centralización de las variables de
@@ -20,8 +19,6 @@ contenedores Docker.
 
 
 ### Dotenv
-- Seguridad: Maneja variables de entorno, que pueden incluir información
-sensible.
 - Flexibilidad: Proporciona flexibilidad al cargar variables de entorno desde
 archivos.
 - Centralización: Permite centralizar las variables de entorno en un archivo
@@ -30,8 +27,6 @@ archivos.
 eficientemente.
 
 ### Config
-- Seguridad: Permite definir archivos de configuración con estructuras
-específicas y no maneja directamente información sensible.
 - Flexibilidad: Soporta diferentes formatos de archivos de configuración (JSON,
 YAML, JavaScript).
 - Centralización: Ofrece la posibilidad de centralizar configuraciones en
