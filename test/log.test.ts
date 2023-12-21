@@ -1,6 +1,9 @@
 import { ActividadFija } from '../src/actividad_fija';
 import { LoggerConfig } from '../src/logger';
 
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 const logger = LoggerConfig.logger;
 
 const mockLogger = jest.spyOn(logger, 'info');
