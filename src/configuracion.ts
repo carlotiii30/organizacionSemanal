@@ -8,7 +8,7 @@ export class Configuracion {
 
         if (!value) {
             // Si no se encuentra la variable en el archivo .env, intentar obtenerla de las variables de entorno de GitHub
-            const githubEnvVar = process.env[`GITHUB_ENV_${key.toUpperCase()}`];
+            const githubEnvVar = process.env[`GITHUB_ENV_${key}`];
 
             if (githubEnvVar) {
                 return githubEnvVar;
