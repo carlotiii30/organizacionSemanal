@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ debug: true });
 
 export class Configuracion {
     get(key: string): string {
