@@ -9,7 +9,6 @@ críticos.
 ## Criterios
 - **Compatibilidad**: Buscamos un sistema de logs que sea compatible con el
 entorno de ejecución en el que trabajamos.
-- **Soporte de contenedores**: Debe estar optimizada para su uso en Docker.
 - **Mantenimiento**: Buscamos una biblioteca con una comunidad activa y con
 actualizaciones frecuentes.
 - **Formato**: Debemos tener en cuenta el formato de registro que nos ofrece
@@ -25,28 +24,23 @@ la biblioteca.
 ### Pino
 - Compatibilidad: Diseñado para ser rápido y eficiente en entornos Node.js,
 compatible con TypeScript.
-- Soporte de Contenedores: Ligero y optimizado para entornos de contenedores.
 - Mantenimiento: Activa comunidad de desarrollo y actualizaciones frecuentes.
 - Formato: Puede producir logs en formato JSON o formato plano.
 
 ### Winston
 - Compatibilidad: Ampliamente utilizado en el ecosistema Node.js, compatible
 con TypeScript.
-- Soporte de Contenedores: Se puede utilizar en entornos de contenedores,
-aunque puede ser más pesado en comparación con Pino.
 - Mantenimiento: Comunidad activa y mantenimiento regular.
 - Formato: Configurable, permite varios formatos de logs.
 
 ### Log4js
 - Compatibilidad: Compatible con Node.js y TypeScript.
-- Soporte de Contenedores: Puede ser utilizado en entornos de contenedores.
 - Mantenimiento: Comunidad activa, con actualizaciones periódicas.
 - Formato: Configurable, permite diferentes formatos de logs.
 
 ### Bunyan
 - Compatibilidad: Diseñado para ser rápido en entornos Node.js, compatible con
 TypeScript.
-- Soporte de Contenedores: Ligero y adecuado para entornos de contenedores.
 - Mantenimiento: Mantenimiento regular, aunque su última actualización en GiHub
 fue hace un año.
 - Formato: Estructurado en formato JSON.
