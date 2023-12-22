@@ -13,7 +13,7 @@
   "scripts": {
     "build": "tsc",
     "check": "tsc --noEmit src/*.ts",
-    "test": "LOG_LEVEL=info jest"
+    "test": "LOG_LEVEL=info LOG_FILE_PATH=./logs.log jest"
   },
   "dependencies": {
     "@types/pino": "^7.0.5",
