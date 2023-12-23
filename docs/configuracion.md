@@ -25,6 +25,7 @@ archivos.
 `.env`.
 - Gestión de Entorno de Docker: Es compatible con Docker y puede integrarse
 eficientemente.
+- Puntuación en [Snyk](https://snyk.io/advisor/npm-package/dotenv): 86.
 
 ### Config
 - Flexibilidad: Soporta diferentes formatos de archivos de configuración (JSON,
@@ -33,6 +34,7 @@ YAML, JavaScript).
 archivos específicos y estructurados.
 - Gestión de Entorno de Docker: Es compatible y puede ser configurado para
 manejar variables de entorno.
+- Puntuación en [Snyk](https://snyk.io/advisor/npm-package/config): 80.
 
 ## Decisión final
 Teniendo en cuenta que estamos trabajando en un proyecto pequeño, la solución

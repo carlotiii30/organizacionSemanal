@@ -10,7 +10,7 @@ críticos.
 - **Compatibilidad**: Buscamos un sistema de logs que sea compatible con el
 entorno de ejecución en el que trabajamos.
 - **Mantenimiento**: Buscamos una biblioteca con una comunidad activa y con
-actualizaciones frecuentes.
+actualizaciones frecuentes. Nos documentaremos con utilizando Snyk.
 - **Formato**: Debemos tener en cuenta el formato de registro que nos ofrece
 la biblioteca.
 
@@ -25,17 +25,20 @@ la biblioteca.
 - Compatibilidad: Diseñado para ser rápido y eficiente en entornos Node.js,
 compatible con TypeScript.
 - Mantenimiento: Activa comunidad de desarrollo y actualizaciones frecuentes.
+En [Snyk](https://snyk.io/advisor/npm-package/pino) puntuación de 94.
 - Formato: Puede producir logs en formato JSON o formato plano.
 
 ### Winston
 - Compatibilidad: Ampliamente utilizado en el ecosistema Node.js, compatible
 con TypeScript.
 - Mantenimiento: Comunidad activa y mantenimiento regular.
+En [Snyk](https://snyk.io/advisor/npm-package/winston) puntuación de 92.
 - Formato: Configurable, permite varios formatos de logs.
 
 ### Log4js
 - Compatibilidad: Compatible con Node.js y TypeScript.
 - Mantenimiento: Comunidad activa, con actualizaciones periódicas.
+En [Snyk](https://snyk.io/advisor/npm-package/log4js) puntuación de 82.
 - Formato: Configurable, permite diferentes formatos de logs.
 
 ### Bunyan
@@ -43,6 +46,7 @@ con TypeScript.
 TypeScript.
 - Mantenimiento: Mantenimiento regular, aunque su última actualización en GiHub
 fue hace un año.
+En [Snyk](https://snyk.io/advisor/npm-package/bunyan) puntuación de 62.
 - Formato: Estructurado en formato JSON.
 
 ## Decisión final
