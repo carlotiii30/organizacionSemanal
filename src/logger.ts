@@ -1,5 +1,6 @@
 import pino from 'pino';
 import { Configuracion } from './configuracion';
+import fs from 'fs';
 
 export class Logger {
     private logger: pino.Logger;
@@ -12,10 +13,16 @@ export class Logger {
             throw new Error('Nivel de registro o ruta del archivo de registro no configurados correctamente.');
         }
 
+        const streams = [
+            { level: logLevel, stream: process.stdout },
+            { level: logLevel, stream: fs.createWriteStream(logFilePath, { flags: 'a' }) },
+        ];
+
         this.logger = pino({
             level: logLevel,
-        }, pino.destination(logFilePath));
+        }, pino.multistream(streams));
     }
+
 
     public debug(message: string, data?: Record<string, any>): void {
         this.logger.debug({ message, ...data });
