@@ -12,6 +12,7 @@ entorno de ejecución.
 entorno para facilitar la gestión y la coherencia en entornos distribuidos.
 - **Gestión de Entorno de Docker**: Debe ser compatible y enficiente en
 contenedores Docker.
+- **Limitaciones**: Debemos buscar limitaciones de las bibliotecas.
 
 ## Opciones
 - Dotenv: https://github.com/motdotla/dotenv
@@ -26,6 +27,7 @@ archivos.
 - Gestión de Entorno de Docker: Es compatible con Docker y puede integrarse
 eficientemente.
 - Puntuación en [Snyk](https://snyk.io/advisor/npm-package/dotenv): 86.
+- Limitaciones: Solo trabaja con ficheros de entorno.
 
 ### Config
 - Flexibilidad: Soporta diferentes formatos de archivos de configuración (JSON,
@@ -35,8 +37,9 @@ archivos específicos y estructurados.
 - Gestión de Entorno de Docker: Es compatible y puede ser configurado para
 manejar variables de entorno.
 - Puntuación en [Snyk](https://snyk.io/advisor/npm-package/config): 80.
+- Limitaciones: Ninguna que afecte a nuestro proyecto.
 
 ## Decisión final
-Teniendo en cuenta que estamos trabajando en un proyecto pequeño, la solución
-más fácil de implementar para la carga de variables de entorno en entornos de
-desarrollo es Dotenv.
+A pesar de las limitaciones, teniendo en cuenta que estamos trabajando en un
+proyecto pequeño, la biblioteca que vamos a utilizar es Dotenv, ya que es la
+más fácil de implementar.
