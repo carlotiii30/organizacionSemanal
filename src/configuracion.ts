@@ -12,11 +12,11 @@ export class Configuracion {
 
             if (githubEnvVar) {
                 return githubEnvVar;
+            } else {
+                throw new Error(`La variable de entorno ${key} no está configurada.`);
             }
-
-            throw new Error(`La variable de entorno ${key} no está configurada.`);
+        } else {
+            return value;
         }
-
-        return value;
     }
 }
