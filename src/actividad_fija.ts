@@ -1,4 +1,5 @@
 import { Actividad } from './actividad';
+import { LoggerConfig } from './logger';
 
 export enum DiaSemana {
     LUNES,
@@ -12,14 +13,22 @@ export class ActividadFija extends Actividad {
 
     constructor(
         descripcion: string,
+        logger = LoggerConfig.logger,
         private dia: DiaSemana,
         private horaInicio: string,
         private horaFin: string
     ) {
-        super(descripcion);
+        super(descripcion, logger);
 
-        if (!this.validarFormatoHora(horaInicio) || !this.validarFormatoHora(horaFin)) {
-            throw new Error("El formato de la hora no es válido. Debe ser HH:MM");
+        try {
+            this.validarFormatoHora(horaInicio);
+            this.validarFormatoHora(horaFin);
+
+            logger.info(`Se creó una nueva instancia de ActividadFija con descripción: ${descripcion}, día: ${DiaSemana[dia]}, horaInicio: ${horaInicio}, horaFin: ${horaFin}`);
+        }
+        catch (error: any) {
+            logger.error(error.message);
+            throw error;
         }
     }
 
@@ -54,6 +63,11 @@ export class ActividadFija extends Actividad {
     */
     private validarFormatoHora(hora: string): boolean {
         const formatoHoraRegex = /^\d{1,2}:\d{2}$/;
+
+        if (!formatoHoraRegex.test(hora)) {
+            throw new Error("El formato de la hora no es válido.");
+        }
+
         return formatoHoraRegex.test(hora);
     }
 }
