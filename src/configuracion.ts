@@ -3,20 +3,31 @@ import * as dotenv from 'dotenv';
 dotenv.config({ debug: true });
 
 export class Configuracion {
-    get(key: string): string {
-        const value = process.env[key];
+    private configValues: { [key: string]: string } = {
+        LOG_LEVEL: 'info',
+        LOG_FILE_PATH: './logs.log',
+    };
 
-        if (!value) {
-            // Si no se encuentra la variable en el archivo .env, intentar obtenerla de las variables de entorno de GitHub
-            const githubEnvVar = process.env[`GITHUB_ENV_${key}`];
-
-            if (githubEnvVar) {
-                return githubEnvVar;
+    constructor() {
+        for (const key in this.configValues) {
+            if (process.env[key]) {
+                this.configValues[key] = process.env[key]!;
             } else {
-                throw new Error(`La variable de entorno ${key} no está configurada.`);
+                const githubEnvVar = process.env[`GITHUB_ENV_${key}`];
+                if (githubEnvVar) {
+                    this.configValues[key] = githubEnvVar;
+                } else {
+                    throw new Error(`La variable de entorno ${key} no está configurada.`);
+                }
             }
+        }
+    }
+
+    get(key: string): string {
+        if (this.configValues[key]) {
+            return this.configValues[key];
         } else {
-            return value;
+            throw new Error(`La variable de entorno ${key} no está configurada.`);
         }
     }
 }
