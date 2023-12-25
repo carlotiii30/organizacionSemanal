@@ -1,6 +1,6 @@
 import pino from 'pino';
 import { Configuracion } from './configuracion';
-import fs from 'fs';
+import * as fs from 'fs';
 
 export class Logger {
     private logger: pino.Logger;
