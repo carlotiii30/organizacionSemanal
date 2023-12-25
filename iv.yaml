@@ -9,3 +9,4 @@ CI:
   - .github/workflows/ci.yml
   - .travis.yml
 configuracion: src/configuracion.ts
+framework: nestjs
