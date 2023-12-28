@@ -10,8 +10,8 @@ simplificar y acelerar la creación de interfaces de programación de aplicacion
 - **Comunidad y soporte**: Una comunidad activa implica mayor facilidad a la
 hora de encontrar soluciones. Además, buscamos que esté actualizado.
 - **Costo**: Debería ser gratuito.
-- **Verbos HTTP**: Facilidad para la declaración de los verbos HTTP asociados
-al CRUD.
+- **Verbos HTTP**: Buscamos que tenga un formato simple a la hora de declarar
+los verbos asociados al CRUD.
 
 ## Opciones
 - Nest: https://nestjs.com
