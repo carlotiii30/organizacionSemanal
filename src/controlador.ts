@@ -4,9 +4,19 @@ import { LoggerConfig } from './logger';
 @Controller('organizador')
 export class Controlador {
   @Get()
-  comprobarEstado(): string {
-    LoggerConfig.logger.debug('Comprobando estado del servidor');
-    return 'El servidor está funcionando correctamente';
+  obtenerRecursos(): string {
+    // Lógica para obtener todos los recursos
+
+    LoggerConfig.logger.info('Recursos obtenidos');
+    return 'Recursos obtenidos';
+  }
+
+  @Get(':id')
+  obtenerRecurso(@Param('id') id: string): string {
+    // Lógica para obtener un recurso por su ID
+
+    LoggerConfig.logger.info(`Recurso con ID ${id} obtenido`);
+    return `Recurso con ID ${id} obtenido`;
   }
 
   @Post()
