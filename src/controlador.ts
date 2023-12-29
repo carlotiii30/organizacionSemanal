@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { LoggerConfig } from './logger';
 import { Actividad } from './actividad';
 import { OptimizadorSemanal } from './optimizador_semanal';
+import { ActividadVariable } from './actividad_variable';
 
 @Controller('tareas')
 export class Controlador {
@@ -18,11 +19,23 @@ export class Controlador {
   }
 
   @Post()
-  crearTarea(): string {
-    // Lógica para crear una nueva tarea
+  crearTarea(@Body() body: any): Actividad {
+    try {
+      const { descripcion, duracion } = body;
 
-    this.logger.info('Tarea creada');
-    return 'Tarea creada';
+      if (descripcion == null || duracion == null) {
+        throw new Error('La descripción y la duración son obligatorias para crear una tarea');
+      }
+
+      const actividadVariable = new ActividadVariable(descripcion, this.logger, duracion);
+
+      this.logger.info('Tarea creada');
+      return actividadVariable;
+
+    } catch (error: any) {
+      this.logger.error(`Error al crear la tarea: ${error.message}`);
+      throw new Error(error.message);
+    }
   }
 
   @Get(':id')

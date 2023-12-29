@@ -40,4 +40,5 @@ describe('Controlador', () => {
             expect(resultado).toEqual(optimizadorMock.Actividades);
         });
     });
+
 });
