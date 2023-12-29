@@ -41,4 +41,30 @@ describe('Controlador', () => {
         });
     });
 
+    describe('crearTarea', () => {
+        it('debería crear una nueva tarea', () => {
+            const body = { descripcion: 'Nueva Tarea', duracion: 3 };
+            const resultado: Actividad = controlador.crearTarea(body);
+
+            expect(resultado).toBeInstanceOf(ActividadVariable);
+        });
+
+        it('debería manejar el caso de crear tarea sin descripción', () => {
+            const body = { duracion: 3 };
+            try {
+                controlador.crearTarea(body);
+            } catch (error: any) {
+                expect(error.message).toBe('La descripción y la duración son obligatorias para crear una tarea');
+            }
+        });
+
+        it('debería manejar el caso de crear tarea sin duración', () => {
+            const body = { descripcion: 'Nueva Tarea' };
+            try {
+                controlador.crearTarea(body);
+            } catch (error: any) {
+                expect(error.message).toBe('La descripción y la duración son obligatorias para crear una tarea');
+            }
+        });
+    });
 });
