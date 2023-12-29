@@ -1,45 +1,45 @@
 import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
 import { LoggerConfig } from './logger';
 
-@Controller('organizador')
+@Controller('tareas')
 export class Controlador {
   @Get()
-  obtenerRecursos(): string {
-    // Lógica para obtener todos los recursos
+  obtenerTodasLasTareas(): string {
+    // Lógica para obtener todas las tareas
 
-    LoggerConfig.logger.info('Recursos obtenidos');
-    return 'Recursos obtenidos';
-  }
-
-  @Get(':id')
-  obtenerRecurso(@Param('id') id: string): string {
-    // Lógica para obtener un recurso por su ID
-
-    LoggerConfig.logger.info(`Recurso con ID ${id} obtenido`);
-    return `Recurso con ID ${id} obtenido`;
+    LoggerConfig.logger.debug('Obteniendo todas las tareas programadas');
+    return 'Lista de todas las tareas programadas';
   }
 
   @Post()
-  crearRecurso(): string {
-    // Lógica para crear un nuevo recurso
+  crearTarea(): string {
+    // Lógica para crear una nueva tarea
 
-    LoggerConfig.logger.info('Recurso creado');
-    return 'Recurso creado';
+    LoggerConfig.logger.info('Tarea creada');
+    return 'Tarea creada';
+  }
+
+  @Get(':id')
+  obtenerTareaPorId(@Param('id') id: string): string {
+    // Lógica para obtener una tarea por su ID
+
+    LoggerConfig.logger.debug(`Obteniendo tarea con ID ${id}`);
+    return `Tarea con ID ${id}`;
   }
 
   @Put(':id')
-  actualizarRecurso(@Param('id') id: string): string {
-    // Lógica para actualizar un recurso por su ID
+  actualizarTarea(@Param('id') id: string): string {
+    // Lógica para actualizar una tarea por su ID
 
-    LoggerConfig.logger.info(`Recurso con ID ${id} actualizado`);
-    return `Recurso con ID ${id} actualizado`;
+    LoggerConfig.logger.info(`Tarea con ID ${id} actualizada`);
+    return `Tarea con ID ${id} actualizada`;
   }
 
   @Delete(':id')
-  eliminarRecurso(@Param('id') id: string): string {
-    // Lógica para eliminar un recurso por su ID
+  eliminarTarea(@Param('id') id: string): string {
+    // Lógica para eliminar una tarea por su ID
 
-    LoggerConfig.logger.info(`Recurso con ID ${id} eliminado`);
-    return `Recurso con ID ${id} eliminado`;
+    LoggerConfig.logger.info(`Tarea con ID ${id} eliminada`);
+    return `Tarea con ID ${id} eliminada`;
   }
 }
