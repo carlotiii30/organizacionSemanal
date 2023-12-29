@@ -1,14 +1,16 @@
 import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
 import { LoggerConfig } from './logger';
+import { Actividad } from './actividad';
 
 @Controller('tareas')
 export class Controlador {
   @Get()
-  obtenerTodasLasTareas(): string {
+  obtenerTodasLasTareas(): Actividad[] {
+    const tareas: Actividad[] = [];
     // Lógica para obtener todas las tareas
 
     LoggerConfig.logger.debug('Obteniendo todas las tareas programadas');
-    return 'Lista de todas las tareas programadas';
+    return tareas;
   }
 
   @Post()
