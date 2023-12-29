@@ -1,15 +1,17 @@
 import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
 import { LoggerConfig } from './logger';
 import { Actividad } from './actividad';
+import { OptimizadorSemanal } from './optimizador_semanal';
 
 @Controller('tareas')
 export class Controlador {
   private readonly logger = LoggerConfig.logger;
 
+  constructor(private readonly optimizador: OptimizadorSemanal) {}
+
   @Get()
   obtenerTodasLasTareas(): Actividad[] {
-    const tareas: Actividad[] = [];
-    // Lógica para obtener todas las tareas
+    const tareas: Actividad[] = this.optimizador.Actividades;
 
     this.logger.debug('Obteniendo todas las tareas programadas');
     return tareas;
