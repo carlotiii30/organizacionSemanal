@@ -4,12 +4,14 @@ import { Actividad } from './actividad';
 
 @Controller('tareas')
 export class Controlador {
+  private readonly logger = LoggerConfig.logger;
+
   @Get()
   obtenerTodasLasTareas(): Actividad[] {
     const tareas: Actividad[] = [];
     // Lógica para obtener todas las tareas
 
-    LoggerConfig.logger.debug('Obteniendo todas las tareas programadas');
+    this.logger.debug('Obteniendo todas las tareas programadas');
     return tareas;
   }
 
@@ -17,7 +19,7 @@ export class Controlador {
   crearTarea(): string {
     // Lógica para crear una nueva tarea
 
-    LoggerConfig.logger.info('Tarea creada');
+    this.logger.info('Tarea creada');
     return 'Tarea creada';
   }
 
@@ -25,7 +27,7 @@ export class Controlador {
   obtenerTareaPorId(@Param('id') id: string): string {
     // Lógica para obtener una tarea por su ID
 
-    LoggerConfig.logger.debug(`Obteniendo tarea con ID ${id}`);
+    this.logger.debug(`Obteniendo tarea con ID ${id}`);
     return `Tarea con ID ${id}`;
   }
 
@@ -33,7 +35,7 @@ export class Controlador {
   actualizarTarea(@Param('id') id: string): string {
     // Lógica para actualizar una tarea por su ID
 
-    LoggerConfig.logger.info(`Tarea con ID ${id} actualizada`);
+    this.logger.info(`Tarea con ID ${id} actualizada`);
     return `Tarea con ID ${id} actualizada`;
   }
 
@@ -41,7 +43,7 @@ export class Controlador {
   eliminarTarea(@Param('id') id: string): string {
     // Lógica para eliminar una tarea por su ID
 
-    LoggerConfig.logger.info(`Tarea con ID ${id} eliminada`);
+    this.logger.info(`Tarea con ID ${id} eliminada`);
     return `Tarea con ID ${id} eliminada`;
   }
 }
