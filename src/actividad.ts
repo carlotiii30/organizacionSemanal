@@ -6,10 +6,12 @@ export abstract class Actividad {
      * Constructor de la clase Actividad.
      * @param descripcion Descripción de la actividad.
      * @param logger Logger de la aplicación.
+     * @param id Id de la actividad.
      */
     constructor(
         private descripcion: string,
         private logger = LoggerConfig.logger,
+        private id = Math.floor(Math.random() * 1000),
     ) {
         try {
             this.validarDescripcion();
@@ -27,6 +29,14 @@ export abstract class Actividad {
      */
     get Descripcion(): string {
         return this.descripcion;
+    }
+
+    /**
+     * Getter del id de la actividad.
+     * @returns Id de la actividad.
+     */
+    get Id(): number {
+        return this.id;
     }
 
     /**
