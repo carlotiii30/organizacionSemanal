@@ -42,10 +42,21 @@ export class Controlador {
 
   @Get(':id')
   obtenerTareaPorId(@Param('id') id: number): Actividad {
-    // Lógica para obtener una tarea por su ID
+    try {
+      const actividad = this.optimizador.Actividades.find((actividad) => actividad.Id === id);
 
-    this.logger.info(`Tarea con ID ${id} obtenida`);
-    return new Actividad('Tarea obtenida');
+      if (actividad == null) {
+        this.logger.error('No se encontró la tarea');
+        throw new Error(`No se encontró la tarea con descripción: ${id}`);
+      }
+
+      this.logger.info(`Tarea con descripción ${id} encontrada`);
+      return actividad;
+
+    } catch (error: any) {
+      this.logger.error(error.message);
+      throw new Error(error.message);
+    }
   }
 
   @Put(':id')
