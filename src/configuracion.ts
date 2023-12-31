@@ -3,11 +3,17 @@ import * as dotenv from 'dotenv';
 dotenv.config({ debug: true });
 
 export class Configuracion {
+    /**
+     * Valores de configuración.
+     */
     private configValues: { [key: string]: string } = {
         LOG_LEVEL: 'info',
         LOG_FILE_PATH: './logs.log',
     };
 
+    /**
+     * Constructor de la clase Configuracion.
+     */
     constructor() {
         for (const key in this.configValues) {
             if (process.env[key]) {
@@ -23,6 +29,11 @@ export class Configuracion {
         }
     }
 
+    /**
+     * Getter de los valores de configuración.
+     * @param key Clave de la variable de entorno.
+     * @returns Valor de la variable de entorno.
+     */
     get(key: string): string {
         if (this.configValues[key]) {
             return this.configValues[key];

@@ -3,12 +3,13 @@ import { LoggerConfig } from './logger';
 import { Actividad } from './actividad';
 import { OptimizadorSemanal } from './optimizador_semanal';
 import { ActividadVariable } from './actividad_variable';
+import { ActividadFija } from './actividad_fija';
 
 @Controller('tareas')
 export class Controlador {
   private readonly logger = LoggerConfig.logger;
 
-  constructor(private readonly optimizador: OptimizadorSemanal) {}
+  constructor(private readonly optimizador: OptimizadorSemanal) { }
 
   @Get()
   obtenerTodasLasTareas(): Actividad[] {
@@ -24,6 +25,7 @@ export class Controlador {
       const { descripcion, duracion } = body;
 
       if (descripcion == null || duracion == null) {
+        this.logger.error('Descripción o duración no proporcionadas');
         throw new Error('La descripción y la duración son obligatorias para crear una tarea');
       }
 
@@ -39,11 +41,11 @@ export class Controlador {
   }
 
   @Get(':id')
-  obtenerTareaPorId(@Param('id') id: string): string {
+  obtenerTareaPorId(@Param('id') id: number): Actividad {
     // Lógica para obtener una tarea por su ID
 
-    this.logger.debug(`Obteniendo tarea con ID ${id}`);
-    return `Tarea con ID ${id}`;
+    this.logger.info(`Tarea con ID ${id} obtenida`);
+    return new Actividad('Tarea obtenida');
   }
 
   @Put(':id')

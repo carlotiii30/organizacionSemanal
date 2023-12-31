@@ -11,6 +11,14 @@ export enum DiaSemana {
 
 export class ActividadFija extends Actividad {
 
+    /**
+     * Constructor de la clase ActividadFija.
+     * @param descripcion Descripción de la actividad.
+     * @param logger Logger de la aplicación.
+     * @param dia Día de la actividad.
+     * @param horaInicio Hora de inicio de la actividad.
+     * @param horaFin Hora de fin de la actividad.
+     */
     constructor(
         descripcion: string,
         logger = LoggerConfig.logger,

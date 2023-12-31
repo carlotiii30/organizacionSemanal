@@ -3,6 +3,12 @@ import { LoggerConfig } from './logger';
 
 export class ActividadVariable extends Actividad {
 
+    /**
+     * Constructor de la clase ActividadVariable.
+     * @param descripcion Descripción de la actividad.
+     * @param logger Logger de la aplicación.
+     * @param duracion Duración de la actividad.
+     */
     constructor(
         descripcion: string,
         logger = LoggerConfig.logger,
