@@ -67,4 +67,25 @@ describe('Controlador', () => {
             }
         });
     });
+
+    describe('obtenerTareaPorId', () => {
+        it('debería retornar una tarea por su id', () => {
+            const actividadFija = new ActividadFija('Actividad Fija', logger, DiaSemana.LUNES, '08:00', '09:00');
+            const id = actividadFija.Id;
+
+            if (optimizadorMock.Actividades != undefined)
+                optimizadorMock.Actividades.push(actividadFija);
+
+            const resultado: Actividad = controlador.obtenerTareaPorId(id);
+            expect(resultado).toEqual(actividadFija);
+        });
+
+        it('debería manejar el caso de no encontrar una tarea', () => {
+            try {
+                controlador.obtenerTareaPorId(3);
+            } catch (error: any) {
+                expect(error.message).toBe('No se encontró la tarea con id: 3');
+            }
+        });
+    });
 });

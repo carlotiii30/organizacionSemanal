@@ -47,10 +47,10 @@ export class Controlador {
 
       if (actividad == null) {
         this.logger.error('No se encontró la tarea');
-        throw new Error(`No se encontró la tarea con descripción: ${id}`);
+        throw new Error(`No se encontró la tarea con id: ${id}`);
       }
 
-      this.logger.info(`Tarea con descripción ${id} encontrada`);
+      this.logger.info(`Tarea con id ${id} encontrada`);
       return actividad;
 
     } catch (error: any) {
