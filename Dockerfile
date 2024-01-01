@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package.json ./
 
 RUN yarn config set cache-folder /app/.yarn_cache && \
-    yarn install --ignore-optional --silent
+    yarn install --ignore-optional
 
 ENV PATH $PATH:/app/node_modules/.bin
 
