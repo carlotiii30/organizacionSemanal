@@ -66,12 +66,4 @@ export class Controlador {
     this.logger.info(`Tarea con ID ${id} actualizada`);
     return `Tarea con ID ${id} actualizada`;
   }
-
-  @Delete(':id')
-  eliminarTarea(@Param('id') id: string): string {
-    // Lógica para eliminar una tarea por su ID
-
-    this.logger.info(`Tarea con ID ${id} eliminada`);
-    return `Tarea con ID ${id} eliminada`;
-  }
 }
