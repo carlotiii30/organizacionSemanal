@@ -1,3 +1,4 @@
+import pino from 'pino';
 import * as dotenv from 'dotenv';
 
 dotenv.config({ debug: true });
@@ -8,7 +9,6 @@ export class Configuracion {
      */
     private configValues: { [key: string]: string } = {
         LOG_LEVEL: 'info',
-        LOG_FILE_PATH: './logs.log',
     };
 
     /**
