@@ -10,8 +10,7 @@ WORKDIR /app
 
 COPY package.json ./
 
-RUN yarn config set cache-folder /app/.yarn_cache && \
-    yarn install
+RUN yarn set version stable && yarn install
 
 ENV PATH $PATH:/app/node_modules/.bin
 

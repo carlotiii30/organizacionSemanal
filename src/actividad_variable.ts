@@ -3,6 +3,14 @@ import { LoggerConfig } from './logger';
 
 export class ActividadVariable extends Actividad {
 
+    /**
+     * Constructor de la clase ActividadVariable.
+     * @param {string} descripcion Descripción de la actividad.
+     * @param {Logger} logger Logger de la aplicación.
+     * @param {number} duracion Duración de la actividad.
+     * @throws {Error} Si la duración de la actividad es null o menor que 0.
+     * @throws {Error} Si la descripción de la actividad es null.
+     */
     constructor(
         descripcion: string,
         logger = LoggerConfig.logger,
@@ -23,7 +31,7 @@ export class ActividadVariable extends Actividad {
 
     /**
      * Getter de la duración de la actividad.
-     * @returns Duración de la actividad.
+     * @returns {number} Duración de la actividad.
      */
     get Duracion(): number {
         return this.duracion;
@@ -31,7 +39,9 @@ export class ActividadVariable extends Actividad {
 
     /**
      * Validar la duración de la actividad.
-     * @param duracion Duración de la actividad.
+     * @private
+     * @param {number} duracion Duración de la actividad.
+     * @throws {Error} Si la duración de la actividad es null o menor que 0.
      */
     private validarDuracion(duracion: number) {
         if (duracion == null || duracion <= 0) {
