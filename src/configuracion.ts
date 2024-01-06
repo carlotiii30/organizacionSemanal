@@ -1,6 +1,8 @@
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 
+const DEFAULT_CONFIG_FILE_PATH = './config.env';
+
 export class Configuracion {
     /**
      * Valores de configuración.
@@ -9,10 +11,22 @@ export class Configuracion {
 
     /**
      * Constructor de la clase Configuracion.
+     * @param configFilePath Ruta del archivo de configuración.
      */
-    constructor() {
-        const configFilePath = './config.env';
+    constructor(configFilePath: string) {
+        if (!configFilePath) {
+            configFilePath = DEFAULT_CONFIG_FILE_PATH;
+        }
+        else {
+            this.loadConfig(configFilePath);
+        }
+    }
 
+    /**
+     * Carga la configuración desde el archivo.
+     * @param configFilePath Ruta del archivo de configuración.
+     */
+    private loadConfig(configFilePath: string): void {
         if (fs.existsSync(configFilePath)) {
             dotenv.config({ path: configFilePath });
         } else {
