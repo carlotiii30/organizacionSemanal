@@ -11,7 +11,7 @@ import { ActividadVariable } from './actividad_variable';
 export class ErrorFilter {
   catch(error: any, host: any): void {
     const response = host.switchToHttp().getResponse();
-    const status = error.getStatus ? error.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
+    const status = error.getStatus ? error.getStatus() : HttpStatus.BAD_REQUEST;
     response.status(status).json({
       statusCode: status,
       message: error.message,
@@ -19,13 +19,39 @@ export class ErrorFilter {
   }
 }
 
-@Controller('tareas')
+@Controller('horario')
 export class Controlador {
   private readonly logger = LoggerConfig.logger;
 
-  constructor(private readonly optimizador: OptimizadorSemanal) {}
+  constructor(private readonly optimizador: OptimizadorSemanal) { }
 
+  // Horario
   @Get()
+  obtener(): string[][] | undefined {
+    try {
+      const horario = this.optimizador.Horario;
+      this.logger.debug('Obteniendo horario');
+      return horario;
+    } catch (error) {
+      this.handleException(error);
+      return undefined;
+    }
+  }
+
+  @Post()
+  @UseFilters(new ErrorFilter())
+  organizar(): string {
+    try {
+      this.optimizador.organizarHorario();
+      return 'Horario organizado con éxito';
+    } catch (error) {
+      this.handleException(error);
+      return 'Error al organizar el horario';
+    }
+  }
+
+  // Tareas
+  @Get('tareas')
   obtenerTodasLasTareas(): Actividad[] | undefined {
     try {
       const tareas: Actividad[] = this.optimizador.Actividades;
@@ -37,7 +63,7 @@ export class Controlador {
     }
   }
 
-  @Post()
+  @Post('tareas')
   @UseFilters(new ErrorFilter())
   crearTarea(@Body() body: any): Actividad | undefined {
     try {
@@ -56,7 +82,7 @@ export class Controlador {
     }
   }
 
-  @Get(':id')
+  @Get('tareas/:id')
   obtenerTareaPorId(@Param('id') id: ActividadId): Actividad | undefined {
     try {
       const actividad = this.optimizador.Actividades.find((act) => act.Id === id);
@@ -73,21 +99,8 @@ export class Controlador {
     }
   }
 
-  @Put(':id')
-  @UseFilters(new ErrorFilter())
-  actualizarTarea(@Param('id') id: ActividadId): string | undefined {
-    try {
-      // Lógica para actualizar una tarea por su ID
-      this.logger.info(`Tarea con ID ${id} actualizada`);
-      return `Tarea con ID ${id} actualizada`;
-    } catch (error) {
-      this.handleException(error);
-      return undefined;
-    }
-  }
-
   private handleException(error: any): void {
     this.logger.error(error.message);
-    throw new HttpException('Error interno del servidor', HttpStatus.INTERNAL_SERVER_ERROR);
+    throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
   }
 }

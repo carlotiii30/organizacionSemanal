@@ -12,12 +12,47 @@ describe('Controlador', () => {
     let optimizadorMock: Partial<OptimizadorSemanal>;
 
     beforeEach(async () => {
-        // Crear instancias de ActividadFija, y ActividadVariable para la prueba.
+        // Crear instancias de ActividadFija y ActividadVariable para la prueba.
         const actividadFija = new ActividadFija('Actividad Fija', logger, DiaSemana.LUNES, '08:00', '09:00');
-        const actividadVariable = new ActividadVariable('Actividad Variable', logger, 2.5); // Duración de 2.5 horas
+        const actividadVariable = new ActividadVariable('Actividad Variable', logger, 2.5);
+
+        const horario: string[][] = [
+            ["", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"],
+            ["07:00", "", "", "", "", ""],
+            ["07:30", "", "", "", "", ""],
+            ["08:00", "", "", "", "", ""],
+            ["08:30", "", "", "", "", ""],
+            ["09:00", "", "", "", "", ""],
+            ["09:30", "", "", "", "", ""],
+            ["10:00", "", "", "", "", ""],
+            ["10:30", "", "", "", "", ""],
+            ["11:00", "", "", "", "", ""],
+            ["11:30", "", "", "", "", ""],
+            ["12:00", "", "", "", "", ""],
+            ["12:30", "", "", "", "", ""],
+            ["13:00", "", "", "", "", ""],
+            ["13:30", "", "", "", "", ""],
+            ["14:00", "", "", "", "", ""],
+            ["14:30", "", "", "", "", ""],
+            ["15:00", "", "", "", "", ""],
+            ["15:30", "", "", "", "", ""],
+            ["16:00", "", "", "", "", ""],
+            ["16:30", "", "", "", "", ""],
+            ["17:00", "", "", "", "", ""],
+            ["17:30", "", "", "", "", ""],
+            ["18:00", "", "", "", "", ""],
+            ["18:30", "", "", "", "", ""],
+            ["19:00", "", "", "", "", ""],
+            ["19:30", "", "", "", "", ""],
+            ["20:00", "", "", "", "", ""],
+            ["20:30", "", "", "", "", ""],
+            ["21:00", "", "", "", "", ""],
+        ];
+
 
         optimizadorMock = {
             Actividades: [actividadFija, actividadVariable],
+            Horario: horario,
             organizarHorario: jest.fn(),
         };
 
@@ -32,6 +67,29 @@ describe('Controlador', () => {
         }).compile();
 
         controlador = module.get<Controlador>(Controlador);
+    });
+
+    describe('obtener', () => {
+        it('debería retornar el horario', () => {
+            const resultado: string[][] = controlador.obtener() ?? [];
+            expect(resultado).toEqual(optimizadorMock.Horario);
+        });
+    });
+
+    describe('organizar', () => {
+        it('debería organizar el horario', () => {
+            const resultado: string = controlador.organizar();
+            expect(resultado).toBe('Horario organizado con éxito');
+            expect(optimizadorMock.organizarHorario).toHaveBeenCalled();
+        });
+
+        it('debería manejar un error al organizar el horario', () => {
+            try {
+                controlador.organizar();
+            } catch (error: any) {
+                expect(error.message).toBe('Bad Request');
+            }
+        });
     });
 
     describe('obtenerTodasLasTareas', () => {
@@ -54,7 +112,7 @@ describe('Controlador', () => {
             try {
                 controlador.crearTarea(body);
             } catch (error: any) {
-                expect(error.message).toBe('Error interno del servidor');
+                expect(error.message).toBe('Bad Request');
             }
         });
 
@@ -63,7 +121,7 @@ describe('Controlador', () => {
             try {
                 controlador.crearTarea(body);
             } catch (error: any) {
-                expect(error.message).toBe('Error interno del servidor');
+                expect(error.message).toBe('Bad Request');
             }
         });
     });
