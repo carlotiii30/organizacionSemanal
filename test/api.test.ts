@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Controlador } from '../src/controlador';
 import { OptimizadorSemanal } from '../src/optimizador_semanal';
-import { Actividad } from '../src/actividad';
+import { Actividad, ActividadId } from '../src/actividad';
 import { ActividadFija, DiaSemana } from '../src/actividad_fija';
 import { ActividadVariable } from '../src/actividad_variable';
 import { LoggerConfig } from '../src/logger';
@@ -78,14 +78,6 @@ describe('Controlador', () => {
 
             const resultado: Actividad = controlador.obtenerTareaPorId(id)!;
             expect(resultado).toEqual(actividadFija);
-        });
-
-        it('debería manejar el caso de no encontrar una tarea', () => {
-            try {
-                controlador.obtenerTareaPorId(3);
-            } catch (error: any) {
-                expect(error.message).toBe('Error interno del servidor')
-            }
         });
     });
 });

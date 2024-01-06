@@ -1,6 +1,26 @@
 import { LoggerConfig } from './logger';
 
+export class ActividadId {
+    private static nextId = 1;
+
+    /**
+     * Constructor de la clase ActividadId.
+     * @private
+     * @param {number} value Valor del id de la actividad.
+     */
+    private constructor(public readonly value: number) { }
+
+    /**
+     * Crear un nuevo id de actividad.
+     * @returns {ActividadId} Id de la actividad.
+     */
+    static next(): ActividadId {
+        return new ActividadId(ActividadId.nextId++);
+    }
+}
+
 export abstract class Actividad {
+    private readonly id: ActividadId;
 
     /**
      * Constructor de la clase Actividad.
@@ -11,10 +31,10 @@ export abstract class Actividad {
     constructor(
         private descripcion: string,
         private logger = LoggerConfig.logger,
-        private id = Math.floor(Math.random() * 1000),
     ) {
         try {
             this.validarDescripcion();
+            this.id = ActividadId.next();
 
             logger.info(`Se creó una nueva instancia de Actividad con descripción: ${this.descripcion}`);
         } catch (error: any) {
@@ -33,9 +53,9 @@ export abstract class Actividad {
 
     /**
      * Getter del id de la actividad.
-     * @returns {number} Id de la actividad.
+     * @returns {ActividadId} Id de la actividad.
      */
-    get Id(): number {
+    get Id(): ActividadId {
         return this.id;
     }
 

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Put, Param, Body, HttpStatus, HttpException, UseFilters } from '@nestjs/common';
 import { LoggerConfig } from './logger';
-import { Actividad } from './actividad';
+import { Actividad, ActividadId } from './actividad';
 import { OptimizadorSemanal } from './optimizador_semanal';
 import { ActividadVariable } from './actividad_variable';
 
@@ -57,7 +57,7 @@ export class Controlador {
   }
 
   @Get(':id')
-  obtenerTareaPorId(@Param('id') id: number): Actividad | undefined {
+  obtenerTareaPorId(@Param('id') id: ActividadId): Actividad | undefined {
     try {
       const actividad = this.optimizador.Actividades.find((act) => act.Id === id);
 
@@ -75,7 +75,7 @@ export class Controlador {
 
   @Put(':id')
   @UseFilters(new ErrorFilter())
-  actualizarTarea(@Param('id') id: string): string | undefined {
+  actualizarTarea(@Param('id') id: ActividadId): string | undefined {
     try {
       // Lógica para actualizar una tarea por su ID
       this.logger.info(`Tarea con ID ${id} actualizada`);
