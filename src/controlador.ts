@@ -4,6 +4,21 @@ import { Actividad } from './actividad';
 import { OptimizadorSemanal } from './optimizador_semanal';
 import { ActividadVariable } from './actividad_variable';
 
+/**
+ * Filtro para manejar errores.
+ * @see https://docs.nestjs.com/exception-filters
+ */
+export class ErrorFilter {
+  catch(error: any, host: any): void {
+    const response = host.switchToHttp().getResponse();
+    const status = error.getStatus ? error.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
+    response.status(status).json({
+      statusCode: status,
+      message: error.message,
+    });
+  }
+}
+
 @Controller('tareas')
 export class Controlador {
   private readonly logger = LoggerConfig.logger;
@@ -23,7 +38,7 @@ export class Controlador {
   }
 
   @Post()
-  @UseFilters(new ErrorFilter()) // Usa un filtro para manejar errores
+  @UseFilters(new ErrorFilter())
   crearTarea(@Body() body: any): Actividad | undefined {
     try {
       const { descripcion, duracion } = body;
@@ -74,20 +89,5 @@ export class Controlador {
   private handleException(error: any): void {
     this.logger.error(error.message);
     throw new HttpException('Error interno del servidor', HttpStatus.INTERNAL_SERVER_ERROR);
-  }
-}
-
-/**
- * Filtro para manejar errores.
- * @see https://docs.nestjs.com/exception-filters
- */
-export class ErrorFilter {
-  catch(error: any, host: any): void {
-    const response = host.switchToHttp().getResponse();
-    const status = error.getStatus ? error.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
-    response.status(status).json({
-      statusCode: status,
-      message: error.message,
-    });
   }
 }

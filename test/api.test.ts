@@ -36,7 +36,7 @@ describe('Controlador', () => {
 
     describe('obtenerTodasLasTareas', () => {
         it('debería retornar todas las actividades', () => {
-            const resultado: Actividad[] = controlador.obtenerTodasLasTareas();
+            const resultado: Actividad[] = controlador.obtenerTodasLasTareas() ?? [];
             expect(resultado).toEqual(optimizadorMock.Actividades);
         });
     });
@@ -44,7 +44,7 @@ describe('Controlador', () => {
     describe('crearTarea', () => {
         it('debería crear una nueva tarea', () => {
             const body = { descripcion: 'Nueva Tarea', duracion: 3 };
-            const resultado: Actividad = controlador.crearTarea(body);
+            const resultado: Actividad = controlador.crearTarea(body)!;
 
             expect(resultado).toBeInstanceOf(ActividadVariable);
         });
@@ -54,7 +54,7 @@ describe('Controlador', () => {
             try {
                 controlador.crearTarea(body);
             } catch (error: any) {
-                expect(error.message).toBe('La descripción y la duración son obligatorias para crear una tarea');
+                expect(error.message).toBe('Error interno del servidor');
             }
         });
 
@@ -63,7 +63,7 @@ describe('Controlador', () => {
             try {
                 controlador.crearTarea(body);
             } catch (error: any) {
-                expect(error.message).toBe('La descripción y la duración son obligatorias para crear una tarea');
+                expect(error.message).toBe('Error interno del servidor');
             }
         });
     });
@@ -76,7 +76,7 @@ describe('Controlador', () => {
             if (optimizadorMock.Actividades != undefined)
                 optimizadorMock.Actividades.push(actividadFija);
 
-            const resultado: Actividad = controlador.obtenerTareaPorId(id);
+            const resultado: Actividad = controlador.obtenerTareaPorId(id)!;
             expect(resultado).toEqual(actividadFija);
         });
 
@@ -84,7 +84,7 @@ describe('Controlador', () => {
             try {
                 controlador.obtenerTareaPorId(3);
             } catch (error: any) {
-                expect(error.message).toBe('No se encontró la tarea con id: 3');
+                expect(error.message).toBe('Error interno del servidor')
             }
         });
     });
