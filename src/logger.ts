@@ -7,7 +7,8 @@ export class Logger {
 
     /**
      * Constructor de la clase Logger.
-     * @param configuracion Configuración de la aplicación.
+     * @param {Configuracion} configuracion Configuración de la aplicación.
+     * @throws {Error} Si el nivel de registro o la ruta del archivo de registro no están configurados correctamente.
      */
     constructor(configuracion: Configuracion) {
         const logLevel = configuracion.get('LOG_LEVEL');
@@ -30,8 +31,8 @@ export class Logger {
 
     /**
      * Registrar un mensaje de debug.
-     * @param message Mensaje a registrar.
-     * @param data Datos a registrar.
+     * @param {string} message Mensaje a registrar.
+     * @param {Record<string, any>} data Datos a registrar.
      */
     public debug(message: string, data?: Record<string, any>): void {
         this.logger.debug({ message, ...data });
@@ -39,8 +40,8 @@ export class Logger {
 
     /**
      * Registrar un mensaje de información.
-     * @param message Mensaje a registrar.
-     * @param data Datos a registrar.
+     * @param {string} message Mensaje a registrar.
+     * @param {Record<string, any>} data Datos a registrar.
      */
     public info(message: string, data?: Record<string, any>): void {
         this.logger.info({ message, ...data });
@@ -48,8 +49,8 @@ export class Logger {
 
     /**
      * Registrar un mensaje de advertencia.
-     * @param message Mensaje a registrar.
-     * @param data Datos a registrar.
+     * @param {string} message Mensaje a registrar.
+     * @param {Record<string, any>} data Datos a registrar.
      */
     public warn(message: string, data?: Record<string, any>): void {
         this.logger.warn({ message, ...data });
@@ -57,8 +58,8 @@ export class Logger {
 
     /**
      * Registrar un mensaje de error.
-     * @param message Mensaje a registrar.
-     * @param data Datos a registrar.
+     * @param {string} message Mensaje a registrar.
+     * @param {Record<string, any>} data Datos a registrar.
      */
     public error(message: string, data?: Record<string, any>): void {
         this.logger.error({ message, ...data });

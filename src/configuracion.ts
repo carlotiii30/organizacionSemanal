@@ -3,6 +3,9 @@ import * as fs from 'fs';
 
 const DEFAULT_CONFIG_FILE_PATH = './config.env';
 
+/**
+ * Clase que maneja la configuración de la aplicación.
+ */
 export class Configuracion {
     /**
      * Valores de configuración.
@@ -11,20 +14,17 @@ export class Configuracion {
 
     /**
      * Constructor de la clase Configuracion.
-     * @param configFilePath Ruta del archivo de configuración.
+     * @param {string} configFilePath Ruta del archivo de configuración. Si no se proporciona, se utiliza el valor por defecto.
      */
-    constructor(configFilePath: string) {
-        if (!configFilePath) {
-            configFilePath = DEFAULT_CONFIG_FILE_PATH;
-        }
-        else {
-            this.loadConfig(configFilePath);
-        }
+    constructor(configFilePath: string = DEFAULT_CONFIG_FILE_PATH) {
+        this.loadConfig(configFilePath);
     }
+
 
     /**
      * Carga la configuración desde el archivo.
-     * @param configFilePath Ruta del archivo de configuración.
+     * @private
+     * @param {string} configFilePath Ruta del archivo de configuración.
      */
     private loadConfig(configFilePath: string): void {
         if (fs.existsSync(configFilePath)) {
@@ -39,9 +39,10 @@ export class Configuracion {
     }
 
     /**
-     * Getter de los valores de configuración.
-     * @param key Clave de la variable de entorno.
-     * @returns Valor de la variable de entorno.
+     * Obtiene el valor de la variable de entorno.
+     * @param {string} key Clave de la variable de entorno.
+     * @returns {string} Valor de la variable de entorno.
+     * @throws {Error} Si la variable de entorno no está configurada.
      */
     get(key: string): string {
         if (this.configValues[key]) {

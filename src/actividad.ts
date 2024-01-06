@@ -4,9 +4,9 @@ export abstract class Actividad {
 
     /**
      * Constructor de la clase Actividad.
-     * @param descripcion Descripción de la actividad.
-     * @param logger Logger de la aplicación.
-     * @param id Id de la actividad.
+     * @param {string} descripcion Descripción de la actividad.
+     * @param {Logger} logger Logger de la aplicación.
+     * @throws {Error} Si la descripción de la actividad es null.
      */
     constructor(
         private descripcion: string,
@@ -25,7 +25,7 @@ export abstract class Actividad {
 
     /**
      * Getter de la descripción de la actividad.
-     * @returns Descripción de la actividad.
+     * @returns {string} Descripción de la actividad.
      */
     get Descripcion(): string {
         return this.descripcion;
@@ -33,7 +33,7 @@ export abstract class Actividad {
 
     /**
      * Getter del id de la actividad.
-     * @returns Id de la actividad.
+     * @returns {number} Id de la actividad.
      */
     get Id(): number {
         return this.id;
@@ -41,7 +41,8 @@ export abstract class Actividad {
 
     /**
      * Validar que la descripción no sea null.
-     * @throws Error si la descripción es null.
+     * @private
+     * @throws {Error} Si la descripción de la actividad es null.
      */
     private validarDescripcion() {
         if (this.descripcion == null) {
