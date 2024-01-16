@@ -1,49 +1,106 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Param, Body, HttpStatus, HttpException, UseFilters } from '@nestjs/common';
 import { LoggerConfig } from './logger';
-import { Actividad } from './actividad';
+import { Actividad, ActividadId } from './actividad';
+import { OptimizadorSemanal } from './optimizador_semanal';
+import { ActividadVariable } from './actividad_variable';
 
-@Controller('tareas')
+/**
+ * Filtro para manejar errores.
+ * @see https://docs.nestjs.com/exception-filters
+ */
+export class ErrorFilter {
+  catch(error: any, host: any): void {
+    const response = host.switchToHttp().getResponse();
+    const status = error.getStatus ? error.getStatus() : HttpStatus.BAD_REQUEST;
+    response.status(status).json({
+      statusCode: status,
+      message: error.message,
+    });
+  }
+}
+
+@Controller('horario')
 export class Controlador {
   private readonly logger = LoggerConfig.logger;
 
-  @Get()
-  obtenerTodasLasTareas(): Actividad[] {
-    const tareas: Actividad[] = [];
-    // Lógica para obtener todas las tareas
+  constructor(private readonly optimizador: OptimizadorSemanal) { }
 
-    this.logger.debug('Obteniendo todas las tareas programadas');
-    return tareas;
+  // Horario
+  @Get()
+  obtener(): string[][] | undefined {
+    try {
+      const horario = this.optimizador.Horario;
+      this.logger.debug('Obteniendo horario');
+      return horario;
+    } catch (error) {
+      this.handleException(error);
+      return undefined;
+    }
   }
 
   @Post()
-  crearTarea(): string {
-    // Lógica para crear una nueva tarea
-
-    this.logger.info('Tarea creada');
-    return 'Tarea creada';
+  @UseFilters(new ErrorFilter())
+  organizar(): string {
+    try {
+      this.optimizador.organizarHorario();
+      return 'Horario organizado con éxito';
+    } catch (error) {
+      this.handleException(error);
+      return 'Error al organizar el horario';
+    }
   }
 
-  @Get(':id')
-  obtenerTareaPorId(@Param('id') id: string): string {
-    // Lógica para obtener una tarea por su ID
-
-    this.logger.debug(`Obteniendo tarea con ID ${id}`);
-    return `Tarea con ID ${id}`;
+  // Tareas
+  @Get('tareas')
+  obtenerTodasLasTareas(): Actividad[] | undefined {
+    try {
+      const tareas: Actividad[] = this.optimizador.Actividades;
+      this.logger.debug('Obteniendo todas las tareas programadas');
+      return tareas;
+    } catch (error) {
+      this.handleException(error);
+      return undefined;
+    }
   }
 
-  @Put(':id')
-  actualizarTarea(@Param('id') id: string): string {
-    // Lógica para actualizar una tarea por su ID
+  @Post('tareas')
+  @UseFilters(new ErrorFilter())
+  crearTarea(@Body() body: any): Actividad | undefined {
+    try {
+      const { descripcion, duracion } = body;
 
-    this.logger.info(`Tarea con ID ${id} actualizada`);
-    return `Tarea con ID ${id} actualizada`;
+      if (descripcion == null || duracion == null) {
+        throw new HttpException('La descripción y la duración son obligatorias para crear una tarea', HttpStatus.BAD_REQUEST);
+      }
+
+      const actividadVariable = new ActividadVariable(descripcion, this.logger, duracion);
+      this.logger.info('Tarea creada');
+      return actividadVariable;
+    } catch (error) {
+      this.handleException(error);
+      return undefined;
+    }
   }
 
-  @Delete(':id')
-  eliminarTarea(@Param('id') id: string): string {
-    // Lógica para eliminar una tarea por su ID
+  @Get('tareas/:id')
+  obtenerTareaPorId(@Param('id') id: ActividadId): Actividad | undefined {
+    try {
+      const actividad = this.optimizador.Actividades.find((act) => act.Id === id);
 
-    this.logger.info(`Tarea con ID ${id} eliminada`);
-    return `Tarea con ID ${id} eliminada`;
+      if (!actividad) {
+        throw new HttpException(`No se encontró la tarea con id: ${id}`, HttpStatus.NOT_FOUND);
+      }
+
+      this.logger.info(`Tarea con id ${id} encontrada`);
+      return actividad;
+    } catch (error) {
+      this.handleException(error);
+      return undefined;
+    }
+  }
+
+  private handleException(error: any): void {
+    this.logger.error(error.message);
+    throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
   }
 }
