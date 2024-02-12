@@ -13,6 +13,7 @@ export class OptimizadorSemanal {
 
     /**
      * Constructor por defecto de la clase OptimizadorSemanal
+     * @param {Actividad[]} actividades Lista de actividades.
      */
     constructor(actividades: Actividad[]) {
         this.actividades = actividades;
@@ -25,7 +26,7 @@ export class OptimizadorSemanal {
 
     /**
      * Getter de las actividades semanales.
-     * @returns Lista de actividades de la semana.
+     * @returns {Actividad[]} Lista de actividades semanales.
      */
     get Actividades(): Actividad[] {
         return this.actividades;
@@ -33,7 +34,7 @@ export class OptimizadorSemanal {
 
     /**
      * Getter del horario.
-     * @returns horario.
+     * @returns {string[][]} Horario.
      */
     get Horario(): string[][] {
         return this.horario;
@@ -62,7 +63,9 @@ export class OptimizadorSemanal {
 
     /**
      * Calcula la duración de la actividad.
-     * @returns Duración calculada de la actividad.
+     * @param {string} horaInicio Hora de inicio de la actividad.
+     * @param {string} horaFin Hora de fin de la actividad.
+     * @returns {number} Duración de la actividad.
      */
     calcularDuracion(horaInicio: string, horaFin: string): number | undefined {
         const horaIniciohoras = parseInt(horaInicio.split(/:/)[0]);
@@ -79,11 +82,13 @@ export class OptimizadorSemanal {
 
     /**
      * Asigna una actividad fija al horario.
-     * @param horario horario a asignar la actividad.
-     * @param diaIndex Indice del día en el horario.
-     * @param horaIndex Indice de la hora en el horario.
-     * @param duracion Duración de la actividad.
-     * @param descripcion Descripción de la actividad.
+     * @private
+     * @param {string[][]} horario horario a asignar la actividad.
+     * @param {DiaSemana} dia Día de la semana de la actividad.
+     * @param {string} horaInicio Hora de inicio de la actividad.
+     * @param {string} horaFin Hora de fin de la actividad.
+     * @param {string} descripcion Descripción de la actividad.
+     * @throws {Error} Si no se pudo asignar la actividad fija.
      */
     private asignarActividadFija(horario: string[][], dia: DiaSemana, horaInicio: string, horaFin: string, descripcion: string): void {
         const diaIndex = this.horario[0].findIndex(d => d === DiaSemana[dia]);
@@ -110,8 +115,8 @@ export class OptimizadorSemanal {
 
     /**
      * Obtiene las celdas disponibles del horario.
-     * @param horario horario a obtener las celdas disponibles.
-     * @returns Lista de celdas disponibles.
+     * @param {string[][]} horario Horario.
+     * @returns {{ rowIndex: number, cellIndex: number }[]} Celdas disponibles.
      */
     public obtenerCeldasDisponibles(horario: string[][]): { rowIndex: number, cellIndex: number }[] {
         const celdasDisponibles: { rowIndex: number, cellIndex: number }[] = [];
@@ -129,9 +134,10 @@ export class OptimizadorSemanal {
 
     /**
      * Asigna una actividad variable al horario.
-     * @param horario horario a asignar la actividad.
-     * @param descripcion Descripción de la actividad.
-     * @param duracion Duración de la actividad.
+     * @private
+     * @param {string[][]} horario Horario a asignar la actividad.
+     * @param {string} descripcion Descripción de la actividad.
+     * @param {number} duracion Duración de la actividad.
      */
     private asignarActividadVariable(horario: string[][], descripcion: string, duracion: number): void {
         const celdasDisponibles = this.obtenerCeldasDisponibles(horario);
@@ -147,6 +153,7 @@ export class OptimizadorSemanal {
 
     /**
      * Asignación de horas.
+     * @throws {Error} Si no se pudo asignar la actividad fija.
      */
     public organizarHorario(): void {
         const fijas = this.actividades.filter(actividad => actividad instanceof ActividadFija) as ActividadFija[];
